@@ -4,7 +4,9 @@
   <title>Cervinia Ski Home</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Font di alto livello: Syne per i titoli, Montserrat per il testo -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -13,24 +15,24 @@
 <div class="overlay">
   <div class="container">
 
-    <!-- TOPBAR -->
+    <!-- TOPBAR: Solo lingue a destra -->
     <div class="topbar">
-      <div class="logo"><b>CERVINIA SKI HOME</b></div>
+      <div></div> <!-- Spazio vuoto a sx -->
       <div class="flags-selector">
         <span class="flag-icon active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
         <span class="flag-icon" id="flag-en" onclick="setLang('en')">🇬🇧</span>
       </div>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO CON LOGO RUOTATO -->
     <div class="hero">
-      <img src="sfondo_nero.webp" class="hero-logo-bg" alt="">
+      <img src="sfondo_nero.webp" class="hero-logo-bg" alt="Logo">
       <h1 id="title">Cervinia Ski Home</h1>
       <p id="desc">Il tuo rifugio moderno sulle piste del Cervino</p>
     </div>
 
     <div class="main-grid">
-      <!-- SINISTRA: FOTO -->
+      <!-- SINISTRA: CAROSELLO FOTO (Più largo) -->
       <div class="grid-left">
         <div class="carousel-container">
           <button class="carousel-btn prev-btn" onclick="scrollCarousel('myCarousel', -1)">&#10094;</button>
@@ -47,19 +49,19 @@
         </div>
       </div>
 
-      <!-- DESTRA: DESCRIZIONE -->
+      <!-- DESTRA: DESCRIZIONE (Più stretta e protetta dai social) -->
       <div class="grid-right">
         <div class="description-section material-card">
           <h2 id="descTitle">L'Appartamento</h2>
-          <p id="descP1">Appartamento SKi-in SKi-Out ubicato direttamente sulle piste di Cervinia Cielo alto. 6 posti letto disponibili (1 letto matrimoniale, 2 letti singoli e un comodo divano letto). WiFi gratuito e vista sul giardino, l'alloggio è caldo ed accogliente. Balcone privato e parcheggio gratuito.</p>
-          <p id="descP2">Dotato di smart TV, cucina con frigorifero, lavastoviglie, <b>microonde e macchina Nespresso</b>. <b>Forniamo lenzuola, coperte e set asciugamani completi.</b></p>
-          <p id="descP3">Accesso diretto alla <b>Pista 16</b> dal parcheggio! Centro di Cervinia a 700m.</p>
+          <p id="descP1">Appartamento SKi-in SKi-Out ubicato direttamente sulle piste di Cervinia Cielo alto. 6 posti letto disponibili (1 letto matrimoniale, 2 letti singoli e un comodo divano letto).</p>
+          <p id="descP2">Smart TV, cucina con <b>microonde e macchina Nespresso</b>. <b>Forniamo lenzuola e set asciugamani completi.</b></p>
+          <p id="descP3">Accesso diretto alla <b>Pista 16</b> dal parcheggio! Centro a 700m.</p>
           
           <div class="house-rules">
-            <h4 id="rulesTitle">Regole della casa</h4>
+            <h4 id="rulesTitle">Regole</h4>
             <div class="rules-flex">
-              <div id="checkInText"><i class="fas fa-clock"></i> In: 16:00</div>
-              <div id="checkOutText"><i class="fas fa-clock"></i> Out: 10:30</div>
+              <div id="checkInText"><b>In:</b> 16:00</div>
+              <div id="checkOutText"><b>Out:</b> 10:30</div>
             </div>
           </div>
         </div>
@@ -67,10 +69,8 @@
     </div>
 
     <!-- LISTINO PREZZI -->
-    <h3 id="priceTitle" class="section-title">Listino Prezzi</h3>
-    <div class="price-grid" id="priceGrid">
-        <!-- Generato da JS -->
-    </div>
+    <h3 id="priceTitle" class="section-title">Listino</h3>
+    <div class="price-grid" id="priceGrid"></div>
 
     <!-- CALENDARIO E METEO -->
     <div class="bottom-grid">
@@ -78,13 +78,12 @@
         <h2 id="availTitle" class="mini-title">Disponibilità</h2>
         <div id="calendar-container"></div>
         <div class="cal-legend">
-            <span><i class="fas fa-square" style="color:#ff4d4d"></i> <small id="legBooked">Occupato</small></span>
-            <span><i class="fas fa-square" style="color:#2ecc71"></i> <small id="legFree">Libero</small></span>
+            <small id="legBooked">Occupato</small> | <small id="legFree">Libero</small>
         </div>
       </div>
 
       <div class="section material-card">
-        <h2 id="weatherTitle" class="mini-title">Meteo Cervinia</h2>
+        <h2 id="weatherTitle" class="mini-title">Meteo</h2>
         <a class="weatherwidget-io" href="https://forecast7.com/it/45d937d63/breuil-cervinia/" data-label_1="CERVINIA" data-font="Roboto" data-icons="Climacons Animated" data-theme="dark" data-basecolor="rgba(0,0,0,0.3)" data-textcolor="#ffffff" >METEO</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');</script>
       </div>
@@ -103,6 +102,7 @@
   </div>
 </div>
 
+<!-- SOCIAL LATERALI -->
 <div class="floating-socials">
   <a href="https://wa.me/393479612836" target="_blank" class="float-btn float-wa"><i class="fab fa-whatsapp"></i></a>
   <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="float-btn float-insta"><i class="fab fa-instagram"></i></a>
@@ -110,6 +110,7 @@
   <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank" class="float-btn float-maps"><i class="fas fa-map-marker-alt"></i></a>
 </div>
 
+<!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox()">
   <span class="close-lightbox">&times;</span>
   <button class="lightbox-btn lb-prev" onclick="changeLightboxImage(-1, event)">&#10094;</button>
