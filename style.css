@@ -1,0 +1,140 @@
+/* STILE GENERALE */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: url("https://images.unsplash.com/photo-1549420042-32a1dfdfdeec?q=80&w=2000&auto=format&fit=crop") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* BARRA SUPERIORE */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lang-btn {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  transition: 0.3s;
+}
+.lang-btn:hover { background: rgba(255, 255, 255, 0.3); }
+
+/* TESTI PRINCIPALI */
+.hero { text-align: center; padding: 40px 10px; }
+.hero h1 { font-size: 42px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+.hero p { font-size: 19px; color: #ddd; }
+
+/* CAROSELLO FOTO */
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 15px;
+  padding: 20px 0;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar { display: none; }
+
+.carousel img {
+  scroll-snap-align: center;
+  width: 85%;
+  max-width: 500px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 15px;
+  flex-shrink: 0;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s;
+}
+.carousel img:hover { transform: scale(1.02); }
+
+/* PULSANTI CONTATTI */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-wa { background-color: #25D366; color: white; }
+.btn-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
+.btn-mail { background-color: #ffffff; color: #333; }
+.btn-maps { background-color: #4285F4; color: white; }
+.btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+
+/* SEZIONE CALENDARIO */
+.section {
+  margin-top: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calendar-wrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 5px;
+  margin-top: 20px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.calendar-wrapper iframe { width: 100%; height: 100%; border: none; }
+
+/* MODALE (LIGHTBOX) */
+#lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.2);
+}
