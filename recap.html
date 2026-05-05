@@ -2,45 +2,64 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Recap - Cervinia Ski Home</title>
+    <title>Prenota - Cervinia Ski Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Outfit', sans-serif; background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); padding: 40px; border-radius: 25px; text-align: center; max-width: 450px; border: 1px solid #00e5ff; }
-        .price { font-size: 56px; font-weight: 800; color: #00e5ff; margin: 20px 0; }
-        .old { text-decoration: line-through; opacity: 0.5; font-size: 18px; }
-        .btn { display: block; background: #25D366; color: white; padding: 18px; border-radius: 12px; text-decoration: none; font-weight: 800; margin-top: 30px; }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <h1 id="t"></h1>
-        <p id="d"></p> <p id="g"></p>
-        <p style="color:#2ecc71; font-weight:800;" id="c"></p>
-        <hr style="opacity:0.2; margin:20px 0;">
-        <div class="old" id="o"></div>
-        <div class="price" id="p"></div>
-        <p style="color:#2ecc71;" id="s"></p>
-        <a href="#" id="w" class="btn">WHATSAPP</a>
-        <a href="index.html" style="color:white; display:block; margin-top:20px; opacity:0.5; text-decoration:none;">Annulla</a>
+    <div class="main-content" style="margin-left:0;">
+        <div class="container" style="max-width:800px;">
+            <div class="material-card" style="margin-top:20px;">
+                <h1 style="text-align:center; color:#00e5ff;">PRENOTAZIONE</h1>
+                
+                <!-- DATI UTENTE -->
+                <div class="form-grid">
+                    <input type="text" id="fName" placeholder="Nome" class="input-field">
+                    <input type="text" id="fSurname" placeholder="Cognome" class="input-field">
+                    <input type="email" id="fEmail" placeholder="Email" class="input-field">
+                    <input type="tel" id="fPhone" placeholder="Telefono" class="input-field">
+                </div>
+
+                <!-- OSPITI -->
+                <div class="guest-picker" style="margin-top:20px;">
+                    <div class="picker-row">
+                        <span id="lblAd">Adulti</span>
+                        <div class="picker-ctrl">
+                            <button onclick="setGuests('ad', -1)">-</button>
+                            <span id="valAd">2</span>
+                            <button onclick="setGuests('ad', 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="picker-row">
+                        <span id="lblCh">Bambini</span>
+                        <div class="picker-ctrl">
+                            <button onclick="setGuests('ch', -1)">-</button>
+                            <span id="valCh">0</span>
+                            <button onclick="setGuests('ch', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALENDARIO -->
+                <div class="cal-nav-recap">
+                    <button onclick="shiftMonth(-1)">❮</button>
+                    <button onclick="shiftMonth(1)">❯</button>
+                </div>
+                <div id="calendar-render" class="calendar-dual"></div>
+
+                <!-- PREZZO E WHATSAPP -->
+                <div class="price-box" style="text-align:center; margin-top:30px;">
+                    <p style="color:#2ecc71; font-weight:800;">✓ Pulizie incluse</p>
+                    <div id="oldPrice" style="text-decoration:line-through; opacity:0.5;"></div>
+                    <div id="totalPrice" style="font-size:48px; color:#00e5ff; font-weight:800;">Scegli le date</div>
+                    <a href="#" id="waBtn" class="btn-whatsapp">CONFERMA SU WHATSAPP</a>
+                    <a href="index.html" style="display:block; margin-top:15px; color:#ccc; text-decoration:none;">Annulla e torna alla Home</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <script>
-        const u = new URLSearchParams(window.location.search);
-        const l = u.get("l") || "it";
-        const txt = {
-            it: { t: "Riepilogo", ad: "Adulti", ch: "Bambini", c: "✓ Pulizie incluse", s: "Sconto prenotazione diretta!", w: "CONFERMA SU WHATSAPP" },
-            en: { t: "Recap", ad: "Adults", ch: "Children", c: "✓ Cleaning included", s: "Direct booking discount!", w: "CONFIRM ON WHATSAPP" }
-        }[l];
-        document.getElementById("t").innerText = txt.t;
-        document.getElementById("d").innerText = `${u.get("in")} / ${u.get("out")} (${u.get("n")} notti)`;
-        document.getElementById("g").innerText = `${u.get("ad")} ${txt.ad}, ${u.get("ch")} ${txt.ch}`;
-        document.getElementById("c").innerText = txt.c;
-        document.getElementById("o").innerText = u.get("o") + "€";
-        document.getElementById("p").innerText = u.get("t") + "€";
-        document.getElementById("s").innerText = txt.s;
-        document.getElementById("w").innerText = txt.w;
-        const msg = `Ciao! Vorrei prenotare.%0AIn: ${u.get("in")}%0AOut: ${u.get("out")}%0AOspiti: ${u.get("ad")} Ad, ${u.get("ch")} Bam.%0ATotale: ${u.get("t")}€`;
-        document.getElementById("w").href = `https://wa.me/393479612836?text=${msg}`;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
