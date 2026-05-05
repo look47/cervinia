@@ -5,42 +5,34 @@
     <title>Riepilogo - Cervinia Ski Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .recap-box { max-width: 500px; margin: 100px auto; text-align: center; }
-        .discount-applied { color: #2ecc71; font-size: 14px; font-weight: 800; margin-top: 10px; display: none; }
-    </style>
 </head>
 <body>
     <div class="overlay">
-        <div class="container">
-            <div class="recap-box material-card">
-                <h1>Riepilogo</h1>
-                <p>Check-in: <b><span id="resIn"></span></b></p>
-                <p>Check-out: <b><span id="resOut"></span></b></p>
-                <p>Notti: <b><span id="resNights"></span></b></p>
-                <div id="resTotal" style="font-size: 50px; color:#00e5ff; font-weight:800; margin:20px 0;"></div>
-                <div id="discountMsg" class="discount-applied">✓ Sconto 10% Prenotazione Diretta applicato!</div>
+        <div class="container" style="max-width:500px; padding-top:100px;">
+            <div class="material-card" style="text-align:center;">
+                <h1>Prenotazione</h1>
+                <p>Arrivo: <b id="resIn"></b> | Partenza: <b id="resOut"></b></p>
+                <p>Durata: <b id="resNights"></b> notti</p>
+                <p style="color:#2ecc71; font-weight:800;">✓ Pulizie incluse</p>
+                <hr>
+                <p>Prezzo Originale: <span style="text-decoration:line-through; opacity:0.6;" id="resOld"></span>€</p>
+                <div style="font-size: 50px; color:#00e5ff; font-weight:800;" id="resTotal"></div>
+                <p style="color:#2ecc71;">Risparmi il 13% prenotando qui!</p>
                 
-                <!-- Tasto WhatsApp centrato, prende stile float-btn ma lo riadattiamo per inline -->
-                <a href="#" id="waLink" style="display:block; background:#25D366; color:white; padding:15px; border-radius:10px; font-weight:bold; text-decoration:none; margin-top:20px; font-size:18px;">INVIA RICHIESTA <i class="fab fa-whatsapp"></i></a>
-                
-                <a href="index.html" style="color:#ccc; display:block; margin-top:20px; text-decoration:none;">Torna indietro</a>
+                <a href="#" id="waLink" style="display:block; background:#25D366; color:white; padding:15px; border-radius:10px; text-decoration:none; font-weight:bold; margin-top:20px;">CONFERMA SU WHATSAPP</a>
+                <a href="index.html" style="color:white; display:block; margin-top:15px; opacity:0.6;">Annulla</a>
             </div>
         </div>
     </div>
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const nights = params.get("nights");
-        document.getElementById("resIn").innerText = params.get("in");
-        document.getElementById("resOut").innerText = params.get("out");
-        document.getElementById("resNights").innerText = nights;
-        document.getElementById("resTotal").innerText = params.get("total") + "€";
+        const p = new URLSearchParams(window.location.search);
+        document.getElementById("resIn").innerText = p.get("in");
+        document.getElementById("resOut").innerText = p.get("out");
+        document.getElementById("resNights").innerText = p.get("nights");
+        document.getElementById("resOld").innerText = p.get("old");
+        document.getElementById("resTotal").innerText = p.get("total") + "€";
         
-        if (nights >= 4) {
-            document.getElementById("discountMsg").style.display = "block";
-        }
-        
-        const msg = `Ciao! Richiesta Cervinia Ski Home.%0AArrivo: ${params.get("in")}%0APartenza: ${params.get("out")}%0ANotti: ${nights}%0APrezzo: ${params.get("total")}€`;
+        const msg = `Ciao! Vorrei prenotare.%0AIn: ${p.get("in")}%0AOut: ${p.get("out")}%0ATotale: ${p.get("total")}€`;
         document.getElementById("waLink").href = `https://wa.me/393479612836?text=${msg}`;
     </script>
 </body>
