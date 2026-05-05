@@ -10,27 +10,20 @@
 </head>
 <body>
 
-<!-- SIDEBAR SINISTRA -->
 <nav class="sidebar" id="sidebar">
     <div class="sidebar-inner">
         <h2 class="sidebar-logo">CERVINIA<br><span>SKI HOME</span></h2>
         <ul class="nav-links">
-            <li><a href="#info" onclick="handleNav()"><i class="fas fa-info-circle"></i> <span id="navInfo">Descrizione</span></a></li>
+            <li><a href="#info" onclick="handleNav()"><i class="fas fa-home"></i> <span id="navInfo">Appartamento</span></a></li>
             <li><a href="#foto" onclick="handleNav()"><i class="fas fa-images"></i> <span id="navFoto">Gallery</span></a></li>
             <li><a href="#recensioni" onclick="handleNav()"><i class="fas fa-star"></i> <span id="navRev">Recensioni</span></a></li>
         </ul>
-        <div class="sidebar-socials">
-            <a href="https://wa.me/393479612836" target="_blank" class="s-ic wa"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="s-ic ig"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:airpulizie@gmail.com" class="s-ic mail"><i class="far fa-envelope"></i></a>
+        <div class="sidebar-footer">
+            <p>© 2026 Cervinia Ski Home</p>
         </div>
-        <a href="recap.html" class="btn-sidebar-book">
-            <i class="fas fa-calendar-check"></i> <span id="navBook">PRENOTA</span>
-        </a>
     </div>
 </nav>
 
-<!-- MOBILE HEADER -->
 <div class="mobile-header">
     <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
     <b>CERVINIA SKI HOME</b>
@@ -46,26 +39,14 @@
 
     <div class="container">
         <div class="hero">
-            <img src="sfondo_nero.webp" class="logo-watermark" alt="">
-            <h1 id="hTitle">Cervinia Ski Home</h1>
-            <p id="hTag">Il tuo rifugio moderno sulle piste del Cervino</p>
+            <img src="sfondo_nero.webp" class="logo-watermark" alt="Logo Watermark">
+            <h1 id="heroTitle">Cervinia Ski Home</h1>
+            <p id="heroTagline">Il tuo rifugio moderno sulle piste del Cervino</p>
         </div>
 
-        <!-- GRID: DESCRIZIONE | FOTO -->
         <div class="content-grid">
-            <div class="col-desc" id="info">
-                <div class="material-card">
-                    <h2 id="descTitle">L'Appartamento</h2>
-                    <p id="descP1">Situato nel complesso di Cielo Alto, l'appartamento offre un accesso <b>Ski-in Ski-out</b> imbattibile sulla Pista 16. Recentemente rinnovato con uno stile moderno e alpino.</p>
-                    <p id="descP2">Dispone di 6 posti letto, WiFi fibra, Smart TV, cucina completa con macchina Nespresso e microonde. Ideale per famiglie o gruppi di amici.</p>
-                    <div class="check-times">
-                        <span><b>Check-in:</b> 16:00</span> | <span><b>Check-out:</b> 10:30</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-carousel" id="foto">
-                <div class="carousel-box material-card">
+            <div class="col-left" id="foto">
+                <div class="carousel-container material-card">
                     <button class="c-btn prev" onclick="moveCarousel(-1)">❮</button>
                     <div class="carousel-track" id="track">
                         <img src="foto1.webp" onclick="openLightbox(0)">
@@ -79,22 +60,41 @@
                     <button class="c-btn next" onclick="moveCarousel(1)">❯</button>
                 </div>
             </div>
+
+            <div class="col-right" id="info">
+                <div class="description-card material-card">
+                  <h2 id="descTitle">L'Appartamento</h2>
+                  <p id="descP1">Ski-in Ski-out direttamente sulla Pista 16. Recentemente rinnovato, offre 6 posti letto in un ambiente caldo e moderno.</p>
+                  <p id="descP2">Smart TV, WiFi, cucina completa (Nespresso/Microonde). Parcheggio incluso.</p>
+                  <div class="check-box">
+                      <span id="txtCheckIn"><b>In:</b> 16:00</span> | <span id="txtCheckOut"><b>Out:</b> 10:30</span>
+                  </div>
+                </div>
+            </div>
         </div>
 
         <div class="reviews-section" id="recensioni">
-            <h3 class="section-title">Recensioni</h3>
-            <div class="review-grid">
+            <h3 class="section-title" id="revTitle">Recensioni</h3>
+            <div class="rev-grid">
                 <div class="material-card rev-item">
                     <div class="stars">★★★★★</div>
-                    <p>"Posizione incredibile, si esce di casa con gli sci ai piedi. Casa calda e moderna." - <b>Marco</b></p>
-                </div>
-                <div class="material-card rev-item">
-                    <div class="stars">★★★★★</div>
-                    <p>"Vista mozzafiato sul Cervino. Cucina fornitissima e letti comodi." - <b>Elena</b></p>
+                    <p>"Posizione imbattibile, sci ai piedi. Casa pulitissima e host super disponibile." - <b>Marco</b></p>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="floating-actions">
+    <div class="social-stack">
+        <a href="https://wa.me/393479612836" target="_blank" class="act-btn wa"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="act-btn ig"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:airpulizie@gmail.com" class="act-btn mail"><i class="far fa-envelope"></i></a>
+        <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank" class="act-btn maps"><i class="fas fa-map-marker-alt"></i></a>
+    </div>
+    <a href="recap.html" class="book-btn-float">
+        <i class="fas fa-calendar-alt"></i> <span id="txtBook">PRENOTA</span>
+    </a>
 </div>
 
 <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
