@@ -1,16 +1,11 @@
-
-/* STILE GENERALE MATERIAL DESIGN */
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  /* Qui inserisci il nome esatto della foto che hai caricato su GitHub */
-  background: url("sfondo_rododendro.jpg")  no-repeat center center fixed;
-  background-size: cover;
+  background-color: #121212; /* Colore scuro di base */
   color: white;
 }
 
 .overlay {
-  background-color: rgba(0, 0, 0, 0.6);
   min-height: 100vh;
   padding-bottom: 50px;
 }
@@ -21,41 +16,77 @@ body {
   padding: 20px;
 }
 
-/* BARRA SUPERIORE */
+.material-card {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
   padding: 15px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+.logo { font-size: 22px; letter-spacing: 2px; font-weight: 500; }
 
-.lang-btn {
+.hero { text-align: center; padding: 30px 10px 20px; }
+.hero h1 { font-size: 46px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+.hero p { font-size: 18px; color: #bbb; font-weight: 300; margin-bottom: 20px; }
+
+.flags-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 32px;
+}
+.flag {
   cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 8px 15px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
+  opacity: 0.3;
   transition: 0.3s;
+  filter: grayscale(1);
 }
-.lang-btn:hover { background: rgba(255, 255, 255, 0.3); }
+.flag.active, .flag:hover {
+  opacity: 1;
+  filter: grayscale(0);
+  transform: scale(1.1);
+}
 
-/* TESTI PRINCIPALI */
-.hero { text-align: center; padding: 40px 10px; }
-.hero h1 { font-size: 42px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-.hero p { font-size: 19px; color: #ddd; }
+.description-section {
+  padding: 30px;
+  margin: 30px 0;
+  text-align: left;
+}
+.description-section h2 { margin-top: 0; color: #25D366; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+.description-section p { line-height: 1.6; font-size: 16px; color: #f1f1f1; font-weight: 300; }
 
-/* CAROSELLO FOTO */
+.rating-box {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rating-box i { color: #FFD700; font-size: 20px; }
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 30px 0;
+}
+
 .carousel {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 15px;
-  padding: 20px 0;
+  padding: 10px 0;
   scrollbar-width: none;
+  flex-grow: 1;
 }
 .carousel::-webkit-scrollbar { display: none; }
 
@@ -65,120 +96,66 @@ body {
   max-width: 500px;
   height: 350px;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: 12px;
   flex-shrink: 0;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-  transition: transform 0.3s;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+  transition: 0.3s;
 }
-.carousel img:hover { transform: scale(1.02); }
 
-/* PULSANTI CONTATTI */
+.carousel-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 15px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  z-index: 10;
+}
+.carousel-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
 .buttons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
   margin: 30px 0;
 }
-
 .btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 15px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: 0.3s;
-  border: none;
-  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 15px; font-size: 16px; font-weight: 500; text-decoration: none;
+  transition: 0.3s; border: none; cursor: pointer;
 }
-
 .btn-wa { background-color: #25D366; color: white; }
 .btn-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
-.btn-mail { background-color: #ffffff; color: #333; }
+.btn-mail { background-color: #333; color: white; border: 1px solid #444; }
 .btn-maps { background-color: #4285F4; color: white; }
-.btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+.btn:hover { transform: translateY(-4px); box-shadow: 0 8px 15px rgba(0,0,0,0.6); }
 
-/* SEZIONE CALENDARIO */
 .section {
-  margin-top: 40px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
   padding: 25px;
-  border-radius: 20px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-.calendar-wrapper {
-  background: white;
-  border-radius: 12px;
-  padding: 5px;
-  margin-top: 20px;
-  overflow: hidden;
-  aspect-ratio: 4/3;
-}
+.calendar-wrapper { background: white; border-radius: 8px; padding: 5px; margin-top: 20px; overflow: hidden; aspect-ratio: 4/3; }
 .calendar-wrapper iframe { width: 100%; height: 100%; border: none; }
 
-/* MODALE (LIGHTBOX) */
 #lightbox {
-  display: none;
-  position: fixed;
-  z-index: 999;
+  display: none; position: fixed; z-index: 999;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.9);
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  background: rgba(0,0,0,0.95);
+  align-items: center; justify-content: center;
 }
-#lightbox img {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 10px;
-  box-shadow: 0 0 30px rgba(255,255,255,0.2);
-}
-/* STILE DESCRIZIONE */
-.description-section {
-  background: rgba(0, 0, 0, 0.4);
-  padding: 30px;
-  border-radius: 15px;
-  margin: 30px 0;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: left;
-}
+#lightboxImg { max-width: 90%; max-height: 85%; border-radius: 8px; }
 
-.description-section h2 {
-  margin-top: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 2px solid #25D366;
-  padding-bottom: 10px;
-  display: inline-block;
+.close-lightbox {
+  position: absolute; top: 20px; right: 30px;
+  color: white; font-size: 40px; cursor: pointer;
 }
-
-.description-section p {
-  line-height: 1.6;
-  font-size: 16px;
-  color: #ddd;
-  margin-bottom: 15px;
+.lightbox-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: transparent; color: white; border: none;
+  font-size: 50px; cursor: pointer; opacity: 0.5; transition: 0.3s;
 }
-
-.rating-box {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: bold;
-}
-
-.rating-box i {
-  color: #FFD700; /* Giallo stella */
-  font-size: 20px;
-}
+.lightbox-btn:hover { opacity: 1; }
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
