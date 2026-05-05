@@ -10,46 +10,45 @@
 </head>
 <body>
 
-<!-- MOBILE HEADER -->
 <div class="mobile-header">
     <button class="hamburger-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-    <b>CERVINIA SKI HOME</b>
+    <div class="logo-mob">CERVINIA SKI HOME</div>
 </div>
 
-<!-- SIDEBAR SINISTRA -->
 <nav class="sidebar" id="sidebar">
-    <div class="sidebar-top">
-        <h2 class="sidebar-logo">Cervinia<br><span style="color:#00e5ff;">Ski Home</span></h2>
+    <div class="sidebar-content">
+        <h2 class="sidebar-title">Cervinia<br><span>Ski Home</span></h2>
         <ul class="nav-links">
-            <li><a href="#info" onclick="toggleSidebar()"><i class="fas fa-home"></i> <span id="navInfo">Info</span></a></li>
             <li><a href="#foto" onclick="toggleSidebar()"><i class="fas fa-images"></i> <span id="navFoto">Foto</span></a></li>
-            <li><a href="#disponibilita" onclick="toggleSidebar()"><i class="far fa-calendar-alt"></i> <span id="navAvail">Prenota</span></a></li>
-            <li><a href="#location" onclick="toggleSidebar()"><i class="fas fa-map-marker-alt"></i> <span id="navLoc">Mappa</span></a></li>
+            <li><a href="#info" onclick="toggleSidebar()"><i class="fas fa-info-circle"></i> <span id="navInfo">Informazioni</span></a></li>
+            <li><a href="#disponibilita" onclick="toggleSidebar()"><i class="fas fa-calendar-alt"></i> <span id="navAvail">Prenota</span></a></li>
+            <li><a href="#location" onclick="toggleSidebar()"><i class="fas fa-map-marker"></i> <span id="navLoc">Mappa</span></a></li>
         </ul>
     </div>
 </nav>
 
-<div class="main-content">
+<div class="main-wrapper">
+  
+  <div class="top-lang-bar">
+      <div class="flags">
+          <span class="flag-icon active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
+          <span class="flag-icon" id="flag-en" onclick="setLang('en')">🇬🇧</span>
+      </div>
+  </div>
+
   <div class="container">
     
-    <!-- TOPBAR LINGUE -->
-    <div class="topbar-lang">
-        <span class="flag-icon active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
-        <span class="flag-icon" id="flag-en" onclick="setLang('en')">🇬🇧</span>
-    </div>
-
-    <!-- HERO CON LOGO TRASPARENTE -->
     <div class="hero">
-      <img src="sfondo_nero.webp" class="hero-logo-bg" alt="Logo">
-      <h1 id="title">Cervinia Ski Home</h1>
-      <p id="desc">Il tuo rifugio moderno sulle piste del Cervino</p>
+      <img src="sfondo_nero.webp" class="logo-bg" alt="Logo">
+      <h1 id="heroTitle">Cervinia Ski Home</h1>
+      <p id="heroTagline">Il tuo rifugio moderno sulle piste del Cervino</p>
     </div>
 
-    <!-- DUE COLONNE: FOTO | DESCRIZIONE -->
-    <div class="main-grid">
-      <div class="grid-left" id="foto">
+    <div class="content-grid">
+      
+      <div class="col-left" id="foto">
         <div class="carousel-container material-card">
-          <button class="carousel-btn prev-btn" onclick="scrollCarousel('myCarousel', -1)">&#10094;</button>
+          <button class="carousel-btn prev" onclick="scrollCarousel(-1)">❮</button>
           <div class="carousel" id="myCarousel">
             <img src="foto1.webp" onclick="openLightbox(0)">
             <img src="foto2.webp" onclick="openLightbox(1)">
@@ -59,92 +58,83 @@
             <img src="foto6.webp" onclick="openLightbox(5)">
             <img src="foto7.webp" onclick="openLightbox(6)">
           </div>
-          <button class="carousel-btn next-btn" onclick="scrollCarousel('myCarousel', 1)">&#10095;</button>
+          <button class="carousel-btn next" onclick="scrollCarousel(1)">❯</button>
         </div>
       </div>
 
-      <div class="grid-right" id="info">
-        <div class="description-section material-card">
+      <div class="col-right" id="info">
+        <div class="material-card description-box">
           <h2 id="descTitle">L'Appartamento</h2>
-          <p id="descP1">Appartamento SKi-in SKi-Out direttamente sulle piste di Cielo Alto. 6 posti letto disponibili.</p>
-          <p id="descP2">Smart TV, Nespresso e Microonde. Lenzuola e asciugamani inclusi.</p>
-          <div class="house-rules">
-              <span><b>Check-in:</b> 16:00</span> | <span><b>Check-out:</b> 10:30</span>
+          <p id="descP1">Appartamento Ski-in Ski-out direttamente sulle piste di Cielo Alto. Rientro a casa con gli sci ai piedi garantito (Pista 16).</p>
+          <p id="descP2">Smart TV, cucina attrezzata, Nespresso e Microonde. WiFi gratuito, lenzuola e asciugamani inclusi.</p>
+          <div class="rules-box">
+              <span id="txtCheckIn"><b>Check-in:</b> 16:00</span> | <span id="txtCheckOut"><b>Check-out:</b> 10:30</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SELETTORE OSPITI E CALENDARIO -->
-    <div class="section-container" id="disponibilita">
-        <h3 id="availTitle" class="section-title">Disponibilità e Preventivo</h3>
+    <div class="booking-section" id="disponibilita">
+        <h3 id="bookTitle" class="section-title">Disponibilità e Preventivo</h3>
         
-        <div class="guest-picker material-card">
-            <div class="picker-item">
-                <span id="labelAdults">Adulti</span>
-                <div class="counter">
-                    <button onclick="updateGuests('adults', -1)">-</button>
-                    <span id="countAdults">2</span>
-                    <button onclick="updateGuests('adults', 1)">+</button>
+        <div class="guest-selector material-card">
+            <div class="guest-type">
+                <span id="lblAdults">Adulti</span>
+                <div class="ctrl">
+                    <button onclick="changeGuests('adults', -1)">-</button>
+                    <span id="numAdults">2</span>
+                    <button onclick="changeGuests('adults', 1)">+</button>
                 </div>
             </div>
-            <div class="picker-item">
-                <span id="labelChildren">Bambini</span>
-                <div class="counter">
-                    <button onclick="updateGuests('children', -1)">-</button>
-                    <span id="countChildren">0</span>
-                    <button onclick="updateGuests('children', 1)">+</button>
+            <div class="guest-type">
+                <span id="lblChildren">Bambini</span>
+                <div class="ctrl">
+                    <button onclick="changeGuests('children', -1)">-</button>
+                    <span id="numChildren">0</span>
+                    <button onclick="changeGuests('children', 1)">+</button>
                 </div>
-            </div>
-            <div class="picker-info">
-                <small id="maxGuestsInfo">Massimo 6 persone totali</small>
             </div>
         </div>
 
-        <div class="calendar-booking-container material-card">
-            <div class="cal-nav-top">
-                <button onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
-                <button onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+        <div class="calendar-wrapper material-card">
+            <div class="cal-header-nav">
+                <button onclick="moveMonth(-1)">❮</button>
+                <button onclick="moveMonth(1)">❯</button>
             </div>
-            <div id="calendar-container" class="calendar-dual"></div>
+            <div id="calendar-grid-container" class="dual-calendar"></div>
         </div>
     </div>
 
-    <!-- LOCATION E RECENSIONI -->
-    <div class="section-container" id="location">
-        <div class="guide-grid">
-            <div class="material-card">
-                <h4 id="foodTitle">Ristoranti Consigliati</h4>
-                <p><a href="https://maps.app.goo.gl/3w6qPzMvVj8pXyvL8" target="_blank" class="food-link">Lo Chalet</a></p>
-                <p><a href="https://maps.app.goo.gl/8J9b2Wb2Z9zZ9zZ9" target="_blank" class="food-link">Wood Gourmet</a></p>
-            </div>
-            <div class="material-card">
-                <h4 id="reviewsTitle">Recensioni</h4>
-                <div class="rev-stars">★★★★★</div>
-                <p id="revText">"Posizione perfetta, rientro a casa sci ai piedi!"</p>
-            </div>
+    <div class="footer-grid" id="location">
+        <div class="material-card">
+            <h4 id="titleEat">Dove Mangiare</h4>
+            <p><a href="https://maps.app.goo.gl/xxx" target="_blank" class="link">Lo Chalet</a> (Tipico)</p>
+            <p><a href="https://maps.app.goo.gl/yyy" target="_blank" class="link">Wood</a> (Gourmet)</p>
+        </div>
+        <div class="material-card">
+            <h4 id="titleRev">Recensioni</h4>
+            <div class="stars">★★★★★</div>
+            <p>"Sulle piste, moderno e accogliente!"</p>
         </div>
     </div>
 
   </div>
 </div>
 
-<!-- ACTIONS DESTRA (SOCIAL + PRENOTA) -->
-<div class="right-actions">
-    <div class="social-stack">
-        <a href="https://wa.me/393479612836" target="_blank" class="action-btn wa"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="action-btn ig"><i class="fab fa-instagram"></i></a>
-        <a href="mailto:airpulizie@gmail.com" class="action-btn mail"><i class="far fa-envelope"></i></a>
-        <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank" class="action-btn map"><i class="fas fa-map-marker-alt"></i></a>
+<div class="floating-actions">
+    <div class="social-links">
+        <a href="https://wa.me/393479612836" target="_blank" class="s-btn wa"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="s-btn ig"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:airpulizie@gmail.com" class="s-btn mail"><i class="far fa-envelope"></i></a>
+        <a href="http://maps.google.com/?q=Cervinia" target="_blank" class="s-btn map"><i class="fas fa-map-marker-alt"></i></a>
     </div>
-    <a href="#disponibilita" class="book-float-btn">
-        <i class="fas fa-calendar-check"></i>
-        <span id="btnFloatBook">PRENOTA</span>
+    <a href="#disponibilita" class="main-book-btn">
+        <i class="fas fa-calendar-check"></i> <span id="txtBtnBook">PRENOTA</span>
     </a>
 </div>
 
-<div class="menu-overlay" id="menuOverlay" onclick="toggleSidebar()"></div>
-<div id="lightbox" onclick="closeLightbox()"><span class="close-lightbox">&times;</span><img id="lightboxImg" src=""></div>
+<div class="menu-overlay" id="overlay" onclick="toggleSidebar()"></div>
+<div id="lightbox" onclick="closeLightbox()"><span class="close-lb">×</span><img id="lbImg" src=""></div>
 
 <script src="script.js"></script>
 </body>
