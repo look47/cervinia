@@ -2,48 +2,65 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Recap - Cervinia Ski Home</title>
+    <title>Prenota - Cervinia Ski Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="overlay">
-        <div class="container" style="max-width:500px; padding-top:100px;">
-            <div class="material-card" style="text-align:center;">
-                <h1 id="recapTitle">Riepilogo</h1>
-                <p id="datesInfo"></p>
-                <p id="guestsInfo"></p>
-                <p style="color:#2ecc71; font-weight:800;" id="cleanText">✓ Pulizie incluse</p>
-                <hr>
-                <p id="oldPriceText"></p>
-                <div style="font-size: 50px; color:#00e5ff; font-weight:800;" id="finalPrice"></div>
-                <p style="color:#2ecc71;" id="saveText"></p>
+        <div class="top-lang-bar">
+            <span class="flag-icon active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
+            <span class="flag-icon" id="flag-en" onclick="setLang('en')">🇬🇧</span>
+        </div>
+
+        <div class="container" style="max-width:800px;">
+            <div class="material-card" style="margin-top: 20px;">
+                <h1 style="text-align:center; color:#00e5ff;">RESERVATION</h1>
                 
-                <a href="#" id="waLink" style="display:block; background:#25D366; color:white; padding:15px; border-radius:10px; text-decoration:none; font-weight:bold; margin-top:20px;">CONFERMA SU WHATSAPP</a>
-                <a href="index.html" style="color:white; display:block; margin-top:15px; opacity:0.6;">Annulla</a>
+                <!-- GUEST SELECTOR -->
+                <div class="guest-selector">
+                    <div class="guest-type">
+                        <span id="lblAdults">Adulti</span>
+                        <div class="ctrl">
+                            <button onclick="changeGuests('adults', -1)">-</button>
+                            <span id="numAdults">2</span>
+                            <button onclick="changeGuests('adults', 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="guest-type">
+                        <span id="lblChildren">Bambini</span>
+                        <div class="ctrl">
+                            <button onclick="changeGuests('children', -1)">-</button>
+                            <span id="numChildren">0</span>
+                            <button onclick="changeGuests('children', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALENDARIO DUAL -->
+                <div class="cal-header-nav" style="text-align:center; margin-bottom:15px;">
+                    <button onclick="moveMonth(-1)" style="background:none; border:1px solid #00e5ff; color:white; padding:5px 15px; border-radius:5px;">❮</button>
+                    <button onclick="moveMonth(1)" style="background:none; border:1px solid #00e5ff; color:white; padding:5px 15px; border-radius:5px;">❯</button>
+                </div>
+                <div id="calendar-grid-container" class="dual-calendar"></div>
+
+                <!-- PREZZO E WHATSAPP -->
+                <div class="price-display">
+                    <p style="color:#2ecc71; font-weight:800;" id="txtClean">✓ Pulizie incluse</p>
+                    <div class="price-old" id="p-old">---</div>
+                    <div class="price-final" id="p-final">Scegli le date</div>
+                    <p style="color:#2ecc71; font-weight:600;" id="txtSave">Risparmio prenotazione diretta!</p>
+                    
+                    <a href="#" id="wa-link" style="display:block; background:#25D366; color:white; padding:20px; border-radius:15px; text-decoration:none; font-weight:800; margin-top:30px; font-size:20px; box-shadow: 0 4px 15px rgba(37,211,102,0.4);">
+                        CONFIRM VIA WHATSAPP
+                    </a>
+                    <a href="index.html" style="color:white; display:block; margin-top:20px; opacity:0.5; text-decoration:none; text-align:center;">Torna alla Home</a>
+                </div>
             </div>
         </div>
     </div>
-    <script>
-        const p = new URLSearchParams(window.location.search);
-        const l = p.get("lang") || "it";
-        
-        const content = {
-            it: { title: "Riepilogo", in: "In", out: "Out", ad: "Adulti", ch: "Bambini", clean: "✓ Pulizie incluse", old: "Prezzo Originale", save: "Risparmio prenotazione diretta!" },
-            en: { title: "Recap", in: "In", out: "Out", ad: "Adults", ch: "Children", clean: "✓ Cleaning included", old: "Original Price", save: "Direct booking discount!" }
-        };
-
-        const s = content[l];
-        document.getElementById("recapTitle").innerText = s.title;
-        document.getElementById("datesInfo").innerText = `${s.in}: ${p.get("in")} | ${s.out}: ${p.get("out")} (${p.get("nights")} notti)`;
-        document.getElementById("guestsInfo").innerText = `${p.get("ad")} ${s.ad}, ${p.get("ch")} ${s.ch}`;
-        document.getElementById("cleanText").innerText = s.clean;
-        document.getElementById("oldPriceText").innerHTML = `${s.old}: <span style="text-decoration:line-through">${p.get("old")}€</span>`;
-        document.getElementById("finalPrice").innerText = p.get("total") + "€";
-        document.getElementById("saveText").innerText = s.save;
-        
-        const msg = `Ciao! Vorrei prenotare.%0AIn: ${p.get("in")}%0AOut: ${p.get("out")}%0AOspiti: ${p.get("ad")} Ad, ${p.get("ch")} Bam.%0ATotale: ${p.get("total")}€`;
-        document.getElementById("waLink").href = `https://wa.me/393479612836?text=${msg}`;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
