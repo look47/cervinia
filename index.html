@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <!-- Carica le icone e il NOSTRO file dello stile grafico -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -14,29 +14,22 @@
 <div class="overlay">
   <div class="container">
 
-    <!-- TOPBAR -->
     <div class="topbar">
-      <div style="font-size: 20px; letter-spacing: 1px;"><b>CERVINIA SKI HOME</b></div>
-      <button class="lang-btn" onclick="toggleLang()">IT / EN</button>
+      <div class="logo"><b>CERVINIA SKI HOME</b></div>
     </div>
 
-    <!-- HERO -->
     <div class="hero">
       <h1 id="title">Cervinia Ski Home</h1>
       <p id="desc">Il tuo rifugio moderno sulle piste del Cervino</p>
+      
+      <div class="flags-container">
+        <span class="flag active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
+        <span class="flag" id="flag-en" onclick="setLang('en')">🇬🇧</span>
+      </div>
     </div>
 
-    <!-- CAROSELLO FOTO -->
-    <div class="carousel">
-      <img src="foto1.webp" onclick="openLightbox(this.src)" alt="Foto 1">
-      <img src="foto2.webp" onclick="openLightbox(this.src)" alt="Foto 2">
-      <img src="foto3.webp" onclick="openLightbox(this.src)" alt="Foto 3">
-      <img src="foto4.webp" onclick="openLightbox(this.src)" alt="Foto 4">
-      <img src="foto5.webp" onclick="openLightbox(this.src)" alt="Foto 5">
-    </div>
-
-<!-- SEZIONE DESCRIZIONE -->
-    <div class="description-section">
+    <!-- Descrizione posizionata sopra le foto -->
+    <div class="description-section material-card">
       <h2 id="descTitle">L'Appartamento</h2>
       <p id="descP1">Con WiFi gratuito e vista sul giardino, Rododendro Ski-in Ski-out CIR 0491 offre un alloggio a Breuil-Cervinia a solo 900 metri da Funivia del Plateau Rosà. Situata a 8,6 km da Klein Matterhorn, la struttura prevede una terrazza e il parcheggio privato gratuito.</p>
       <p id="descP2">Questo appartamento con balcone e vista sulla montagna presenta 1 camera da letto, un soggiorno, una TV a schermo piatto, una cucina con frigorifero e lavastoviglie e 1 bagno con bidet. Per vostra comodità, la struttura può fornire asciugamani e biancheria da letto a pagamento.</p>
@@ -47,25 +40,39 @@
         <span id="descRating">I gruppi apprezzano molto la posizione: l'hanno valutata 8,8 per un soggiorno di più persone.</span>
       </div>
     </div>
-    
-    <!-- PULSANTI CONTATTI -->
+
+    <div class="carousel-container">
+      <button class="carousel-btn prev-btn" onclick="scrollCarousel(-1)">&#10094;</button>
+      
+      <div class="carousel" id="myCarousel">
+        <img src="foto1.webp" onclick="openLightbox(0)" alt="Foto 1">
+        <img src="foto2.webp" onclick="openLightbox(1)" alt="Foto 2">
+        <img src="foto3.webp" onclick="openLightbox(2)" alt="Foto 3">
+        <img src="foto4.webp" onclick="openLightbox(4)" alt="Foto 4">
+        <img src="foto5.webp" onclick="openLightbox(5)" alt="Foto 5">
+        <img src="foto6.webp" onclick="openLightbox(5)" alt="Foto 6">
+        <img src="foto7.webp" onclick="openLightbox(5)" alt="Foto 7">
+      </div>
+      
+      <button class="carousel-btn next-btn" onclick="scrollCarousel(1)">&#10095;</button>
+    </div>
+
     <div class="buttons">
-      <a href="https://wa.me/393479612836" target="_blank" class="btn btn-wa">
+      <a href="https://wa.me/393479612836" target="_blank" class="btn btn-wa material-card">
         <i class="fab fa-whatsapp"></i> <span id="waText">WhatsApp</span>
       </a>
-      <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="btn btn-insta">
+      <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="btn btn-insta material-card">
         <i class="fab fa-instagram"></i> Instagram
       </a>
-      <a href="mailto:airpulizie@gmail.com" class="btn btn-mail">
+      <a href="mailto:airpulizie@gmail.com" class="btn btn-mail material-card">
         <i class="far fa-envelope"></i> Email
       </a>
-      <a href="https://maps.app.goo.gl/vostro-link-mappa" target="_blank" class="btn btn-maps">
-        <i class="fas fa-map-marker-alt"></i> Google Maps
+      <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank" class="btn btn-maps material-card">
+        <i class="fas fa-map-marker-alt"></i> Maps
       </a>
     </div>
 
-    <!-- CALENDARIO -->
-    <div class="section">
+    <div class="section material-card">
       <h2 id="availTitle">Disponibilità</h2>
       <p id="availText">Date aggiornate in tempo reale</p>
       <div class="calendar-wrapper">
@@ -76,13 +83,13 @@
   </div>
 </div>
 
-<!-- Lightbox -->
-<div id="lightbox" onclick="this.style.display='none'">
-  <img id="lightboxImg" src="">
+<div id="lightbox" onclick="closeLightbox()">
+  <span class="close-lightbox">&times;</span>
+  <button class="lightbox-btn lb-prev" onclick="changeLightboxImage(-1, event)">&#10094;</button>
+  <img id="lightboxImg" src="" onclick="event.stopPropagation()">
+  <button class="lightbox-btn lb-next" onclick="changeLightboxImage(1, event)">&#10095;</button>
 </div>
 
-<!-- Carica il NOSTRO file per le funzioni al termine della pagina -->
 <script src="script.js"></script>
-
 </body>
 </html>
