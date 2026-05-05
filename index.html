@@ -14,49 +14,72 @@
 <div class="overlay">
   <div class="container">
 
+    <!-- TOPBAR: Logo a sx e Lingue a dx -->
     <div class="topbar">
       <div class="logo"><b>CERVINIA SKI HOME</b></div>
-    </div>
-
-    <div class="hero">
-      <h1 id="title">Cervinia Ski Home</h1>
-      <p id="desc">Il tuo rifugio moderno sulle piste del Cervino</p>
-      
       <div class="flags-container">
         <span class="flag active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
         <span class="flag" id="flag-en" onclick="setLang('en')">🇬🇧</span>
       </div>
     </div>
 
-    <!-- Descrizione posizionata sopra le foto -->
+    <div class="hero">
+      <h1 id="title">Cervinia Ski Home</h1>
+      <p id="desc">Il tuo rifugio moderno sulle piste del Cervino</p>
+    </div>
+
+    <!-- DESCRIZIONE -->
     <div class="description-section material-card">
       <h2 id="descTitle">L'Appartamento</h2>
       <p id="descP1">Con WiFi gratuito e vista sul giardino, Rododendro Ski-in Ski-out CIR 0491 offre un alloggio a Breuil-Cervinia a solo 900 metri da Funivia del Plateau Rosà. Situata a 8,6 km da Klein Matterhorn, la struttura prevede una terrazza e il parcheggio privato gratuito.</p>
-      <p id="descP2">Questo appartamento con balcone e vista sulla montagna presenta 1 camera da letto, un soggiorno, una TV a schermo piatto, una cucina con frigorifero e lavastoviglie e 1 bagno con bidet. Per vostra comodità, la struttura può fornire asciugamani e biancheria da letto a pagamento.</p>
-      <p id="descP3">L’accesso diretto alle piste e un deposito sci sono disponibili presso questo appartamento, e gli ospiti possono praticare lo sci nei dintorni. L'Aeroporto di Torino si trova a 114 km di distanza.</p>
-      
-      <div class="rating-box">
-        <i class="fas fa-star"></i>
-        <span id="descRating">I gruppi apprezzano molto la posizione: l'hanno valutata 8,8 per un soggiorno di più persone.</span>
-      </div>
+      <p id="descP2">Questo appartamento con balcone e vista sulla montagna presenta 1 camera da letto, un soggiorno, una TV a schermo piatto, una cucina con frigorifero e lavastoviglie e 1 bagno con bidet.</p>
+      <p id="descP3">L’accesso diretto alle piste e un deposito sci sono disponibili presso questo appartamento. L'Aeroporto di Torino si trova a 114 km di distanza.</p>
     </div>
 
+    <!-- CAROSELLO FOTO -->
     <div class="carousel-container">
       <button class="carousel-btn prev-btn" onclick="scrollCarousel(-1)">&#10094;</button>
-      
       <div class="carousel" id="myCarousel">
         <img src="foto1.webp" onclick="openLightbox(0)" alt="Foto 1">
         <img src="foto2.webp" onclick="openLightbox(1)" alt="Foto 2">
         <img src="foto3.webp" onclick="openLightbox(2)" alt="Foto 3">
-        <img src="foto4.webp" onclick="openLightbox(4)" alt="Foto 4">
-        <img src="foto5.webp" onclick="openLightbox(5)" alt="Foto 5">
-        <img src="foto6.webp" onclick="openLightbox(5)" alt="Foto 6">
-        <img src="foto7.webp" onclick="openLightbox(5)" alt="Foto 7">
+        <img src="foto4.webp" onclick="openLightbox(3)" alt="Foto 4">
+        <img src="foto5.webp" onclick="openLightbox(4)" alt="Foto 5">
+        <img src="foto6.webp" onclick="openLightbox(3)" alt="Foto 6">
+        <img src="foto7.webp" onclick="openLightbox(4)" alt="Foto 7">
       </div>
-      
       <button class="carousel-btn next-btn" onclick="scrollCarousel(1)">&#10095;</button>
     </div>
 
+    <!-- SEZIONE RECENSIONI (Google Maps style) -->
+    <h3 id="reviewsTitle" style="text-align:center; text-transform:uppercase; letter-spacing:1px; margin-top:40px;">Cosa dicono gli ospiti</h3>
+    <div class="reviews-container">
+      <div class="review-card material-card">
+        <div class="review-header">
+          <b>Marco</b>
+          <div class="stars">★★★★★</div>
+        </div>
+        <p class="review-text">"Posizione incredibile, letteralmente sulle piste. L'appartamento è moderno e pulitissimo. Torneremo sicuramente!"</p>
+      </div>
+
+      <div class="review-card material-card">
+        <div class="review-header">
+          <b>Elena</b>
+          <div class="stars">★★★★★</div>
+        </div>
+        <p class="review-text">"Soggiorno perfetto. La vista sul Cervino dal balcone vale da sola il prezzo. Comodo il parcheggio gratuito."</p>
+      </div>
+
+      <div class="review-card material-card">
+        <div class="review-header">
+          <b>Thomas</b>
+          <div class="stars">★★★★★</div>
+        </div>
+        <p class="review-text">"Very modern apartment and great communication with the host. Best ski-in ski-out experience in Cervinia."</p>
+      </div>
+    </div>
+
+    <!-- CONTATTI -->
     <div class="buttons">
       <a href="https://wa.me/393479612836" target="_blank" class="btn btn-wa material-card">
         <i class="fab fa-whatsapp"></i> <span id="waText">WhatsApp</span>
@@ -72,6 +95,7 @@
       </a>
     </div>
 
+    <!-- CALENDARIO -->
     <div class="section material-card">
       <h2 id="availTitle">Disponibilità</h2>
       <p id="availText">Date aggiornate in tempo reale</p>
