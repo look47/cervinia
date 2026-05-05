@@ -10,43 +10,40 @@
 </head>
 <body>
 
+<!-- SIDEBAR SINISTRA -->
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+        <h2 class="sidebar-logo">CERVINIA<br><span>SKI HOME</span></h2>
+        <ul class="nav-links">
+            <li><a href="#foto"><i class="fas fa-images"></i> <span id="navFoto">Gallery</span></a></li>
+            <li><a href="#info"><i class="fas fa-info-circle"></i> <span id="navInfo">Info</span></a></li>
+            <li><a href="recap.html"><i class="fas fa-calendar-alt"></i> <span id="navAvail">Prenota</span></a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HEADER MOBILE -->
 <div class="mobile-header">
     <button class="hamburger-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
     <div class="logo-mob">CERVINIA SKI HOME</div>
 </div>
 
-<nav class="sidebar" id="sidebar">
-    <div class="sidebar-content">
-        <h2 class="sidebar-title">Cervinia<br><span>Ski Home</span></h2>
-        <ul class="nav-links">
-            <li><a href="#foto" onclick="toggleSidebar()"><i class="fas fa-images"></i> <span id="navFoto">Foto</span></a></li>
-            <li><a href="#info" onclick="toggleSidebar()"><i class="fas fa-info-circle"></i> <span id="navInfo">Informazioni</span></a></li>
-            <li><a href="#disponibilita" onclick="toggleSidebar()"><i class="fas fa-calendar-alt"></i> <span id="navAvail">Prenota</span></a></li>
-            <li><a href="#location" onclick="toggleSidebar()"><i class="fas fa-map-marker"></i> <span id="navLoc">Mappa</span></a></li>
-        </ul>
-    </div>
-</nav>
-
 <div class="main-wrapper">
-  
   <div class="top-lang-bar">
-      <div class="flags">
-          <span class="flag-icon active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
-          <span class="flag-icon" id="flag-en" onclick="setLang('en')">🇬🇧</span>
-      </div>
+      <span class="flag-icon active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
+      <span class="flag-icon" id="flag-en" onclick="setLang('en')">🇬🇧</span>
   </div>
 
   <div class="container">
-    
     <div class="hero">
       <img src="sfondo_nero.webp" class="logo-bg" alt="Logo">
       <h1 id="heroTitle">Cervinia Ski Home</h1>
       <p id="heroTagline">Il tuo rifugio moderno sulle piste del Cervino</p>
     </div>
 
-    <div class="content-grid">
-      
-      <div class="col-left" id="foto">
+    <!-- DUE COLONNE -->
+    <div class="content-grid" id="foto">
+      <div class="col-left">
         <div class="carousel-container material-card">
           <button class="carousel-btn prev" onclick="scrollCarousel(-1)">❮</button>
           <div class="carousel" id="myCarousel">
@@ -65,70 +62,30 @@
       <div class="col-right" id="info">
         <div class="material-card description-box">
           <h2 id="descTitle">L'Appartamento</h2>
-          <p id="descP1">Appartamento Ski-in Ski-out direttamente sulle piste di Cielo Alto. Rientro a casa con gli sci ai piedi garantito (Pista 16).</p>
-          <p id="descP2">Smart TV, cucina attrezzata, Nespresso e Microonde. WiFi gratuito, lenzuola e asciugamani inclusi.</p>
+          <p id="descP1">Sci ai piedi sulla Pista 16 di Cielo Alto. Un design moderno per il massimo comfort dopo una giornata sulla neve.</p>
+          <p id="descP2">6 posti letto, WiFi, Smart TV e cucina completa. Tutto incluso per il tuo soggiorno perfetto.</p>
           <div class="rules-box">
-              <span id="txtCheckIn"><b>Check-in:</b> 16:00</span> | <span id="txtCheckOut"><b>Check-out:</b> 10:30</span>
+              <span id="txtCheckIn">Check-in: 16:00</span> | <span id="txtCheckOut">Check-out: 10:30</span>
+          </div>
+          <div style="margin-top:20px;">
+              <h4 id="titleEat">Food</h4>
+              <p><a href="https://maps.app.goo.gl/3w6qPzMvVj8pXyvL8" target="_blank" class="link">Lo Chalet</a> | <a href="https://maps.app.goo.gl/8J9b2Wb2Z9zZ9zZ9" target="_blank" class="link">Wood Gourmet</a></p>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="booking-section" id="disponibilita">
-        <h3 id="bookTitle" class="section-title">Disponibilità e Preventivo</h3>
-        
-        <div class="guest-selector material-card">
-            <div class="guest-type">
-                <span id="lblAdults">Adulti</span>
-                <div class="ctrl">
-                    <button onclick="changeGuests('adults', -1)">-</button>
-                    <span id="numAdults">2</span>
-                    <button onclick="changeGuests('adults', 1)">+</button>
-                </div>
-            </div>
-            <div class="guest-type">
-                <span id="lblChildren">Bambini</span>
-                <div class="ctrl">
-                    <button onclick="changeGuests('children', -1)">-</button>
-                    <span id="numChildren">0</span>
-                    <button onclick="changeGuests('children', 1)">+</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="calendar-wrapper material-card">
-            <div class="cal-header-nav">
-                <button onclick="moveMonth(-1)">❮</button>
-                <button onclick="moveMonth(1)">❯</button>
-            </div>
-            <div id="calendar-grid-container" class="dual-calendar"></div>
-        </div>
-    </div>
-
-    <div class="footer-grid" id="location">
-        <div class="material-card">
-            <h4 id="titleEat">Dove Mangiare</h4>
-            <p><a href="https://maps.app.goo.gl/xxx" target="_blank" class="link">Lo Chalet</a> (Tipico)</p>
-            <p><a href="https://maps.app.goo.gl/yyy" target="_blank" class="link">Wood</a> (Gourmet)</p>
-        </div>
-        <div class="material-card">
-            <h4 id="titleRev">Recensioni</h4>
-            <div class="stars">★★★★★</div>
-            <p>"Sulle piste, moderno e accogliente!"</p>
-        </div>
-    </div>
-
   </div>
 </div>
 
+<!-- AZIONI FLOTTANTI A DESTRA -->
 <div class="floating-actions">
-    <div class="social-links">
+    <div class="social-stack">
         <a href="https://wa.me/393479612836" target="_blank" class="s-btn wa"><i class="fab fa-whatsapp"></i></a>
         <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="s-btn ig"><i class="fab fa-instagram"></i></a>
         <a href="mailto:airpulizie@gmail.com" class="s-btn mail"><i class="far fa-envelope"></i></a>
-        <a href="http://maps.google.com/?q=Cervinia" target="_blank" class="s-btn map"><i class="fas fa-map-marker-alt"></i></a>
+        <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank" class="s-btn map"><i class="fas fa-map-marker-alt"></i></a>
     </div>
-    <a href="#disponibilita" class="main-book-btn">
+    <a href="recap.html" class="main-book-btn">
         <i class="fas fa-calendar-check"></i> <span id="txtBtnBook">PRENOTA</span>
     </a>
 </div>
