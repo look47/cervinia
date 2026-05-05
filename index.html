@@ -1,176 +1,290 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Cervinia Ski Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!DOCTYPE html>
+<html lang="it">
+<head>
+  <!-- Titolo che appare nella scheda del browser -->
+  <title>Cervinia Ski Home</title>
+  
+  <!-- Codifica dei caratteri (permette di leggere accenti e simboli) -->
+  <meta charset="UTF-8">
+  
+  <!-- Fondamentale per far sì che il sito si adatti bene agli schermi dei cellulari -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- INIZIO DELLO STILE (CSS) - Qui definiamo colori, spaziature e layout -->
   <style>
+    /* Stile generale della pagina */
     body {
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f7f7f7;
-      color: #111;
+      /* Sfondo con foto del Cervino. L'immagine è presa da Unsplash.
+         'fixed' fa in modo che lo sfondo resti fermo quando scorri la pagina. */
+      background: url("https://images.unsplash.com/photo-1549420042-32a1dfdfdeec?q=80&w=2000&auto=format&fit=crop") no-repeat center center fixed;
+      background-size: cover;
+      color: white; /* Il testo generale è bianco */
     }
 
+    /* Questo overlay crea una "patina" scura sopra la foto di sfondo.
+       Senza questo, il testo bianco sarebbe illeggibile sopra la neve chiara. */
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.55); /* Nero con 55% di trasparenza */
+      min-height: 100vh; /* Copre sempre almeno il 100% dell'altezza dello schermo */
+      padding-bottom: 50px;
+    }
+
+    /* Il contenitore centrale che racchiude tutto il sito */
     .container {
-      max-width: 1000px;
-      margin: auto;
+      max-width: 1000px; /* Non diventa più largo di 1000 pixel sui computer */
+      margin: auto; /* Lo centra nella pagina */
       padding: 20px;
     }
 
+    /* La barra in alto con il nome e il cambio lingua */
     .topbar {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-between; /* Mette gli elementi agli estremi (uno a sx, uno a dx) */
       align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linea semitrasparente sotto */
+      margin-bottom: 20px;
     }
 
+    /* Stile del pulsante della lingua */
     .lang {
       cursor: pointer;
       font-size: 14px;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background 0.3s; /* Animazione fluida quando ci passi sopra */
     }
 
+    /* Quando il mouse passa sopra il bottone lingua */
+    .lang:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Sezione testuale in alto (Titolo e sottotitolo) */
     .hero {
       text-align: center;
-      padding: 40px 20px;
+      padding: 20px;
     }
-
     .hero h1 {
       font-size: 40px;
       margin-bottom: 10px;
     }
-
     .hero p {
       font-size: 18px;
-      color: #555;
+      color: #eee;
     }
 
-    .image {
-      width: 100%;
-      border-radius: 15px;
-      margin: 20px 0;
+    /* Stile del CAROSELLO di foto */
+    .carousel {
+      display: flex; /* Mette le foto in riga */
+      overflow-x: auto; /* Permette di scorrere orizzontalmente se le foto escono dallo schermo */
+      scroll-snap-type: x mandatory; /* Fa "incastrare" le foto al centro quando scorri */
+      gap: 15px; /* Spazio tra una foto e l'altra */
+      padding: 10px 0;
+      margin: 30px 0;
+      /* Personalizzazione della barra di scorrimento sotto le foto */
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.8) rgba(0, 0, 0, 0.2);
     }
 
+    /* Stile per i browser basati su webkit (Chrome, Safari) per il carosello */
+    .carousel::-webkit-scrollbar {
+      height: 8px;
+    }
+    .carousel::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 4px;
+    }
+
+    /* Stile delle singole immagini dentro il carosello */
+    .carousel img {
+      scroll-snap-align: center; /* Incastra la foto al centro */
+      width: 85%; /* Occupa l'85% della larghezza... */
+      max-width: 600px; /* ...ma mai più di 600px */
+      height: 400px; /* Altezza fissa */
+      object-fit: cover; /* Taglia l'immagine per riempire lo spazio senza deformarla */
+      border-radius: 15px; /* Angoli arrotondati */
+      flex-shrink: 0; /* Impedisce alle immagini di restringersi */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Ombra dietro la foto */
+    }
+
+    /* Contenitore per i pulsanti */
     .buttons {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px 0;
+      gap: 15px;
+      flex-wrap: wrap; /* Se non c'è spazio, manda i pulsanti a capo */
+      justify-content: center; /* Li centra */
+      margin: 30px 0;
     }
 
+    /* Rimuove la sottolineatura dai link */
+    a {
+      text-decoration: none;
+    }
+
+    /* Stile base per tutti i pulsanti */
     .btn {
       padding: 12px 20px;
       border-radius: 8px;
       border: none;
       cursor: pointer;
       font-size: 16px;
+      font-weight: bold;
+      display: inline-block;
+      transition: transform 0.2s; /* Animazione al click */
     }
 
+    /* Effetto "premuto" quando clicchi il pulsante */
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Stile specifico del pulsante WhatsApp (Verde) */
     .primary {
-      background: black;
+      background: #25D366; 
       color: white;
     }
 
+    /* Stile degli altri pulsanti (Trasparenti con bordo) */
     .secondary {
-      background: white;
-      border: 1px solid #ccc;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid white;
+      backdrop-filter: blur(5px); /* Sfoca leggermente ciò che c'è dietro il pulsante */
+    }
+    .secondary:hover {
+      background: rgba(255, 255, 255, 0.4);
     }
 
+    /* Stile per i box scuri inferiori (es. Calendario) */
     .section {
       margin-top: 40px;
       text-align: center;
+      background: rgba(0, 0, 0, 0.6); /* Sfondo nero trasparente */
+      padding: 30px 20px;
+      border-radius: 15px;
     }
 
+    /* Contenitore per il calendario */
+    .calendar-container {
+      background: white; /* Sfondo bianco necessario perché il calendario di google ha scritte nere */
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 20px;
+      /* Rendiamo il contenitore flessibile (responsive) per il calendario */
+      position: relative;
+      overflow: hidden;
+      padding-top: 75%; /* Proporzione altezza/larghezza */
+    }
+
+    /* Faccio in modo che l'iframe (il calendario) si adatti al box bianco */
+    .calendar-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
   </style>
+  <!-- FINE DELLO STILE -->
 </head>
 
 <body>
 
-<div class="container">
+  <!-- L'overlay scurisce la foto di sfondo -->
+  <div class="overlay">
+    <div class="container">
 
-  <div class="topbar">
-    <div><b>Cervinia Ski Home</b></div>
-    <div class="lang" onclick="toggleLang()">IT / EN</div>
+      <!-- TOPBAR: Intestazione e Lingua -->
+      <div class="topbar">
+        <div><b>Cervinia Ski Home</b></div>
+        <!-- Il clic qui lancia la funzione "toggleLang()" scritta in fondo -->
+        <div class="lang" onclick="toggleLang()">IT / EN</div>
+      </div>
+
+      <!-- HERO: Testo principale -->
+      <div class="hero">
+        <h1 id="title">Cervinia Ski Home</h1>
+        <p id="desc">Appartamento moderno nel cuore di Cervinia, perfetto per sci e relax</p>
+      </div>
+
+      <!-- CAROSELLO FOTO -->
+      <div class="carousel">
+        <!-- SOSTITUISCI IL LINK DENTRO src="" CON QUELLI DELLE TUE FOTO REALI -->
+        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=800&auto=format&fit=crop" alt="Esterno/Piste">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop" alt="Soggiorno">
+        <img src="https://images.unsplash.com/photo-1502672260266-1c1de24220e8?q=80&w=800&auto=format&fit=crop" alt="Camera da letto">
+        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop" alt="Bagno">
+      </div>
+
+      <!-- PULSANTI DI CONTATTO -->
+      <div class="buttons">
+        <a href="https://wa.me/393479612836" target="_blank">
+          <div class="btn primary" id="wa">Contattami su WhatsApp</div>
+        </a>
+        <a href="mailto:airpulizie@gmail.com">
+          <div class="btn secondary" id="mail">Invia Email</div>
+        </a>
+        <a href="https://instagram.com/cervinia_ski_house" target="_blank">
+          <div class="btn secondary">Instagram</div>
+        </a>
+        <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank">
+          <div class="btn secondary" id="maps">Apri su Google Maps</div>
+        </a>
+      </div>
+
+      <!-- SEZIONE DISPONIBILITÀ -->
+      <div class="section">
+        <h2 id="availTitle">Disponibilità</h2>
+        <p id="availText">Guarda le date occupate sul calendario (sincronizzato con Booking)</p>
+        
+        <!-- CALENDARIO -->
+        <div class="calendar-container">
+          <!-- 
+            ATTENZIONE: Questo iframe è solo un segnaposto dimostrativo.
+            Devi importare il tuo link iCal (https://ical.booking.com/v1/export?t=f8860073-94e4-40ef-96ba-8842d15d65a5)
+            dentro Google Calendar, renderlo pubblico, e incollare qui il VERO iframe che ti dà Google.
+          -->
+         <iframe src="https://calendar.google.com/calendar/embed?src=kaualk8nld0t3n18tmhj88l0k1k1pkc4%40import.calendar.google.com&ctz=Europe%2FRome" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> 
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="hero">
-    <h1 id="title">Cervinia Ski Home</h1>
-    <p id="desc">Appartamento moderno nel cuore di Cervinia, perfetto per sci e relax</p>
-  </div>
+  <!-- JAVASCRIPT: Qui ci sono le funzioni che rendono interattivo il sito -->
+  <script>
+    let lang = "it"; // Imposto la lingua iniziale a Italiano
 
-  <img src="https://via.placeholder.com/1000x500" class="image">
-
-  <div class="buttons">
-    <a href="https://wa.me/393479612836">
-      <button class="btn primary" id="wa">Contattami su WhatsApp</button>
-    </a>
-
-    <a href="mailto:airpulizie@gmail.com">
-      <button class="btn secondary" id="mail">Invia Email</button>
-    </a>
-
-    <a href="https://instagram.com/cervinia_ski_house" target="_blank">
-      <button class="btn secondary">Instagram</button>
-    </a>
-  </div>
-
-  <div class="section">
-    <h2 id="availTitle">Disponibilità</h2>
-    <p id="availText">Contattami per verificare le date disponibili</p>
-  </div>
-
-  <!-- Calendario iCal -->
-  <div class="section">
-  <h2>Disponibilità</h2>
-  <p>Contattami su WhatsApp per verificare le date disponibili in tempo reale</p>
-</div>
-
-</div>
-
-<script>
-  let lang = "it";
-
-  function toggleLang() {
-    if (lang === "it") {
-      document.getElementById("desc").innerText = "Modern apartment in the heart of Cervinia, perfect for skiing and relaxation";
-      document.getElementById("wa").innerText = "Contact me on WhatsApp";
-      document.getElementById("mail").innerText = "Send Email";
-      document.getElementById("availTitle").innerText = "Availability";
-      document.getElementById("availText").innerText = "Contact me to check available dates";
-      lang = "en";
-    } else {
-      document.getElementById("desc").innerText = "Appartamento moderno nel cuore di Cervinia, perfetto per sci e relax";
-      document.getElementById("wa").innerText = "Contattami su WhatsApp";
-      document.getElementById("mail").innerText = "Invia Email";
-      document.getElementById("availTitle").innerText = "Disponibilità";
-      document.getElementById("availText").innerText = "Contattami per verificare le date disponibili";
-      lang = "it";
+    // Questa funzione cambia i testi in base alla lingua selezionata
+    function toggleLang() {
+      if (lang === "it") {
+        // Se è Italiano, passo all'Inglese. Sostituisco i testi tramite il loro ID.
+        document.getElementById("desc").innerText = "Modern apartment in the heart of Cervinia, perfect for skiing and relaxation";
+        document.getElementById("wa").innerText = "Contact me on WhatsApp";
+        document.getElementById("mail").innerText = "Send Email";
+        document.getElementById("maps").innerText = "Open on Google Maps";
+        document.getElementById("availTitle").innerText = "Availability";
+        document.getElementById("availText").innerText = "Check booked dates on the calendar (synced with Booking)";
+        lang = "en"; // Aggiorno la variabile per ricordarmi che ora sono in inglese
+      } else {
+        // Se è Inglese, torno all'Italiano
+        document.getElementById("desc").innerText = "Appartamento moderno nel cuore di Cervinia, perfetto per sci e relax";
+        document.getElementById("wa").innerText = "Contattami su WhatsApp";
+        document.getElementById("mail").innerText = "Invia Email";
+        document.getElementById("maps").innerText = "Apri su Google Maps";
+        document.getElementById("availTitle").innerText = "Disponibilità";
+        document.getElementById("availText").innerText = "Guarda le date occupate sul calendario (sincronizzato con Booking)";
+        lang = "it"; // Aggiorno la variabile
+      }
     }
-  }
-</script>
+  </script>
 
-  
+</body>
 </html>
-<!-- aggiungo immagine -->
-
-<!--<img src="sfondo_nero.webp"> -->
-
-<head>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      color: white;
-      background: url("https://images.unsplash.com/photo-1605540436563-5bca919ae766");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-    }
-  </style>
-</head>
-
-<div class="section">
-  <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank">
-    <button class="btn secondary">Apri su Google Maps</button>
-  </a>
-</div>
