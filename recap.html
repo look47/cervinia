@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Riepilogo - Cervinia Ski Home</title>
+    <title>Recap - Cervinia Ski Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,14 +10,14 @@
     <div class="overlay">
         <div class="container" style="max-width:500px; padding-top:100px;">
             <div class="material-card" style="text-align:center;">
-                <h1>Prenotazione</h1>
-                <p>Arrivo: <b id="resIn"></b> | Partenza: <b id="resOut"></b></p>
-                <p>Durata: <b id="resNights"></b> notti</p>
-                <p style="color:#2ecc71; font-weight:800;">✓ Pulizie incluse</p>
+                <h1 id="recapTitle">Riepilogo</h1>
+                <p id="datesInfo"></p>
+                <p id="guestsInfo"></p>
+                <p style="color:#2ecc71; font-weight:800;" id="cleanText">✓ Pulizie incluse</p>
                 <hr>
-                <p>Prezzo Originale: <span style="text-decoration:line-through; opacity:0.6;" id="resOld"></span>€</p>
-                <div style="font-size: 50px; color:#00e5ff; font-weight:800;" id="resTotal"></div>
-                <p style="color:#2ecc71;">Risparmi il 13% prenotando qui!</p>
+                <p id="oldPriceText"></p>
+                <div style="font-size: 50px; color:#00e5ff; font-weight:800;" id="finalPrice"></div>
+                <p style="color:#2ecc71;" id="saveText"></p>
                 
                 <a href="#" id="waLink" style="display:block; background:#25D366; color:white; padding:15px; border-radius:10px; text-decoration:none; font-weight:bold; margin-top:20px;">CONFERMA SU WHATSAPP</a>
                 <a href="index.html" style="color:white; display:block; margin-top:15px; opacity:0.6;">Annulla</a>
@@ -26,13 +26,23 @@
     </div>
     <script>
         const p = new URLSearchParams(window.location.search);
-        document.getElementById("resIn").innerText = p.get("in");
-        document.getElementById("resOut").innerText = p.get("out");
-        document.getElementById("resNights").innerText = p.get("nights");
-        document.getElementById("resOld").innerText = p.get("old");
-        document.getElementById("resTotal").innerText = p.get("total") + "€";
+        const l = p.get("lang") || "it";
         
-        const msg = `Ciao! Vorrei prenotare.%0AIn: ${p.get("in")}%0AOut: ${p.get("out")}%0ATotale: ${p.get("total")}€`;
+        const content = {
+            it: { title: "Riepilogo", in: "In", out: "Out", ad: "Adulti", ch: "Bambini", clean: "✓ Pulizie incluse", old: "Prezzo Originale", save: "Risparmio prenotazione diretta!" },
+            en: { title: "Recap", in: "In", out: "Out", ad: "Adults", ch: "Children", clean: "✓ Cleaning included", old: "Original Price", save: "Direct booking discount!" }
+        };
+
+        const s = content[l];
+        document.getElementById("recapTitle").innerText = s.title;
+        document.getElementById("datesInfo").innerText = `${s.in}: ${p.get("in")} | ${s.out}: ${p.get("out")} (${p.get("nights")} notti)`;
+        document.getElementById("guestsInfo").innerText = `${p.get("ad")} ${s.ad}, ${p.get("ch")} ${s.ch}`;
+        document.getElementById("cleanText").innerText = s.clean;
+        document.getElementById("oldPriceText").innerHTML = `${s.old}: <span style="text-decoration:line-through">${p.get("old")}€</span>`;
+        document.getElementById("finalPrice").innerText = p.get("total") + "€";
+        document.getElementById("saveText").innerText = s.save;
+        
+        const msg = `Ciao! Vorrei prenotare.%0AIn: ${p.get("in")}%0AOut: ${p.get("out")}%0AOspiti: ${p.get("ad")} Ad, ${p.get("ch")} Bam.%0ATotale: ${p.get("total")}€`;
         document.getElementById("waLink").href = `https://wa.me/393479612836?text=${msg}`;
     </script>
 </body>
