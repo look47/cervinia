@@ -1,5 +1,5 @@
 let lang = "it";
-const fotoArray = ["foto1.webp", "foto2.webp", "foto3.webp", "foto4.webp", "foto5.webp"];
+const fotoArray = ["foto1.webp", "foto2.webp", "foto3.webp", "foto4.webp", "foto5.webp", "foto6.webp", "foto7.webp"];
 let currentPhotoIndex = 0;
 
 function setLang(selectedLang) {
@@ -12,30 +12,36 @@ function setLang(selectedLang) {
     document.getElementById("title").innerText = "Cervinia Ski Home";
     document.getElementById("desc").innerText = "Your modern retreat on the slopes of Cervinia";
     document.getElementById("descTitle").innerText = "The Apartment";
-    document.getElementById("descP1").innerText = "With free WiFi and garden views, Rododendro Ski-in Ski-out CIR 0491 offers accommodation in Breuil-Cervinia just 900 meters from the Plateau Rosà Cable Car. Located 8.6 km from Klein Matterhorn, the property features a terrace and free private parking.";
-    document.getElementById("descP2").innerText = "This apartment with a balcony and mountain views features 1 bedroom, a living room, a flat-screen TV, a kitchen with a fridge and dishwasher, and 1 bathroom with a bidet.";
-    document.getElementById("descP3").innerText = "Ski-to-door access and ski storage are available at this apartment. Turin Airport is 114 km away.";
-    document.getElementById("reviewsTitle").innerText = "What our guests say";
-    document.getElementById("waText").innerText = "WhatsApp";
+    document.getElementById("descP1").innerText = "Ski-in Ski-Out apartment located directly on the slopes of Cervinia Cielo Alto. 6 beds available (1 double bed, 2 single beds and a comfortable sofa bed). Free WiFi and garden views, the apartment offers warm and welcoming accommodation in Breuil-Cervinia. The property features a private balcony with a view and free private parking.";
+    document.getElementById("descP2").innerHTML = "This mountain view apartment features 1 bedroom, a living room, a smart TV, a kitchen with fridge, dishwasher, <b>microwave and Nespresso coffee machine</b>, plus 1 bathroom with bidet. <b>Bed linen, blankets and complete towel sets are provided for each guest.</b>";
+    document.getElementById("descP3").innerText = "Direct access to the slopes (slope 16), right from the parking lot! The center of Cervinia is 700 m away.";
+    
+    document.getElementById("rulesTitle").innerText = "House Rules";
+    document.getElementById("checkInText").innerHTML = '<i class="fas fa-sign-in-alt"></i> <b>Check-in:</b> from 16:00';
+    document.getElementById("checkOutText").innerHTML = '<i class="fas fa-sign-out-alt"></i> <b>Check-out:</b> by 10:30';
+    document.getElementById("weatherTitle").innerText = "Cervinia Weather";
+    document.getElementById("reviewsTitle").innerText = "Guest Reviews";
     document.getElementById("availTitle").innerText = "Availability";
-    document.getElementById("availText").innerText = "Dates updated in real time";
   } else {
     document.getElementById("title").innerText = "Cervinia Ski Home";
     document.getElementById("desc").innerText = "Il tuo rifugio moderno sulle piste del Cervino";
     document.getElementById("descTitle").innerText = "L'Appartamento";
-    document.getElementById("descP1").innerText = "Con WiFi gratuito e vista sul giardino, Rododendro Ski-in Ski-out CIR 0491 offre un alloggio a Breuil-Cervinia a solo 900 metri da Funivia del Plateau Rosà. Situata a 8,6 km da Klein Matterhorn, la struttura prevede una terrazza e il parcheggio privato gratuito.";
-    document.getElementById("descP2").innerText = "Questo appartamento con balcone e vista sulla montagna presenta 1 camera da letto, un soggiorno, una TV a schermo piatto, una cucina con frigorifero e lavastoviglie e 1 bagno con bidet.";
-    document.getElementById("descP3").innerText = "L’accesso diretto alle piste e un deposito sci sono disponibili presso questo appartamento. L'Aeroporto di Torino si trova a 114 km di distanza.";
+    document.getElementById("descP1").innerText = "Appartamento SKi-in SKi-Out ubicato direttamente sulle piste di Cervinia Cielo alto. 6 posti letto disponibili (1 letto matrimoniale, 2 letti singoli e un comodo divano letto). WiFi gratuito e vista sul giardino, l'appartamento offre un alloggio caldo ed accogliente a Breuil-Cervinia. La struttura prevede balcone privato con vista e il parcheggio privato gratuito.";
+    document.getElementById("descP2").innerHTML = "Questo appartamento con balcone e vista sulla montagna presenta 1 camera da letto, soggiorno, una smart TV, una cucina con frigorifero, lavastoviglie, <b>microonde e macchina da caffè Nespresso</b>, oltre a 1 bagno con bidet. <b>Vengono forniti lenzuola, coperte e set di asciugamani completi per ogni ospite.</b>";
+    document.getElementById("descP3").innerText = "L’accesso diretto alle piste (pista 16), direttamente dal parcheggio! Il centro di Cervinia si trova a 700 m.";
+    
+    document.getElementById("rulesTitle").innerText = "Regole della casa";
+    document.getElementById("checkInText").innerHTML = '<i class="fas fa-sign-in-alt"></i> <b>Check-in:</b> dalle 16:00';
+    document.getElementById("checkOutText").innerHTML = '<i class="fas fa-sign-out-alt"></i> <b>Check-out:</b> entro le 10:30';
+    document.getElementById("weatherTitle").innerText = "Meteo Cervinia";
     document.getElementById("reviewsTitle").innerText = "Cosa dicono gli ospiti";
-    document.getElementById("waText").innerText = "WhatsApp";
     document.getElementById("availTitle").innerText = "Disponibilità";
-    document.getElementById("availText").innerText = "Date aggiornate in tempo reale";
   }
 }
 
-function scrollCarousel(direction) {
-  const carousel = document.getElementById("myCarousel");
-  const scrollAmount = 300;
+function scrollCarousel(carouselId, direction) {
+  const carousel = document.getElementById(carouselId);
+  const scrollAmount = 320;
   carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
 }
 
