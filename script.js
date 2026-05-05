@@ -20,19 +20,17 @@ function setLang(l) {
     document.getElementById("flag-"+l).classList.add("active");
 
     const t = {
-        it: { navFoto: "Gallery", navInfo: "Info", navAvail: "Prenota", btnBook: "PRENOTA", lblAdults: "Adulti", lblChildren: "Bambini", clean: "✓ Pulizie incluse", save: "Risparmio prenotazione diretta!" },
-        en: { navFoto: "Gallery", navInfo: "Info", navAvail: "Booking", btnBook: "BOOK NOW", lblAdults: "Adults", lblChildren: "Children", clean: "✓ Cleaning included", save: "Direct booking discount!" }
+        it: { navFoto: "Foto", navInfo: "Info", navAvail: "Prenota", btnBook: "PRENOTA", lblAdults: "Adulti", lblChildren: "Bambini" },
+        en: { navFoto: "Photos", navInfo: "Info", navAvail: "Booking", btnBook: "BOOK NOW", lblAdults: "Adults", lblChildren: "Children" }
     };
 
     const s = t[lang];
-    if(document.getElementById("navFoto")) document.getElementById("navFoto").innerText = s.navFoto;
-    if(document.getElementById("navInfo")) document.getElementById("navInfo").innerText = s.navInfo;
-    if(document.getElementById("navAvail")) document.getElementById("navAvail").innerText = s.navAvail;
-    if(document.getElementById("lblAdults")) document.getElementById("lblAdults").innerText = s.lblAdults;
-    if(document.getElementById("lblChildren")) document.getElementById("lblChildren").innerText = s.lblChildren;
-    if(document.getElementById("txtBtnBook")) document.getElementById("txtBtnBook").innerText = s.btnBook;
-    if(document.getElementById("txtClean")) document.getElementById("txtClean").innerText = s.clean;
-    if(document.getElementById("txtSave")) document.getElementById("txtSave").innerText = s.save;
+    document.getElementById("navFoto").innerText = s.navFoto;
+    document.getElementById("navInfo").innerText = s.navInfo;
+    document.getElementById("navAvail").innerText = s.navAvail;
+    document.getElementById("lblAdults").innerText = s.lblAdults;
+    document.getElementById("lblChildren").innerText = s.lblChildren;
+    document.getElementById("txtBtnBook").innerText = s.btnBook;
 
     renderCalendar();
 }
@@ -47,12 +45,10 @@ function changeGuests(type, delta) {
     }
     document.getElementById("numAdults").innerText = adults;
     document.getElementById("numChildren").innerText = children;
-    updatePrice();
 }
 
 function renderCalendar() {
     const container = document.getElementById("calendar-grid-container");
-    if(!container) return;
     container.innerHTML = "";
     const now = new Date();
     
@@ -61,8 +57,8 @@ function renderCalendar() {
         const monthName = date.toLocaleString(lang==='it'?'it-IT':'en-US', {month:'long', year:'numeric'});
         
         let html = `<div><div style="text-align:center; color:#00e5ff; font-weight:800; margin-bottom:15px; font-size:14px;">${monthName.toUpperCase()}</div><div class="cal-grid">`;
-        const days = lang==='it'?["L","M","M","G","V","S","D"]:["M","T","W","T","F","S","S"];
-        days.forEach(d => html += `<div style="text-align:center; font-size:11px; opacity:0.5; padding-bottom:5px;">${d}</div>`);
+        const daysHeads = lang==='it'?["L","M","M","G","V","S","D"]:["M","T","W","T","F","S","S"];
+        daysHeads.forEach(d => html += `<div style="text-align:center; font-size:11px; opacity:0.5; padding-bottom:5px;">${d}</div>`);
         
         let start = new Date(date.getFullYear(), date.getMonth(), 1).getDay() || 7;
         for(let i=1; i<start; i++) html += `<div></div>`;
@@ -83,29 +79,23 @@ function onDateClick(date, booked) {
     if(booked) return;
     if(!checkIn || (checkIn && checkOut)) { checkIn = date; checkOut = null; }
     else if (date < checkIn) { checkIn = date; }
-    else { checkOut = date; }
+    else { checkOut = date; finish(); }
     renderCalendar();
-    updatePrice();
 }
 
-function updatePrice() {
-    if(!checkIn || !checkOut) return;
+function finish() {
     const nights = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000*60*60*24));
     let daily = new Date(checkIn).getMonth() >= 11 || new Date(checkIn).getMonth() <= 3 ? pricing.winter : pricing.base;
     let mult = pricing.markup[adults] || 1;
     let total = nights * daily * mult * (1 + (children * pricing.child));
-    
-    document.getElementById("p-final").innerText = total.toFixed(0) + "€";
-    document.getElementById("p-old").innerText = (total * 1.15).toFixed(0) + "€";
-    
-    const msg = `Ciao! Vorrei prenotare.%0AIn: ${checkIn}%0AOut: ${checkOut}%0AOspiti: ${adults} Ad, ${children} Bam.%0ATotale: ${total.toFixed(0)}€`;
-    document.getElementById("wa-link").href = `https://wa.me/393479612836?text=${msg}`;
+    let old = total * 1.15;
+    window.location.href = `recap.html?in=${checkIn}&out=${checkOut}&n=${nights}&t=${total.toFixed(0)}&o=${old.toFixed(0)}&ad=${adults}&ch=${children}&l=${lang}`;
 }
 
 function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('active');
     const over = document.getElementById('overlay');
-    if(over) over.style.display = over.style.display === 'block' ? 'none' : 'block';
+    over.style.display = over.style.display === 'block' ? 'none' : 'block';
 }
 
 function moveMonth(d) { monthOffset += d; renderCalendar(); }
