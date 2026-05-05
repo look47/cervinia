@@ -10,82 +10,75 @@
 </head>
 <body>
 
-<!-- BOTTONE PER APRIRE LA SIDEBAR (Sempre visibile in alto a sinistra) -->
-<button class="sidebar-trigger" onclick="toggleSidebar()">
-    <i class="fas fa-bars"></i>
-</button>
-
-<!-- SIDEBAR (Nascosta di default) -->
-<nav class="sidebar" id="sidebar">
-    <div class="sidebar-inner">
-        <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
-        <h2 class="sidebar-logo">CERVINIA<br><span>SKI HOME</span></h2>
-        <ul class="nav-links">
-            <li><a href="#info" onclick="toggleSidebar()"><i class="fas fa-home"></i> <span id="navInfo">Appartamento</span></a></li>
-            <li><a href="#foto" onclick="toggleSidebar()"><i class="fas fa-images"></i> <span id="navFoto">Gallery</span></a></li>
-            <li><a href="#recensioni" onclick="toggleSidebar()"><i class="fas fa-star"></i> <span id="navRev">Recensioni</span></a></li>
-        </ul>
-        <p class="sidebar-footer">© 2026 Cervinia Ski Home</p>
-    </div>
-</nav>
-
-<div class="main-content">
-    <div class="top-bar">
-        <div class="flags">
+<div class="main-layout">
+    <!-- HEADER CON LOGO -->
+    <header class="hero-header">
+        <img src="sfondo_nero.webp" class="watermark-logo" alt="">
+        <h1 id="heroTitle">CERVINIA SKI HOME</h1>
+        <div class="lang-selector">
             <span class="flag active" id="flag-it" onclick="changeLang('it')">🇮🇹</span>
             <span class="flag" id="flag-en" onclick="changeLang('en')">🇬🇧</span>
         </div>
-    </div>
+    </header>
 
     <div class="container">
-        <!-- HERO CON LOGO WATERMARK -->
-        <div class="hero">
-            <img src="sfondo_nero.webp" class="logo-watermark">
-            <h1 id="heroTitle">CERVINIA SKI HOME</h1>
-            <p id="heroTagline">Il tuo rifugio moderno sulle piste del Cervino</p>
-        </div>
-
-        <!-- GRID PRINCIPALE: FOTO (RIDOTTE) | DESCRIZIONE -->
-        <div class="content-grid">
-            <div class="col-carousel" id="foto">
-                <div class="carousel-container material-card">
-                    <button class="c-btn prev" onclick="moveCarousel(-1)">❮</button>
-                    <div class="carousel-track" id="track">
-                        <img src="foto1.webp" onclick="openLightbox(0)">
-                        <img src="foto2.webp" onclick="openLightbox(1)">
-                        <img src="foto3.webp" onclick="openLightbox(2)">
-                        <img src="foto4.webp" onclick="openLightbox(3)">
-                        <img src="foto5.webp" onclick="openLightbox(4)">
-                        <img src="foto6.webp" onclick="openLightbox(5)">
-                        <img src="foto7.webp" onclick="openLightbox(6)">
+        <!-- GALLERY GRID STILE BOOKING -->
+        <div class="booking-gallery">
+            <div class="main-photo">
+                <img src="foto1.webp" onclick="openLightbox(0)">
+            </div>
+            <div class="side-photos">
+                <img src="foto2.webp" onclick="openLightbox(1)">
+                <img src="foto3.webp" onclick="openLightbox(2)">
+            </div>
+            <div class="info-sidebar-box">
+                <div class="rating-card material-card">
+                    <div class="rating-header">
+                        <div>
+                            <b id="txtOttimo">Ottimo</b><br>
+                            <small>23 <span id="txtRevCount">recensioni</span></small>
+                        </div>
+                        <div class="score">8,0</div>
                     </div>
-                    <button class="c-btn next" onclick="moveCarousel(1)">❯</button>
+                    <p class="rating-quote">«La casa è molto calda, pulita ed accogliente. L'accesso alla pista è letteralmente dietro casa.»</p>
+                    <div class="user-meta">
+                        <span class="user-avatar">E</span> <b>Elisabetta</b> 🇮🇹 Italia
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-desc" id="info">
-                <div class="material-card">
-                  <h2 id="descTitle">L'Appartamento</h2>
-                  <p id="descP1">Situato direttamente sulla Pista 16, l'appartamento offre un'esperienza Ski-in Ski-out totale. Recentemente rinnovato, combina design moderno e calore alpino.</p>
-                  <p id="descP2">Dispone di 6 posti letto, WiFi veloce, Smart TV e cucina completamente attrezzata. Parcheggio gratuito incluso.</p>
-                  <div class="check-box">
-                      <span id="txtCheckIn"><b>In:</b> 16:00</span> | <span id="txtCheckOut"><b>Out:</b> 10:30</span>
-                  </div>
+                
+                <div class="map-placeholder material-card">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2777.6324278456195!2d7.621235!3d45.925488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDU1JzMxLjgiTiA3wrAzNycxNi40IkU!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="map-overlay">
+                        <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank" class="map-btn" id="txtMap">Vedi su mappa</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="reviews-section" id="recensioni">
-            <h3 class="section-title" id="revTitle">Recensioni</h3>
-            <div class="material-card rev-item">
-                <div class="stars">★★★★★</div>
-                <p>"Posizione incredibile, si esce di casa con gli sci ai piedi. Casa moderna e pulitissima." - <b>Marco</b></p>
+        <!-- THUMBNAILS ROW -->
+        <div class="thumbs-row">
+            <img src="foto4.webp" onclick="openLightbox(3)">
+            <img src="foto5.webp" onclick="openLightbox(4)">
+            <img src="foto6.webp" onclick="openLightbox(5)">
+            <img src="foto7.webp" onclick="openLightbox(6)">
+            <div class="more-photos" onclick="openLightbox(0)">
+                <img src="foto1.webp" style="opacity: 0.4;">
+                <span id="txtMorePhotos">Altre 22 foto</span>
+            </div>
+        </div>
+
+        <!-- DESCRIZIONE E DETTAGLI -->
+        <div class="details-section material-card" id="info">
+            <h2 id="descTitle">L'Appartamento</h2>
+            <p id="descP1">Situato direttamente sulla Pista 16, l'appartamento offre un'esperienza Ski-in Ski-out totale. Recentemente rinnovato, combina design moderno e calore alpino.</p>
+            <div class="check-box">
+                <span id="txtCheckIn"><b>In:</b> 16:00</span> | <span id="txtCheckOut"><b>Out:</b> 10:30</span>
             </div>
         </div>
     </div>
 </div>
 
-<!-- AZIONI FISSE A DESTRA -->
+<!-- AZIONI FISSE A DESTRA (SOCIAL + PRENOTA) -->
 <div class="floating-right">
     <div class="social-stack">
         <a href="https://wa.me/393479612836" target="_blank" class="s-ic wa"><i class="fab fa-whatsapp"></i></a>
@@ -98,7 +91,6 @@
     </a>
 </div>
 
-<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
 <div id="lightbox" onclick="closeLightbox()"><span class="lb-close">×</span><img id="lbImg" src=""></div>
 
 <script src="script.js"></script>
