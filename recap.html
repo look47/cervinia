@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Riepilogo Prenotazione</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .recap-box { max-width: 500px; margin: 100px auto; text-align: center; }
+        .recap-val { font-size: 24px; color: #00e5ff; font-weight: 800; margin: 10px 0; }
+        .btn-confirm { display: block; background: #25D366; color: white; padding: 20px; border-radius: 10px; text-decoration: none; font-weight: 800; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="container">
+            <div class="recap-box material-card">
+                <h1>Riepilogo</h1>
+                <p>Check-in: <span class="recap-val" id="resIn"></span></p>
+                <p>Check-out: <span class="recap-val" id="resOut"></span></p>
+                <p>Notti: <span class="recap-val" id="resNights"></span></p>
+                <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:20px 0;">
+                <p>TOTALE ESTIMATO</p>
+                <div class="recap-val" id="resTotal" style="font-size: 40px;"></div>
+                <a href="#" id="waLink" class="btn-confirm">INVIA RICHIESTA SU WHATSAPP</a>
+                <a href="index.html" style="color:#ccc; display:block; margin-top:20px; text-decoration:none;">Annulla e torna indietro</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById("resIn").innerText = params.get("in");
+        document.getElementById("resOut").innerText = params.get("out");
+        document.getElementById("resNights").innerText = params.get("nights");
+        document.getElementById("resTotal").innerText = params.get("total") + "€";
+        
+        const msg = `Ciao! Vorrei richiedere una prenotazione per Cervinia Ski Home.%0AArrivo: ${params.get("in")}%0APartenza: ${params.get("out")}%0ANotti: ${params.get("nights")}%0APrezzo stimato: ${params.get("total")}€`;
+        document.getElementById("waLink").href = `https://wa.me/393479612836?text=${msg}`;
+    </script>
+</body>
+</html>
