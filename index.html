@@ -4,7 +4,6 @@
   <title>Cervinia Ski Home</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
@@ -17,9 +16,9 @@
     <!-- TOPBAR -->
     <div class="topbar">
       <div class="logo"><b>CERVINIA SKI HOME</b></div>
-      <div class="flags-container">
-        <span class="flag active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
-        <span class="flag" id="flag-en" onclick="setLang('en')">🇬🇧</span>
+      <div class="flags-selector">
+        <span class="flag-icon active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
+        <span class="flag-icon" id="flag-en" onclick="setLang('en')">🇬🇧</span>
       </div>
     </div>
 
@@ -30,86 +29,87 @@
       <p id="desc">Il tuo rifugio moderno sulle piste del Cervino</p>
     </div>
 
-    <!-- DESCRIZIONE -->
-    <div class="description-section material-card">
-      <h2 id="descTitle">L'Appartamento</h2>
-      <p id="descP1">Appartamento SKi-in SKi-Out ubicato direttamente sulle piste di Cervinia Cielo alto. 6 posti letto disponibili (1 letto matrimoniale, 2 letti singoli e un comodo divano letto). WiFi gratuito e vista sul giardino, l'appartamento offre un alloggio caldo ed accogliente a Breuil-Cervinia. La struttura prevede balcone privato con vista e il parcheggio privato gratuito.</p>
-      <p id="descP2">Questo appartamento con balcone e vista sulla montagna presenta 1 camera da letto, soggiorno, una smart TV, una cucina con frigorifero, lavastoviglie, <b>microonde e macchina da caffè Nespresso</b>, oltre a 1 bagno con bidet. <b>Vengono forniti lenzuola, coperte e set di asciugamani completi per ogni ospite.</b></p>
-      <p id="descP3">L’accesso diretto alle piste (pista 16), direttamente dal parcheggio! Il centro di Cervinia si trova a 700 m.</p>
-      
-      <!-- REGOLE DELLA CASA -->
-      <div class="house-rules">
-        <h4 id="rulesTitle" style="margin:0 0 10px 0; color:#00e5ff;">Regole della casa</h4>
-        <div style="display:flex; flex-wrap:wrap; gap:20px; font-size:15px;">
-          <div id="checkInText"><i class="fas fa-sign-in-alt"></i> <b>Check-in:</b> dalle 16:00</div>
-          <div id="checkOutText"><i class="fas fa-sign-out-alt"></i> <b>Check-out:</b> entro le 10:30</div>
+    <div class="main-grid">
+      <!-- SINISTRA: FOTO -->
+      <div class="grid-left">
+        <div class="carousel-container">
+          <button class="carousel-btn prev-btn" onclick="scrollCarousel('myCarousel', -1)">&#10094;</button>
+          <div class="carousel" id="myCarousel">
+            <img src="foto1.webp" onclick="openLightbox(0)" alt="Soggiorno">
+            <img src="foto2.webp" onclick="openLightbox(1)" alt="Cucina">
+            <img src="foto3.webp" onclick="openLightbox(2)" alt="Camera">
+            <img src="foto4.webp" onclick="openLightbox(3)" alt="Bagno">
+            <img src="foto5.webp" onclick="openLightbox(4)" alt="Vista">
+            <img src="foto6.webp" onclick="openLightbox(5)" alt="Dettaglio">
+            <img src="foto7.webp" onclick="openLightbox(6)" alt="Esterno">
+          </div>
+          <button class="carousel-btn next-btn" onclick="scrollCarousel('myCarousel', 1)">&#10095;</button>
+        </div>
+      </div>
+
+      <!-- DESTRA: DESCRIZIONE -->
+      <div class="grid-right">
+        <div class="description-section material-card">
+          <h2 id="descTitle">L'Appartamento</h2>
+          <p id="descP1">Appartamento SKi-in SKi-Out ubicato direttamente sulle piste di Cervinia Cielo alto. 6 posti letto disponibili (1 letto matrimoniale, 2 letti singoli e un comodo divano letto). WiFi gratuito e vista sul giardino, l'alloggio è caldo ed accogliente. Balcone privato e parcheggio gratuito.</p>
+          <p id="descP2">Dotato di smart TV, cucina con frigorifero, lavastoviglie, <b>microonde e macchina Nespresso</b>. <b>Forniamo lenzuola, coperte e set asciugamani completi.</b></p>
+          <p id="descP3">Accesso diretto alla <b>Pista 16</b> dal parcheggio! Centro di Cervinia a 700m.</p>
+          
+          <div class="house-rules">
+            <h4 id="rulesTitle">Regole della casa</h4>
+            <div class="rules-flex">
+              <div id="checkInText"><i class="fas fa-clock"></i> In: 16:00</div>
+              <div id="checkOutText"><i class="fas fa-clock"></i> Out: 10:30</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- CAROSELLO FOTO -->
+    <!-- LISTINO PREZZI -->
+    <h3 id="priceTitle" class="section-title">Listino Prezzi</h3>
+    <div class="price-grid" id="priceGrid">
+        <!-- Generato da JS -->
+    </div>
+
+    <!-- CALENDARIO E METEO -->
+    <div class="bottom-grid">
+      <div class="section material-card">
+        <h2 id="availTitle" class="mini-title">Disponibilità</h2>
+        <div id="calendar-container"></div>
+        <div class="cal-legend">
+            <span><i class="fas fa-square" style="color:#ff4d4d"></i> <small id="legBooked">Occupato</small></span>
+            <span><i class="fas fa-square" style="color:#2ecc71"></i> <small id="legFree">Libero</small></span>
+        </div>
+      </div>
+
+      <div class="section material-card">
+        <h2 id="weatherTitle" class="mini-title">Meteo Cervinia</h2>
+        <a class="weatherwidget-io" href="https://forecast7.com/it/45d937d63/breuil-cervinia/" data-label_1="CERVINIA" data-font="Roboto" data-icons="Climacons Animated" data-theme="dark" data-basecolor="rgba(0,0,0,0.3)" data-textcolor="#ffffff" >METEO</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');</script>
+      </div>
+    </div>
+
+    <!-- RECENSIONI -->
+    <h3 id="reviewsTitle" class="section-title">Recensioni</h3>
     <div class="carousel-container">
-      <button class="carousel-btn prev-btn" onclick="scrollCarousel('myCarousel', -1)">&#10094;</button>
-      <div class="carousel" id="myCarousel">
-        <img src="foto1.webp" onclick="openLightbox(0)" alt="Foto 1">
-        <img src="foto2.webp" onclick="openLightbox(1)" alt="Foto 2">
-        <img src="foto3.webp" onclick="openLightbox(2)" alt="Foto 3">
-        <img src="foto4.webp" onclick="openLightbox(3)" alt="Foto 4">
-        <img src="foto5.webp" onclick="openLightbox(4)" alt="Foto 5">
-        <img src="foto6.webp" onclick="openLightbox(5)" alt="Foto 6">
-        <img src="foto7.webp" onclick="openLightbox(6)" alt="Foto 7">
-      </div>
-      <button class="carousel-btn next-btn" onclick="scrollCarousel('myCarousel', 1)">&#10095;</button>
-    </div>
-
-    <!-- RECENSIONI SCORREVOLI -->
-    <h3 id="reviewsTitle" class="section-title">Cosa dicono gli ospiti</h3>
-    <div class="carousel-container" style="margin-bottom: 20px;">
-      <button class="carousel-btn prev-btn" onclick="scrollCarousel('reviewsCarousel', -1)">&#10094;</button>
       <div class="carousel reviews-carousel" id="reviewsCarousel">
-        <div class="review-card material-card">
-          <div class="review-header"><b>Marco</b> <div class="stars">★★★★★</div></div>
-          <p class="review-text">"Posizione incredibile, letteralmente sulle piste. L'appartamento è moderno e pulitissimo."</p>
-        </div>
-        <div class="review-card material-card">
-          <div class="review-header"><b>Elena</b> <div class="stars">★★★★★</div></div>
-          <p class="review-text">"Soggiorno perfetto. La vista sul Cervino dal balcone vale da sola il prezzo."</p>
-        </div>
-        <div class="review-card material-card">
-          <div class="review-header"><b>Thomas</b> <div class="stars">★★★★★</div></div>
-          <p class="review-text">"Very modern apartment and great communication. Best ski-in ski-out experience."</p>
-        </div>
-      </div>
-      <button class="carousel-btn next-btn" onclick="scrollCarousel('reviewsCarousel', 1)">&#10095;</button>
-    </div>
-
-    <!-- METEO CERVINIA -->
-    <div class="section material-card" style="margin-top:40px; padding-bottom:10px;">
-      <h2 id="weatherTitle" style="color: #00e5ff; font-size: 20px; text-transform: uppercase; margin-top:0;">Meteo Cervinia</h2>
-      <a class="weatherwidget-io" href="https://forecast7.com/it/45d937d63/breuil-cervinia/" data-label_1="BREUIL-CERVINIA" data-label_2="METEO" data-font="Roboto" data-icons="Climacons Animated" data-theme="dark" data-basecolor="rgba(0,0,0,0)" data-textcolor="#ffffff" >BREUIL-CERVINIA METEO</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');</script>
-    </div>
-
-    <!-- CALENDARIO RIDOTTO -->
-    <div class="section material-card" style="margin-top:30px;">
-      <h2 id="availTitle" style="color: #00e5ff; font-size: 20px; text-transform: uppercase; margin-top:0;">Disponibilità</h2>
-      <div class="calendar-wrapper">
-        <iframe src="https://calendar.google.com/calendar/embed?height=400&wkst=2&bgcolor=%23ffffff&ctz=Europe%2FRome&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=MONTH" scrolling="no"></iframe>
+        <div class="review-card material-card"><b>Marco</b><p>"Sulle piste, moderno e pulito."</p></div>
+        <div class="review-card material-card"><b>Elena</b><p>"Vista Cervino mozzafiato."</p></div>
+        <div class="review-card material-card"><b>Thomas</b><p>"Great ski-in ski-out."</p></div>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- BOTTONI FLUTTUANTI (SOCIAL E CONTATTI) -->
 <div class="floating-socials">
-  <a href="https://wa.me/393479612836" target="_blank" class="float-btn float-wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-  <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="float-btn float-insta" title="Instagram"><i class="fab fa-instagram"></i></a>
-  <a href="mailto:airpulizie@gmail.com" class="float-btn float-mail" title="Email"><i class="far fa-envelope"></i></a>
-  <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank" class="float-btn float-maps" title="Maps"><i class="fas fa-map-marker-alt"></i></a>
+  <a href="https://wa.me/393479612836" target="_blank" class="float-btn float-wa"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="float-btn float-insta"><i class="fab fa-instagram"></i></a>
+  <a href="mailto:airpulizie@gmail.com" class="float-btn float-mail"><i class="far fa-envelope"></i></a>
+  <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank" class="float-btn float-maps"><i class="fas fa-map-marker-alt"></i></a>
 </div>
 
-<!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox()">
   <span class="close-lightbox">&times;</span>
   <button class="lightbox-btn lb-prev" onclick="changeLightboxImage(-1, event)">&#10094;</button>
