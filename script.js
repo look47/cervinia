@@ -1,130 +1,102 @@
-// ==========================================
-// CONFIGURAZIONE MANUALE
-// ==========================================
-
-const bookedDates = [
-    "2026-12-24", "2026-12-25", "2026-12-26",
-    "2026-12-31", "2027-01-01", "2027-01-02"
-];
-
-const prices = [
-    { seasonIT: "Inverno", seasonEN: "Winter", price: "180€" },
-    { seasonIT: "Natale/Capodanno", seasonEN: "Holidays", price: "350€" },
-    { seasonIT: "Estate", seasonEN: "Summer", price: "140€" }
-];
-
-// ==========================================
-// LOGICA APPLICATIVO
-// ==========================================
+// CONFIGURAZIONE
+const bookedDates = ["2026-12-24", "2026-12-25", "2026-12-31", "2027-01-01"];
+const priceConfig = {
+    base: 150,
+    winter: 220,
+    holidays: 350,
+    summer: 160
+};
 
 let lang = "it";
+let checkIn = null;
+let checkOut = null;
 const fotoArray = ["foto1.webp", "foto2.webp", "foto3.webp", "foto4.webp", "foto5.webp", "foto6.webp", "foto7.webp"];
-let currentPhotoIndex = 0;
 
-function setLang(selectedLang) {
-    lang = selectedLang;
+function setLang(l) {
+    lang = l;
     document.querySelectorAll('.flag-icon').forEach(f => f.classList.remove('active'));
-    document.getElementById("flag-" + lang).classList.add("active");
-
+    document.getElementById("flag-" + l).classList.add("active");
+    
     const t = {
-        en: {
-            title: "Cervinia Ski Home",
-            desc: "MODERN RETREAT @ MATTERHORN SLOPES",
-            descTitle: "The Apartment",
-            p1: "Ski-in Ski-Out apartment directly on Cervinia Cielo Alto slopes. 6 beds (1 double, 2 singles, 1 sofa bed).",
-            p2: "Smart TV, <b>Nespresso & Microwave</b>. Bed linen and towels provided.",
-            p3: "Direct access to <b>Slope 16</b> from the parking! Center at 700m.",
-            rules: "Rules",
-            priceT: "Rates",
-            avail: "Availability",
-            weather: "Weather",
-            reviews: "Reviews",
-            legB: "Booked", legF: "Free"
-        },
-        it: {
-            title: "Cervinia Ski Home",
-            desc: "RIFUGIO MODERNO SULLE PISTE",
-            descTitle: "L'Appartamento",
-            p1: "Appartamento SKi-in SKi-Out su piste Cervinia Cielo alto. 6 posti letto (1 matr, 2 singoli, 1 divano letto).",
-            p2: "Smart TV, <b>Nespresso e Microonde</b>. Lenzuola e asciugamani inclusi.",
-            p3: "Accesso diretto alla <b>Pista 16</b> dal parcheggio! Centro a 700m.",
-            rules: "Regole",
-            priceT: "Listino",
-            avail: "Disponibilità",
-            weather: "Meteo",
-            reviews: "Recensioni",
-            legB: "Occupato", legF: "Libero"
-        }
+        it: { title: "Cervinia Ski Home", desc: "RIFUGIO MODERNO SULLE PISTE", cal: "Arrivo / Partenza", legB: "Occupato", legF: "Libero", legS: "Selezione" },
+        en: { title: "Cervinia Ski Home", desc: "MODERN RETREAT ON THE SLOPES", cal: "Check-in / Check-out", legB: "Booked", legF: "Free", legS: "Selection" }
     };
-
-    const sel = t[lang];
-    document.getElementById("title").innerText = sel.title;
-    document.getElementById("desc").innerText = sel.desc;
-    document.getElementById("descTitle").innerText = sel.descTitle;
-    document.getElementById("descP1").innerText = sel.p1;
-    document.getElementById("descP2").innerHTML = sel.p2;
-    document.getElementById("descP3").innerHTML = sel.p3;
-    document.getElementById("rulesTitle").innerText = sel.rules;
-    document.getElementById("priceTitle").innerText = sel.priceT;
-    document.getElementById("availTitle").innerText = sel.avail;
-    document.getElementById("weatherTitle").innerText = sel.weather;
-    document.getElementById("reviewsTitle").innerText = sel.reviews;
-    document.getElementById("legBooked").innerText = sel.legB;
-    document.getElementById("legFree").innerText = sel.legF;
-
-    renderPrices();
+    
+    document.getElementById("title").innerText = t[lang].title;
+    document.getElementById("desc").innerText = t[lang].desc;
+    document.getElementById("calInstruction").innerText = t[lang].cal;
+    document.getElementById("legBooked").innerText = t[lang].legB;
+    document.getElementById("legFree").innerText = t[lang].legF;
+    document.getElementById("legSelected").innerText = t[lang].legS;
+    
     renderCalendar();
+    renderPriceList();
 }
 
-function renderPrices() {
-    const container = document.getElementById("priceGrid");
-    container.innerHTML = "";
-    prices.forEach(p => {
-        const name = lang === "it" ? p.seasonIT : p.seasonEN;
-        container.innerHTML += `
-            <div class="price-card material-card">
-                <b>${name}</b><br>
-                <span>${p.price}</span><small>/night</small>
-            </div>`;
-    });
+function renderPriceList() {
+    const grid = document.getElementById("priceGrid");
+    grid.innerHTML = `<p style="font-size:14px; margin:0;">Base: ${priceConfig.base}€ | Inverno: ${priceConfig.winter}€ | Festività: ${priceConfig.holidays}€</p>`;
 }
 
 function renderCalendar() {
     const container = document.getElementById("calendar-container");
     container.innerHTML = "";
     const now = new Date();
-    for(let m=0; m<2; m++) {
+    
+    for(let m=0; m<3; m++) {
         const date = new Date(now.getFullYear(), now.getMonth() + m, 1);
-        const monthName = date.toLocaleString(lang === 'it' ? 'it-IT' : 'en-US', { month: 'long' });
+        const monthName = date.toLocaleString(lang === 'it' ? 'it-IT' : 'en-US', { month: 'long', year: 'numeric' });
+        
         let html = `<div class="cal-month-title">${monthName}</div><div class="calendar-grid">`;
-        ["L", "M", "M", "G", "V", "S", "D"].forEach(d => html += `<div class="cal-day cal-header">${d}</div>`);
+        ["L","M","M","G","V","S","D"].forEach(d => html += `<div class="cal-day cal-header">${d}</div>`);
+        
         let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay() || 7;
         for(let i=1; i<firstDay; i++) html += `<div class="cal-day empty"></div>`;
-        const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-        for(let d=1; d<=daysInMonth; d++) {
-            const cur = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-            html += `<div class="cal-day ${bookedDates.includes(cur) ? 'booked' : ''}">${d}</div>`;
+        
+        const days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        for(let d=1; d<=days; d++) {
+            const dateStr = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+            const isBooked = bookedDates.includes(dateStr);
+            const isSelected = (checkIn === dateStr || checkOut === dateStr);
+            const inRange = (checkIn && checkOut && dateStr > checkIn && dateStr < checkOut);
+            
+            html += `<div class="cal-day ${isBooked ? 'booked' : ''} ${isSelected ? 'selected' : ''} ${inRange ? 'in-range' : ''}" 
+                     onclick="handleDateClick('${dateStr}', ${isBooked})">${d}</div>`;
         }
         container.innerHTML += html + `</div>`;
     }
 }
 
-function scrollCarousel(id, dir) {
-    document.getElementById(id).scrollBy({ left: dir * 400, behavior: 'smooth' });
+function handleDateClick(date, isBooked) {
+    if(isBooked) return;
+    
+    if(!checkIn || (checkIn && checkOut)) {
+        checkIn = date;
+        checkOut = null;
+    } else if (date < checkIn) {
+        checkIn = date;
+    } else if (date > checkIn) {
+        checkOut = date;
+        calculateAndRedirect();
+    }
+    renderCalendar();
 }
 
-function openLightbox(i) {
-    currentPhotoIndex = i;
-    document.getElementById("lightboxImg").src = fotoArray[i];
-    document.getElementById("lightbox").style.display = "flex";
+function calculateAndRedirect() {
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+    const nights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+    
+    // Logica prezzo semplificata per il demo
+    let pricePerNight = priceConfig.base;
+    if(start.getMonth() >= 11 || start.getMonth() <= 3) pricePerNight = priceConfig.winter;
+    
+    const total = nights * pricePerNight;
+    window.location.href = `recap.html?in=${checkIn}&out=${checkOut}&nights=${nights}&total=${total}`;
 }
 
+function scrollCarousel(id, dir) { document.getElementById(id).scrollBy({ left: dir * 400, behavior: 'smooth' }); }
+function openLightbox(i) { document.getElementById("lightboxImg").src = fotoArray[i]; document.getElementById("lightbox").style.display = "flex"; }
 function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
-
-function changeLightboxImage(dir, e) {
-    e.stopPropagation();
-    currentPhotoIndex = (currentPhotoIndex + dir + fotoArray.length) % fotoArray.length;
-    document.getElementById("lightboxImg").src = fotoArray[currentPhotoIndex];
-}
 
 window.onload = () => setLang('it');
