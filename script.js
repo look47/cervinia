@@ -11,14 +11,16 @@ function changeLang(l) {
     if(document.getElementById("flag-"+l)) document.getElementById("flag-"+l).classList.add("active");
 
     const t = {
-        it: { info: "Descrizione", gallery: "Gallery", rev: "Recensioni", book: "PRENOTA", ad: "Adulti", ch: "Bambini" },
-        en: { info: "Description", gallery: "Gallery", rev: "Reviews", book: "BOOK NOW", ad: "Adults", ch: "Children" }
+        it: { info: "Appartamento", gallery: "Gallery", rev: "Recensioni", book: "PRENOTA", ad: "Adulti", ch: "Bambini" },
+        en: { info: "Apartment", gallery: "Gallery", rev: "Reviews", book: "BOOK NOW", ad: "Adults", ch: "Children" }
     };
     const s = t[l];
     if(document.getElementById("navInfo")) document.getElementById("navInfo").innerText = s.info;
     if(document.getElementById("navFoto")) document.getElementById("navFoto").innerText = s.gallery;
     if(document.getElementById("navRev")) document.getElementById("navRev").innerText = s.rev;
-    if(document.getElementById("navBook")) document.getElementById("navBook").innerText = s.book;
+    if(document.getElementById("txtBook")) document.getElementById("txtBook").innerText = s.book;
+    
+    // Elementi pagina Recap
     if(document.getElementById("lblAd")) document.getElementById("lblAd").innerText = s.ad;
     if(document.getElementById("lblCh")) document.getElementById("lblCh").innerText = s.ch;
 
@@ -42,13 +44,13 @@ function renderCalendar() {
     for(let m=0; m<2; m++) {
         const date = new Date(now.getFullYear(), now.getMonth() + offset + m, 1);
         const name = date.toLocaleString(curLang==='it'?'it-IT':'en-US', {month:'long', year:'numeric'});
-        let html = `<div><div style="text-align:center; color:#00e5ff; font-weight:800; margin-bottom:10px; font-size:13px;">${name.toUpperCase()}</div><div class="cal-grid">`;
-        const dHeads = curLang==='it'?["L","M","M","G","V","S","D"]:["M","T","W","T","F","S","S"];
-        dHeads.forEach(h => html += `<div style="text-align:center; font-size:10px; opacity:0.5">${h}</div>`);
+        let html = `<div><div style="text-align:center; color:#00e5ff; font-weight:800; margin-bottom:12px; font-size:14px;">${name.toUpperCase()}</div><div class="cal-grid">`;
+        const heads = curLang==='it'?["L","M","M","G","V","S","D"]:["M","T","W","T","F","S","S"];
+        heads.forEach(h => html += `<div style="text-align:center; font-size:11px; opacity:0.5">${h}</div>`);
         let start = new Date(date.getFullYear(), date.getMonth(), 1).getDay() || 7;
         for(let i=1; i<start; i++) html += `<div></div>`;
-        const tot = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate();
-        for(let d=1; d<=tot; d++) {
+        const total = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate();
+        for(let d=1; d<=total; d++) {
             const ds = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
             const isB = bookedDates.includes(ds);
             const isS = (checkIn===ds || checkOut===ds);
@@ -69,7 +71,7 @@ function handleDate(date, isB) {
 }
 
 function updatePrice() {
-    if(!checkIn || !checkOut) return;
+    if(!checkIn || !checkOut || !document.getElementById("totalPrice")) return;
     const nights = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000*60*60*24));
     let daily = new Date(checkIn).getMonth() >= 10 || new Date(checkIn).getMonth() <= 3 ? pricing.winter : pricing.base;
     let mult = pricing.markup[ad] || 1;
@@ -78,11 +80,9 @@ function updatePrice() {
     document.getElementById("totalPrice").innerText = tot.toFixed(0) + "€";
     document.getElementById("oldPrice").innerText = (tot * 1.15).toFixed(0) + "€";
 
-    const name = document.getElementById("fName").value;
-    const surname = document.getElementById("fSurname").value;
-    const phone = document.getElementById("fPhone").value;
-    
-    const msg = `Richiesta Cervinia Ski Home%0ANome: ${name} ${surname}%0ATel: ${phone}%0AIn: ${checkIn}%0AOut: ${checkOut}%0AOspiti: ${ad} Ad, ${ch} Bam.%0ATotale: ${tot.toFixed(0)}€`;
+    const n = document.getElementById("fName").value;
+    const s = document.getElementById("fSurname").value;
+    const msg = `Richiesta Cervinia Ski Home%0ANome: ${n} ${s}%0AIn: ${checkIn}%0AOut: ${checkOut}%0AOspiti: ${ad} Ad, ${ch} Bam.%0ATotale: ${tot.toFixed(0)}€`;
     document.getElementById("waBtn").href = `https://wa.me/393479612836?text=${msg}`;
 }
 
