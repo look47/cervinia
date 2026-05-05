@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=TUO_ID_ANALYTICS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'TUO_ID_ANALYTICS');
+  </script>
+  
   <title>Cervinia Ski Home</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,19 +20,22 @@
 <body>
 
 <div class="overlay">
-  <div class="container">
+  <!-- Badge Best Price -->
+  <div class="best-price-badge">
+    <i class="fas fa-certificate"></i> <span id="bpText">Miglior Prezzo Garantito</span>
+  </div>
 
+  <div class="container">
     <div class="topbar">
-      <div></div>
       <div class="flags-selector">
-        <span class="flag-icon active" id="flag-it" onclick="setLang('it')">🇮🇹</span>
-        <span class="flag-icon" id="flag-en" onclick="setLang('en')">🇬🇧</span>
+        <div class="flag-wrapper" onclick="setLang('it')"><span class="flag-icon active" id="flag-it">🇮🇹</span></div>
+        <div class="flag-wrapper" onclick="setLang('en')"><span class="flag-icon" id="flag-en">🇬🇧</span></div>
       </div>
     </div>
 
     <div class="hero">
       <img src="sfondo_nero.webp" class="hero-logo-bg" alt="Logo">
-      <h1 id="title">Cervinia Ski Home</h1>
+      <h1>Cervinia Ski Home</h1>
       <p id="desc">Il tuo rifugio moderno sulle piste del Cervino</p>
     </div>
 
@@ -47,65 +59,72 @@
       <div class="grid-right">
         <div class="description-section material-card">
           <h2 id="descTitle">L'Appartamento</h2>
-          <p id="descP1">Appartamento SKi-in SKi-Out direttamente sulle piste di Cervinia Cielo alto. 6 posti letto disponibili.</p>
-          <p id="descP2">Smart TV, cucina con <b>Nespresso e Microonde</b>. Lenzuola e asciugamani inclusi.</p>
-          <p id="descP3">Accesso diretto alla <b>Pista 16</b>! Centro a 700m.</p>
+          <p id="descP1">Ski-in Ski-Out direttamente sulle piste di Cielo Alto. 6 posti letto.</p>
+          <p id="descP2">Smart TV, Nespresso e Microonde. <b>Sconto 10% per soggiorni di 4+ notti!</b></p>
           
           <div class="house-rules">
-            <h4 id="rulesTitle">Regole</h4>
             <div class="rules-flex">
-              <div><b>In:</b> 16:00</div>
-              <div><b>Out:</b> 10:30</div>
+              <div><i class="fas fa-clock"></i> In: 16:00</div>
+              <div><i class="fas fa-clock"></i> Out: 10:30</div>
             </div>
+          </div>
+          
+          <div class="google-maps-box">
+             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2777.6324278456195!2d7.621235!3d45.925488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDU1JzMxLjgiTiA3wrAzNycxNi40IkU!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
           </div>
         </div>
       </div>
     </div>
 
-    <h3 id="availTitle" class="section-title">Prenota il tuo soggiorno</h3>
+    <!-- CALENDARIO E PREVENTIVO -->
+    <div class="section-header">
+        <h3 id="availTitle">Disponibilità e Preventivo</h3>
+        <div class="cal-nav">
+            <button onclick="changeMonth(-1)" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="changeMonth(1)" class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
     <div class="calendar-booking-container material-card">
-        <p id="calInstruction" style="text-align:center; margin-bottom:15px; font-size:14px; color:#00e5ff;">Seleziona la data di arrivo e poi quella di partenza</p>
-        <div id="calendar-container"></div>
-        <div class="cal-legend">
-            <small><i class="fas fa-square" style="color:#ff4d4d"></i> <span id="legBooked">Occupato</span></small>
-            <small><i class="fas fa-square" style="color:#2ecc71"></i> <span id="legFree">Libero</span></small>
-            <small><i class="fas fa-square" style="color:#00e5ff"></i> <span id="legSelected">Selezione</span></small>
+        <div id="calendar-container" class="calendar-dual"></div>
+    </div>
+
+    <!-- GUIDA LOCALE -->
+    <h3 class="section-title" id="guideTitle">Guida Locale Cervinia</h3>
+    <div class="guide-grid">
+        <div class="guide-card material-card">
+            <i class="fas fa-utensils"></i>
+            <h4>Dove Mangiare</h4>
+            <p>Non perderti <b>Lo Chalet</b> per piatti valdostani autentici o il <b>Wood</b> per un'esperienza gourmet.</p>
+        </div>
+        <div class="guide-card material-card">
+            <i class="fas fa-skiing"></i>
+            <h4>Ski Tips</h4>
+            <p>Siamo sulla <b>Pista 16</b>. Per il panorama migliore, scendi dalla <b>Ventina</b> (pista 7), una delle più lunghe d'Europa.</p>
+        </div>
+        <div class="guide-card material-card">
+            <i class="fas fa-glass-cheers"></i>
+            <h4>Après-Ski</h4>
+            <p>Il <b>Dragon Bar</b> nel centro è il punto di riferimento per una birra post-sciata con ottima musica.</p>
         </div>
     </div>
 
-    <div class="bottom-grid" style="margin-top:30px;">
-        <div class="section material-card">
-            <h2 id="priceTitle" class="mini-title">Listino</h2>
-            <div class="price-list" id="priceGrid"></div>
+    <!-- INSTAGRAM FEED -->
+    <h3 class="section-title">@cervinia_ski_house</h3>
+    <a href="https://www.instagram.com/cervinia_ski_house" target="_blank" class="instagram-feed material-card">
+        <div class="ig-grid">
+            <div class="ig-item"><img src="foto1.webp"></div>
+            <div class="ig-item"><img src="foto2.webp"></div>
+            <div class="ig-item"><img src="foto3.webp"></div>
+            <div class="ig-item"><img src="foto5.webp"></div>
         </div>
-        <div class="section material-card">
-            <h2 id="weatherTitle" class="mini-title">Meteo</h2>
-            <a class="weatherwidget-io" href="https://forecast7.com/it/45d937d63/breuil-cervinia/" data-label_1="CERVINIA" data-font="Roboto" data-icons="Climacons Animated" data-theme="dark" data-basecolor="rgba(0,0,0,0.3)" data-textcolor="#ffffff">METEO</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');</script>
-        </div>
-    </div>
-
-    <h3 id="reviewsTitle" class="section-title">Recensioni</h3>
-    <div class="carousel-container">
-      <div class="carousel reviews-carousel" id="reviewsCarousel">
-        <div class="review-card material-card">
-            <div class="rev-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-            <b>Marco</b><p>"Sulle piste, moderno e pulito."</p>
-        </div>
-        <div class="review-card material-card">
-            <div class="rev-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-            <b>Elena</b><p>"Vista Cervino mozzafiato."</p>
-        </div>
-      </div>
-    </div>
+        <div class="ig-overlay-text"><i class="fab fa-instagram"></i> Follow us on Instagram</div>
+    </a>
 
   </div>
 </div>
 
 <div class="floating-socials">
   <a href="https://wa.me/393479612836" target="_blank" class="float-btn float-wa"><i class="fab fa-whatsapp"></i></a>
-  <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="float-btn float-insta"><i class="fab fa-instagram"></i></a>
-  <a href="mailto:airpulizie@gmail.com" class="float-btn float-mail"><i class="far fa-envelope"></i></a>
 </div>
 
 <div id="lightbox" onclick="closeLightbox()"><span class="close-lightbox">&times;</span><img id="lightboxImg" src=""></div>
