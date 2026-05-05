@@ -1,26 +1,48 @@
-const bookedDates = ["2026-12-24", "2026-12-25", "2026-12-31", "2027-01-01"];
-const priceConfig = { base: 150, winter: 280 };
+const bookedDates = ["2026-06-24", "2026-06-25", "2026-06-26","2026-06-27","2026-08-03", "2026-08-04","2026-08-05", "2026-08-06", "2026-08-07", "2026-08-08"];
+const priceConfig = { base: 150, winter: 220 };
 
 let lang = "it";
 let checkIn = null;
 let checkOut = null;
 let currentMonthOffset = 0;
 
+document.addEventListener('DOMContentLoaded', () => {
+    setLang('it');
+});
+
 function setLang(l) {
     lang = l;
     document.querySelectorAll('.flag-icon').forEach(f => f.classList.remove('active'));
-    document.getElementById("flag-" + l).classList.add("active");
-    
+    document.getElementById("flag-"+l).classList.add("active");
+    if(document.getElementById("flag-"+l+"-mob")) document.getElementById("flag-"+l+"-mob").classList.add("active");
+
     const t = {
-        it: { title: "Cervinia Ski Home", bp: "Miglior Prezzo Garantito", guide: "Guida Locale Cervinia", descTitle: "L'Appartamento", availTitle: "Disponibilità e Preventivo" },
-        en: { title: "Cervinia Ski Home", bp: "Best Price Guaranteed", guide: "Cervinia Local Guide", descTitle: "The Apartment", availTitle: "Availability & Quote" }
+        it: { 
+            bp: "Miglior Prezzo Garantito", guide: "Location & Guida", descTitle: "L'Appartamento", availTitle: "Disponibilità e Preventivo",
+            navInfo: "Informazioni", navFoto: "Foto", navLoc: "Location", navAvail: "Prenota",
+            foodT: "Dove Mangiare", skiT: "Ski Tips", btnBook: "PRENOTA ORA", skipass: "Acquista Skipass Online"
+        },
+        en: { 
+            bp: "Best Price Guaranteed", guide: "Location & Guide", descTitle: "The Apartment", availTitle: "Availability & Quote",
+            navInfo: "Info", navFoto: "Gallery", navLoc: "Location", navAvail: "Book Now",
+            foodT: "Where to Eat", skiT: "Ski Tips", btnBook: "BOOK NOW", skipass: "Buy Skipass Online"
+        }
     };
-    
-    document.getElementById("title").innerText = t[lang].title;
-    document.getElementById("bpText").innerText = t[lang].bp;
-    document.getElementById("guideTitle").innerText = t[lang].guide;
-    document.getElementById("descTitle").innerText = t[lang].descTitle;
-    document.getElementById("availTitle").innerText = t[lang].availTitle;
+
+    const sel = t[lang];
+    document.getElementById("bpText").innerText = sel.bp;
+    document.getElementById("guideTitle").innerText = sel.guide;
+    document.getElementById("descTitle").innerText = sel.descTitle;
+    document.getElementById("availTitle").innerText = sel.availTitle;
+    document.getElementById("navInfo").innerText = sel.navInfo;
+    document.getElementById("navFoto").innerText = sel.navFoto;
+    document.getElementById("navLoc").innerText = sel.navLoc;
+    document.getElementById("navAvail").innerText = sel.navAvail;
+    document.getElementById("foodTitle").innerText = sel.foodT;
+    document.getElementById("skiTitle").innerText = sel.skiT;
+    document.getElementById("btnBookText").innerText = sel.btnBook;
+    document.getElementById("skipassText").innerText = sel.skipass;
+
     renderCalendar();
 }
 
@@ -28,66 +50,47 @@ function renderCalendar() {
     const container = document.getElementById("calendar-container");
     container.innerHTML = "";
     const now = new Date();
-    
     for(let m=0; m<2; m++) {
         const date = new Date(now.getFullYear(), now.getMonth() + currentMonthOffset + m, 1);
-        const monthName = date.toLocaleString(lang === 'it' ? 'it-IT' : 'en-US', { month: 'long', year: 'numeric' });
-        
+        const monthName = date.toLocaleString(lang==='it'?'it-IT':'en-US', {month:'long', year:'numeric'});
         let html = `<div><div class="cal-month-title">${monthName}</div><div class="calendar-grid">`;
-        const headers = lang === 'it' ? ["L","M","M","G","V","S","D"] : ["M","T","W","T","F","S","S"];
-        headers.forEach(d => html += `<div class="cal-day cal-header" style="background:none; color:#00e5ff">${d}</div>`);
-        
-        let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay() || 7;
-        for(let i=1; i<firstDay; i++) html += `<div class="cal-day" style="background:none"></div>`;
-        
-        const days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        const heads = lang==='it'?["L","M","M","G","V","S","D"]:["M","T","W","T","F","S","S"];
+        heads.forEach(h => html += `<div class="cal-day cal-header">${h}</div>`);
+        let start = new Date(date.getFullYear(), date.getMonth(), 1).getDay() || 7;
+        for(let i=1; i<start; i++) html += `<div class="cal-day" style="background:none"></div>`;
+        const days = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate();
         for(let d=1; d<=days; d++) {
-            const dStr = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-            const isBooked = bookedDates.includes(dStr);
-            const isSelected = (checkIn === dStr || checkOut === dStr);
-            const inRange = (checkIn && checkOut && dStr > checkIn && dStr < checkOut);
-            
-            html += `<div class="cal-day ${isBooked ? 'booked' : ''} ${isSelected ? 'selected' : ''} ${inRange ? 'in-range' : ''}" 
-                     onclick="handleDateClick('${dStr}', ${isBooked})">${d}</div>`;
+            const ds = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+            const booked = bookedDates.includes(ds);
+            const sel = (checkIn===ds || checkOut===ds);
+            const range = (checkIn && checkOut && ds > checkIn && ds < checkOut);
+            html += `<div class="cal-day ${booked?'booked':''} ${sel?'selected':''} ${range?'in-range':''}" onclick="handleDateClick('${ds}', ${booked})">${d}</div>`;
         }
         container.innerHTML += html + `</div></div>`;
     }
 }
 
-function handleDateClick(date, isBooked) {
-    if(isBooked) return;
+function handleDateClick(date, booked) {
+    if(booked) return;
     if(!checkIn || (checkIn && checkOut)) { checkIn = date; checkOut = null; }
     else if (date < checkIn) { checkIn = date; }
-    else if (date > checkIn) { checkOut = date; calculateAndRedirect(); }
+    else { checkOut = date; calculate(); }
     renderCalendar();
 }
 
-function calculateAndRedirect() {
-    const start = new Date(checkIn);
-    const nights = Math.ceil((new Date(checkOut) - start) / (1000 * 60 * 60 * 24));
-    let p = priceConfig.base;
-    if(start.getMonth() >= 11 || start.getMonth() <= 3) p = priceConfig.winter;
-    
-    let total = nights * p;
-    if (nights >= 4) { total = total * 0.9; } // SCONTO 10%
-    
+function calculate() {
+    const nights = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000*60*60*24));
+    let price = new Date(checkIn).getMonth() >= 11 || new Date(checkIn).getMonth() <= 3 ? priceConfig.winter : priceConfig.base;
+    let total = nights * price;
+    if(nights >= 4) total *= 0.9;
     window.location.href = `recap.html?in=${checkIn}&out=${checkOut}&nights=${nights}&total=${total.toFixed(0)}`;
 }
 
-function changeMonth(dir) {
-    const newOffset = currentMonthOffset + dir;
-    if (newOffset >= 0 && newOffset <= 11) {
-        currentMonthOffset = newOffset;
-        renderCalendar();
-    }
-}
-
-function scrollCarousel(id, dir) { document.getElementById(id).scrollBy({ left: dir * 400, behavior: 'smooth' }); }
+function changeMonth(dir) { currentMonthOffset += dir; renderCalendar(); }
+function toggleSidebar() { if(window.innerWidth <= 992) document.getElementById('sidebar').classList.toggle('active'); }
+function scrollCarousel(id, dir) { document.getElementById(id).scrollBy({left: dir*400, behavior:'smooth'}); }
 function openLightbox(i) { 
-    const fotoArray = ["foto1.webp", "foto2.webp", "foto3.webp", "foto4.webp", "foto5.webp", "foto6.webp", "foto7.webp"];
-    document.getElementById("lightboxImg").src = fotoArray[i]; 
-    document.getElementById("lightbox").style.display = "flex"; 
+    const f = ["foto1.webp","foto2.webp","foto3.webp","foto4.webp","foto5.webp","foto6.webp","foto7.webp"];
+    document.getElementById("lightboxImg").src = f[i]; document.getElementById("lightbox").style.display = "flex"; 
 }
 function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
-
-window.onload = () => setLang('it');
