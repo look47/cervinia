@@ -91,3 +91,63 @@ body { font-family: 'Outfit', sans-serif; margin: 0; background: url("sfondo_rod
     .top-gallery { height: 250px; }
     .lb-nav { display: none; }
 }
+
+/* ... (mantieni il resto del CSS di prima) ... */
+
+.snowflake-gold {
+    color: #FFD700; /* Oro */
+    margin-right: 2px;
+    font-size: 14px;
+}
+
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.rev-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.3s;
+}
+
+.rev-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.rev-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.rev-date {
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+.rev-text {
+    font-size: 14px;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.lang-flag-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.lang-flag-btn.active {
+    opacity: 1;
+    transform: scale(1.2);
+}
