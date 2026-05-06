@@ -84,41 +84,47 @@ body {
 }
 .btn-back-side:hover { background: var(--accent); color: black; }
 
-/* --- HEADER: TITOLO E LOGO AFFIANCATI E CENTRATI --- */
+/* --- HEADER: TITOLO E LOGO CENTRATI --- */
 .site-header { 
     padding: 70px 20px 40px; 
     display: flex; 
     flex-direction: row;     /* Mette titolo e logo sulla stessa riga */
-    align-items: center;     /* Li allinea verticalmente al centro */
-    justify-content: center; /* Li centra perfettamente nella pagina */
-    gap: 20px;               /* Spazio tra il testo e il logo */
-    width: 100%;             /* Forza l'header a occupare tutto lo spazio */
+    align-items: center;     /* Allineamento verticale perfetto */
+    justify-content: center; /* Centratura orizzontale assoluta */
+    gap: 20px;               /* Spazio tra testo e logo */
+    width: 100%;             
     position: relative;
     text-align: center;
 }
 
 .site-header h1 { 
-    margin: 0;               /* Rimuove margini che potrebbero spostare il titolo */
+    margin: 0;               /* Rimuove margini che spostano il titolo */
     font-weight: 800; 
     letter-spacing: 2px; 
+    color: white;            /* Assicura che il testo sia bianco */
     text-shadow: 0 0 15px rgba(0,0,0,0.5);
     text-transform: uppercase;
     line-height: 1;
 }
 
 .header-logo-inline { 
-    width: 70px;             /* Leggermente più piccolo per non sbilanciare il testo */
+    width: 70px;             /* Dimensione bilanciata */
     height: auto; 
     mix-blend-mode: screen;  /* Rimuove il nero di sfondo_nero.webp */
-    filter: brightness(0) invert(1); /* Trasforma il logo in bianco */
-    opacity: 0.35;           /* Effetto trasparenza/ghost */
+    
+    /* FILTRO: Brightness(0.8) lo rende un po' meno 'sparato' del bianco puro */
+    filter: brightness(0) invert(1) opacity(0.4); 
+    
+    /* OPACITY supplementare per sicurezza */
+    opacity: 0.4;            
     pointer-events: none;
     transition: 0.3s ease-in-out;
 }
 
-/* Effetto luce al passaggio del mouse */
+/* Effetto al passaggio del mouse */
 .site-header:hover .header-logo-inline {
-    opacity: 0.7;
+    opacity: 0.8;
+    filter: brightness(0) invert(1) opacity(0.8);
     transform: scale(1.1);
 }
 
