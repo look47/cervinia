@@ -1,7 +1,6 @@
 :root { --accent: #00e5ff; --bg-card: rgba(0, 0, 0, 0.6); }
 * { box-sizing: border-box; }
 
-/* Ripristino Sfondo */
 body { 
     font-family: 'Outfit', sans-serif; 
     margin: 0; 
@@ -11,11 +10,16 @@ body {
     overflow-x: hidden; 
 }
 
-.main-wrapper { background-color: rgba(0, 0, 0, 0.85); min-height: 100vh; padding-bottom: 80px; }
+.main-wrapper { background-color: rgba(0, 0, 0, 0.85); min-height: 100vh; padding-bottom: 80px; position: relative; }
 .container { max-width: 1200px; margin: auto; padding: 20px; }
 
+/* Lingue in alto a DX */
+.top-lang-selector { position: absolute; top: 20px; right: 30px; z-index: 100; }
+.top-lang-selector span { cursor: pointer; font-size: 26px; margin-left: 15px; opacity: 0.6; transition: 0.3s; }
+.top-lang-selector span:hover { opacity: 1; transform: scale(1.1); }
+
 /* Header con Logo Background */
-.site-header { padding: 80px 20px; text-align: center; position: relative; }
+.site-header { padding: 80px 20px 40px; text-align: center; position: relative; }
 .header-logo-bg { 
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
     width: 320px; opacity: 0.3; z-index: 0; pointer-events: none;
@@ -25,7 +29,7 @@ body {
 /* Grid Layout */
 .booking-grid { display: grid; grid-template-columns: 1fr 380px; gap: 30px; margin-top: 20px; align-items: start; }
 
-/* Fix Gallery: Nessuna sovrapposizione */
+/* Visual Section */
 .visual-section { display: flex; flex-direction: column; gap: 15px; }
 .top-gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; height: 450px; }
 .main-img img, .side-imgs img, .thumb-row img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
@@ -34,27 +38,26 @@ body {
 
 /* Social & Booking Box */
 .booking-aside { display: flex; flex-direction: column; gap: 15px; }
-.social-box { display: flex; gap: 15px; justify-content: flex-end; padding-right: 5px; }
-.social-link { color: var(--accent); font-size: 22px; transition: 0.3s; }
-.social-link:hover { transform: scale(1.2); color: white; }
+.social-box { display: flex; gap: 12px; justify-content: flex-end; padding-right: 5px; }
+
+/* Colori Brand Social */
+.social-link { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; text-decoration: none; transition: 0.3s; }
+.social-link.ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.social-link.wa { background: #25D366; }
+.social-link.mail { background: #EA4335; }
+.social-link.maps { background: #4285F4; }
+.social-link:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255,255,255,0.2); }
 
 .material-card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); padding: 30px; }
 .snowflake-gold { color: #FFD700; font-size: 16px; margin-right: 2px; }
-
-/* Tasto Prenota sempre in basso a dx (Mobile/Scroll) */
-.btn-fixed-book { 
-    position: fixed; bottom: 30px; right: 30px; 
-    background: var(--accent); color: black; 
-    padding: 18px 40px; border-radius: 50px; 
-    font-weight: 800; text-decoration: none; 
-    z-index: 1000; box-shadow: 0 10px 30px rgba(0,229,255,0.4);
-    transition: 0.3s;
-}
-.btn-fixed-book:hover { transform: scale(1.05); background: white; }
 
 /* Calendario Recap */
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
 .cal-day { padding: 12px 0; text-align: center; border-radius: 6px; cursor: pointer; background: #2ecc71; font-weight: 800; font-size: 13px; color: white; }
 .cal-day.booked { background: #ff4d4d; opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
 
-@media (max-width: 1000px) { .booking-grid { grid-template-columns: 1fr; } .top-gallery { height: 300px; } .btn-fixed-book { width: calc(100% - 60px); text-align: center; } }
+@media (max-width: 1000px) { 
+    .booking-grid { grid-template-columns: 1fr; } 
+    .top-gallery { height: 300px; } 
+    .top-lang-selector { position: static; text-align: center; margin-top: 10px; }
+}
