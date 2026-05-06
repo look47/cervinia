@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Cervinia Ski Home</title>
+    <title>Rododendro Ski-In Ski-Out</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -13,32 +13,27 @@
 <button class="sidebar-trigger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
 
 <nav class="sidebar" id="sidebar">
-    <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
-    <h2 style="color:var(--accent)">CERVINIA<br>SKI HOME</h2>
-    <ul class="nav-links">
-        <li><a href="#info" onclick="toggleSidebar()"><i class="fas fa-home"></i> <span class="lang-txt" data-it="Appartamento" data-en="Apartment">Appartamento</span></a></li>
-        <li><a href="#foto" onclick="toggleSidebar()"><i class="fas fa-images"></i> <span class="lang-txt" data-it="Gallery" data-en="Gallery">Gallery</span></a></li>
-        <li><a href="#recensioni" onclick="toggleSidebar()"><i class="fas fa-star"></i> <span class="lang-txt" data-it="Recensioni" data-en="Reviews">Recensioni</span></a></li>
-        <li><a href="recap.html"><i class="fas fa-calendar-alt"></i> <span class="lang-txt" data-it="Prenota" data-en="Book Now">Prenota</span></a></li>
+    <button onclick="toggleSidebar()" style="background:none; border:none; color:white; font-size:35px; cursor:pointer; float:right;">&times;</button>
+    <h2 style="color:var(--accent); margin-top:60px; font-weight:800;">RODODENDRO</h2>
+    <ul style="list-style:none; padding:0; margin-top:40px;">
+        <li style="margin-bottom:25px;"><a href="#info" onclick="toggleSidebar()" style="color:white; text-decoration:none; font-size:18px;"><i class="fas fa-home" style="width:25px;"></i> Appartamento</a></li>
+        <li style="margin-bottom:25px;"><a href="#recensioni" onclick="toggleSidebar()" style="color:white; text-decoration:none; font-size:18px;"><i class="fas fa-star" style="width:25px;"></i> Recensioni</a></li>
+        <li><a href="recap.html" style="color:var(--accent); text-decoration:none; font-size:18px; font-weight:800;"><i class="fas fa-calendar-alt" style="width:25px;"></i> Prenota Ora</a></li>
     </ul>
 </nav>
 
 <div class="main-wrapper">
-    <header class="site-header">
-        <h1>CERVINIA SKI HOME</h1>
-        <div class="social-header">
-            <a href="https://instagram.com/tuoprofilo" class="social-btn"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/393479612836" class="social-btn"><i class="fab fa-whatsapp"></i></a>
-            <a href="mailto:tuaemail@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
-        </div>
-        <div class="lang-selector">
-            <button id="btn-it" class="lang-flag-btn" onclick="setLanguage('it')">🇮🇹</button>
-            <button id="btn-en" class="lang-flag-btn" onclick="setLanguage('en')">🇬🇧</button>
+    <header style="padding: 40px 20px; text-align:center;">
+        <h1 style="font-weight:800; letter-spacing:2px; margin:0;">RODODENDRO SKI-IN SKI-OUT</h1>
+        <div class="lang-selector" style="margin-top:15px;">
+            <span onclick="setLanguage('it')" style="cursor:pointer; font-size:24px; margin:0 10px;">🇮🇹</span>
+            <span onclick="setLanguage('en')" style="cursor:pointer; font-size:24px; margin:0 10px;">🇬🇧</span>
         </div>
     </header>
 
     <div class="container">
         <div class="booking-grid">
+            <!-- COLONNA SINISTRA: GALLERY -->
             <div class="visual-section" id="foto">
                 <div class="top-gallery">
                     <div class="main-img" onclick="openLightbox(0)"><img src="foto1.webp"></div>
@@ -51,38 +46,45 @@
                     <img src="foto4.webp" onclick="openLightbox(3)">
                     <img src="foto5.webp" onclick="openLightbox(4)">
                     <img src="foto6.webp" onclick="openLightbox(5)">
-                    <div class="material-card" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="openLightbox(0)">
-                        <span class="lang-txt" data-it="+20 FOTO" data-en="+20 PHOTOS">+20 FOTO</span>
+                    <img src="foto7.webp" onclick="openLightbox(6)">
+                    <div class="material-card" style="display:flex; align-items:center; justify-content:center; cursor:pointer; border-style:dashed;" onclick="openLightbox(0)">
+                        <span style="font-weight:800; font-size:14px;">+20 FOTO</span>
                     </div>
                 </div>
             </div>
 
-            <aside class="desc-box material-card" id="info">
-                <h2 class="lang-txt" data-it="L'Appartamento" data-en="The Apartment">L'Appartamento</h2>
-                <div class="global-rating-box">
-                    <span class="rating-num">5.0</span>
-                    <div class="rating-stars">
+            <!-- COLONNA DESTRA: BOOKING INFO -->
+            <aside class="desc-box">
+                <div class="social-box">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/393479612836" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:tuaemail@gmail.com" class="social-link"><i class="far fa-envelope"></i></a>
+                </div>
+                
+                <div class="material-card">
+                    <div style="margin-bottom:15px;">
                         <i class="fas fa-snowflake snowflake-gold"></i>
                         <i class="fas fa-snowflake snowflake-gold"></i>
                         <i class="fas fa-snowflake snowflake-gold"></i>
                         <i class="fas fa-snowflake snowflake-gold"></i>
                         <i class="fas fa-snowflake snowflake-gold"></i>
                     </div>
-                    <span class="rating-count">(6 <span class="lang-txt" data-it="Recensioni" data-en="Reviews">Recensioni</span>)</span>
+                    <h2 style="margin:0 0 15px 0;">Rododendro Ski-In Ski-Out</h2>
+                    <p class="lang-txt" data-it="Direttamente sulla Pista 16. Recentemente ristrutturato con finiture moderne, garage privato e 6 posti letto." data-en="Directly on Slope 16. Recently renovated with modern finishes, private garage, and 6 beds.">Direttamente sulla Pista 16...</p>
+                    <a href="recap.html" class="price-btn lang-txt" data-it="PRENOTA IL SOGGIORNO" data-en="BOOK YOUR STAY">PRENOTA IL SOGGIORNO</a>
                 </div>
-                <p class="lang-txt" data-it="Ski-in Ski-out direttamente sulla Pista 16. Recentemente rinnovato, offre 6 posti letto in uno stile moderno e alpino." data-en="Ski-in Ski-out directly on Slope 16. Recently renovated, sleeps 6 in modern alpine style.">Ski-in Ski-out direttamente sulla Pista 16...</p>
             </aside>
         </div>
 
-        <section id="recensioni" style="margin-top: 50px;">
-            <h3 class="section-title lang-txt" data-it="Cosa dicono i nostri ospiti" data-en="Guest Reviews">Cosa dicono i nostri ospiti</h3>
+        <section id="recensioni" style="margin-top: 80px;">
+            <h3 class="lang-txt" data-it="Recensioni degli Ospiti" data-en="Guest Reviews" style="font-size:28px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:15px;">Recensioni degli Ospiti</h3>
             <div id="reviews-grid" class="reviews-container"></div>
         </section>
     </div>
 </div>
 
 <div id="lightbox">
-    <span class="close-lb" onclick="closeLightbox()">&times;</span>
+    <span onclick="closeLightbox()" style="position:absolute; top:30px; right:40px; font-size:50px; color:white; cursor:pointer;">&times;</span>
     <button class="lb-nav lb-prev" onclick="navigateLightbox(-1)">❮</button>
     <img id="lbImg">
     <button class="lb-nav lb-next" onclick="navigateLightbox(1)">❯</button>
