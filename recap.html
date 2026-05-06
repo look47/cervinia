@@ -10,15 +10,21 @@
 </head>
 <body>
 
+<!-- TASTO HOME CLICCABILE -->
 <a href="index.html" class="btn-back-side">
-    <i class="fas fa-house-chimney"></i>
-    <div style="font-weight:800; font-size:12px; margin-top:5px;">H<br>O<br>M<br>E</div>
+    <i class="fas fa-house-chimney-window" style="font-size: 22px;"></i>
+    <div style="font-weight:800; font-size:13px; margin-top:8px; line-height:1.2; text-align:center;">H<br>O<br>M<br>E</div>
 </a>
+
+<div class="top-lang-selector">
+    <span id="lang-it" onclick="setLanguage('it')">🇮🇹</span>
+    <span id="lang-en" onclick="setLanguage('en')">🇬🇧</span>
+</div>
 
 <div class="main-wrapper">
     <div class="container" style="max-width:1000px;">
         <div class="material-card" style="margin-top: 30px;">
-            <h1 style="text-align:center; color:var(--accent); margin-bottom:30px;">RESERVATION</h1>
+            <h1 style="text-align:center; color:var(--accent); margin-bottom:30px; font-weight:800;">RESERVATION</h1>
             
             <div class="recap-main-grid">
                 <div class="cal-section">
@@ -26,20 +32,30 @@
                         <button onclick="shiftMonth(-1)" style="background:none; border:none; color:white; cursor:pointer;">❮</button>
                         <button onclick="shiftMonth(1)" style="background:none; border:none; color:white; cursor:pointer;">❯</button>
                     </div>
-                    <div id="calendar-render" class="cal-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;"></div>
+                    <!-- Il calendario viene iniettato qui -->
+                    <div id="calendar-render" style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;"></div>
                 </div>
 
                 <aside>
                     <div class="skier-ctrl">
                         <i class="fas fa-skier" style="color:var(--accent); font-size:24px;"></i>
-                        <div style="font-size:10px; margin:5px 0;">ADULTI</div>
-                        <button onclick="setGuests('ad', -1)">-</button> <b id="valAd">2</b> <button onclick="setGuests('ad', 1)">+</button>
+                        <div style="font-size:10px; margin:5px 0; font-weight:800;">ADULTI</div>
+                        <div style="display:flex; justify-content:center; align-items:center; gap:15px;">
+                            <button onclick="setGuests('ad', -1)" style="background:none; border:none; color:white; cursor:pointer; font-size:18px;">-</button>
+                            <b id="valAd" style="font-size:20px;">2</b>
+                            <button onclick="setGuests('ad', 1)" style="background:none; border:none; color:white; cursor:pointer; font-size:18px;">+</button>
+                        </div>
                     </div>
                     <div class="skier-ctrl">
                         <i class="fas fa-skier" style="color:var(--accent); font-size:18px;"></i>
-                        <div style="font-size:10px; margin:5px 0;">BAMBINI</div>
-                        <button onclick="setGuests('ch', -1)">-</button> <b id="valCh">0</b> <button onclick="setGuests('ch', 1)">+</button>
+                        <div style="font-size:10px; margin:5px 0; font-weight:800;">BAMBINI</div>
+                        <div style="display:flex; justify-content:center; align-items:center; gap:15px;">
+                            <button onclick="setGuests('ch', -1)" style="background:none; border:none; color:white; cursor:pointer; font-size:18px;">-</button>
+                            <b id="valCh" style="font-size:20px;">0</b>
+                            <button onclick="setGuests('ch', 1)" style="background:none; border:none; color:white; cursor:pointer; font-size:18px;">+</button>
+                        </div>
                     </div>
+                    <div style="font-size:10px; text-align:center; opacity:0.5; margin-top:10px;">Max 6 ospiti totali</div>
                 </aside>
             </div>
 
@@ -50,10 +66,11 @@
                 <input type="tel" id="fPhone" class="input-f-recap" placeholder="Telefono">
             </div>
 
-            <div style="text-align:center; margin-top:30px;">
-                <div id="oldPrice" style="text-decoration:line-through; opacity:0.4;"></div>
-                <div id="totalPrice" style="font-size:40px; color:var(--accent); font-weight:800;">...</div>
-                <button id="mainConfirmBtn" onclick="confirmBooking()" style="width:100%; background:var(--accent); color:black; border:none; padding:20px; border-radius:15px; font-weight:800; cursor:pointer; margin-top:20px;">CONFERMA E PRENOTA</button>
+            <div style="text-align:center; margin-top:30px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+                <div id="oldPrice" style="text-decoration:line-through; opacity:0.4; font-size:18px;"></div>
+                <div id="totalPrice" style="font-size:48px; color:var(--accent); font-weight:800;">...</div>
+                <div style="font-size:14px; opacity:0.7;">Acconto richiesto (30%): <b id="depositTxt">0€</b></div>
+                <button id="mainConfirmBtn" onclick="confirmBooking()" style="width:100%; background:var(--accent); color:black; border:none; padding:20px; border-radius:15px; font-weight:800; cursor:pointer; margin-top:20px; font-size:18px;">CONFERMA E PRENOTA</button>
             </div>
         </div>
     </div>
