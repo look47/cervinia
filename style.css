@@ -84,19 +84,33 @@ body {
 }
 .btn-back-side:hover { background: var(--accent); color: black; }
 
-/* --- HEADER & LOGO --- */
+/* --- HEADER: Nome e Logo Bianco Puro --- */
 .site-header { 
-    padding: 60px 20px; display: flex; align-items: center; 
-    justify-content: center; gap: 20px; position: relative;
+    padding: 60px 20px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 20px; 
+    position: relative;
 }
 
 .header-logo-inline { 
-    width: 80px; height: auto; mix-blend-mode: screen; filter: brightness(1.2);
+    width: 80px; 
+    height: auto; 
+    /* Rende il nero trasparente */
+    mix-blend-mode: screen; 
+    /* Trucco: porta la luminosità a zero (nero) e poi inverte (bianco puro) */
+    filter: brightness(0) invert(1); 
+    pointer-events: none;
+    opacity: 0.9; /* Opzionale: per non renderlo troppo "sparato" */
 }
 
 .site-header h1 { 
-    font-weight: 800; letter-spacing: 2px; margin: 0; 
+    font-weight: 800; 
+    letter-spacing: 2px; 
+    margin: 0; 
     text-shadow: 0 0 15px rgba(0,0,0,0.5);
+    text-transform: uppercase;
 }
 
 /* --- CARDS & FILIGRANA (OVERLAY) --- */
