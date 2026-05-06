@@ -1,7 +1,8 @@
 const APP_CONFIG = {
+    // Link aggiornato fornito dall'utente
     googleSheetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdggamylvF2ppk6wdHX4tkPKF97eJRSL04x-mgT_dppkwqYJbfHp3gdgtgJFbfqeyb2xa17nDTISGZ/pub?gid=0&single=true&output=csv",
-    
-    // Lascia pure questi segnaposto per ora
+
+    // EmailJS (da configurare nel tuo account)
     emailjs: {
         publicKey: "TUA_PUBLIC_KEY",
         serviceId: "TUO_SERVICE_ID",
