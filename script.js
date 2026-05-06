@@ -132,3 +132,27 @@ function setGuests(t, v) { if(t==='ad') ad = Math.max(1, Math.min(6, ad+v)); els
 function shiftMonth(d) { offset += d; renderCalendar(); }
 document.addEventListener('DOMContentLoaded', () => { setLanguage(currentLang); syncBookedDates(); });
 // ... (Resto del codice invariato) ...
+function updatePrice() {
+    const pNew = document.getElementById("totalPrice");
+    const pOld = document.getElementById("oldPrice");
+    const badge = document.getElementById("promoBadge");
+    
+    if(!pNew || !checkIn || !checkOut) return;
+    
+    const nights = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000*60*60*24));
+    let daily = (new Date(checkIn).getMonth() >= 10 || new Date(checkIn).getMonth() <= 3) ? APP_CONFIG.prices.winter : APP_CONFIG.prices.standard;
+    
+    // Calcolo Totale Reale
+    let total = nights * daily * (APP_CONFIG.markup[ad] || 1) * (1 + (ch * APP_CONFIG.childExtra));
+    
+    // Mostra Prezzo Sbarrato (Marketing)
+    if(pOld && APP_CONFIG.marketingMultiplier) {
+        pOld.innerText = (total * APP_CONFIG.marketingMultiplier).toFixed(0) + "€";
+        pNew.innerText = total.toFixed(0) + "€";
+        if(badge) badge.style.display = "inline-block";
+    }
+    
+    if(document.getElementById("depositTxt")) {
+        document.getElementById("depositTxt").innerText = (total * 0.3).toFixed(0) + "€";
+    }
+}
