@@ -11,45 +11,55 @@
 <body>
     <div class="main-wrapper">
         <div class="container" style="max-width:900px;">
-            <div style="margin-bottom: 20px;">
+            <div style="margin-bottom: 25px;">
                 <a href="index.html" class="btn-back-link">
-                    <i class="fas fa-arrow-left"></i> TORNA ALLA GALLERY
+                    <i class="fas fa-arrow-left"></i> <span class="lang-txt" data-it="TORNA ALLA GALLERY" data-en="BACK TO GALLERY">TORNA ALLA GALLERY</span>
                 </a>
             </div>
 
             <div class="material-card">
-                <h1 style="text-align:center; color:#00e5ff; margin-bottom:30px;">PRENOTAZIONE</h1>
+                <h1 style="text-align:center; color:#00e5ff; margin-bottom:30px;" class="lang-txt" data-it="PRENOTAZIONE" data-en="BOOKING">PRENOTAZIONE</h1>
                 
                 <div class="form-grid-recap">
-                    <div class="input-group"><label>Nome</label><input type="text" id="fName" class="input-f"></div>
-                    <div class="input-group"><label>Cognome</label><input type="text" id="fSurname" class="input-f"></div>
+                    <div class="input-group"><label class="lang-txt" data-it="Nome" data-en="First Name">Nome</label><input type="text" id="fName" class="input-f"></div>
+                    <div class="input-group"><label class="lang-txt" data-it="Cognome" data-en="Last Name">Cognome</label><input type="text" id="fSurname" class="input-f"></div>
                     <div class="input-group"><label>Email</label><input type="email" id="fEmail" class="input-f"></div>
-                    <div class="input-group"><label>Telefono</label><input type="tel" id="fPhone" class="input-f"></div>
+                    <div class="input-group"><label class="lang-txt" data-it="Telefono" data-en="Phone">Telefono</label><input type="tel" id="fPhone" class="input-f"></div>
                 </div>
 
                 <div class="guest-selector-recap">
-                    <div class="g-type"><span>Adulti</span><div class="g-ctrl"><button onclick="setGuests('ad', -1)">-</button><b id="valAd">2</b><button onclick="setGuests('ad', 1)">+</button></div></div>
-                    <div class="g-type"><span>Bambini</span><div class="g-ctrl"><button onclick="setGuests('ch', -1)">-</button><b id="valCh">0</b><button onclick="setGuests('ch', 1)">+</button></div></div>
+                    <div class="g-type"><span class="lang-txt" data-it="Adulti" data-en="Adults">Adulti</span><div class="g-ctrl"><button onclick="setGuests('ad', -1)">-</button><b id="valAd">2</b><button onclick="setGuests('ad', 1)">+</button></div></div>
+                    <div class="g-type"><span class="lang-txt" data-it="Bambini" data-en="Children">Bambini</span><div class="g-ctrl"><button onclick="setGuests('ch', -1)">-</button><b id="valCh">0</b><button onclick="setGuests('ch', 1)">+</button></div></div>
                 </div>
 
                 <div class="cal-section">
                     <div class="cal-nav-recap">
-                        <button onclick="shiftMonth(-1)">❮ Mese Prec.</button>
-                        <button onclick="shiftMonth(1)">Mese Succ. ❯</button>
+                        <button onclick="shiftMonth(-1)" class="lang-txt" data-it="❮ Mese Prec." data-en="❮ Prev Month">❮ Mese Prec.</button>
+                        <button onclick="shiftMonth(1)" class="lang-txt" data-it="Mese Succ. ❯" data-en="Next Month ❯">Mese Succ. ❯</button>
                     </div>
+                    <!-- Contenitore calendario -->
                     <div id="calendar-render" class="calendar-dual"></div>
                 </div>
 
                 <div class="price-summary">
-                    <p style="color:#2ecc71; font-weight:800; text-align:center;">✓ Pulizie incluse</p>
+                    <p style="color:#2ecc71; font-weight:800; text-align:center;" class="lang-txt" data-it="✓ Pulizie incluse" data-en="✓ Cleaning included">✓ Pulizie incluse</p>
                     <div id="oldPrice" class="p-old"></div>
-                    <div id="totalPrice" class="p-new">Seleziona le date sul calendario</div>
-                    <p id="txtSave" style="color:#2ecc71; font-weight:600; display:none; text-align:center;">Risparmio prenotazione diretta!</p>
-                    <a href="#" id="waBtn" class="btn-wa">CONFERMA E INVIA SU WHATSAPP</a>
+                    <div id="totalPrice" class="p-new">...</div>
+                    
+                    <div class="policy-box">
+                        <p><b><span class="lang-txt" data-it="Acconto richiesto:" data-en="Deposit required:">Acconto richiesto:</span> <span id="depositTxt">0€</span></b> (30%)</p>
+                        <p class="lang-txt" data-it="Cancellazione gratuita entro 30 giorni dal check-in." data-en="Free cancellation up to 30 days before check-in.">Cancellazione gratuita entro 30 giorni dal check-in.</p>
+                    </div>
+
+                    <button id="mainConfirmBtn" onclick="confirmBooking()" class="btn-wa">
+                        <span class="lang-txt" data-it="CONFERMA E INVIA" data-en="CONFIRM AND SEND">CONFERMA E INVIA</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
