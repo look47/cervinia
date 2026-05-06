@@ -1,5 +1,5 @@
 const APP_CONFIG = {
-    // Date occupate (AAAA-MM-GG)
+    // Aggiungi qui le date da bloccare
     bookedDates: [
         "2026-06-24", "2026-06-25", "2026-06-26", "2026-06-27",
         "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", 
