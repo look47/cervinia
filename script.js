@@ -3,44 +3,13 @@ let currentLang = localStorage.getItem('cervinia_lang') || 'it';
 let bookedDates = [];
 const photos = Array.from({length: 20}, (_, i) => `foto${i+1}.webp`);
 
-// RECENSIONI PROFESSIONALI (Tutte 5 Fiocchi)
 const reviewsData = [
-    { 
-        date: "Gennaio 2024", 
-        stars: 5, 
-        it: "Posizione incredibile direttamente sulla Pista 16, si esce e si entra con gli sci ai piedi. L'appartamento è caldissimo e accogliente, un vero piacere dopo una giornata sulla neve. Pulizia impeccabile al nostro arrivo.", 
-        en: "Incredible location right on Slope 16, you literally ski in and out. The apartment is very warm and cozy, a real treat after a day on the snow. Spotless cleaning upon our arrival." 
-    },
-    { 
-        date: "Febbraio 2024", 
-        stars: 5, 
-        it: "Gli host sono stati incredibilmente gentili e disponibili per ogni nostra esigenza. La casa è stata ristrutturata con grande gusto ed è molto funzionale. Essere sulle piste ha reso la nostra vacanza molto più rilassante.", 
-        en: "The hosts were incredibly kind and helpful with everything we needed. The house has been renovated with great taste and is very functional. Being right on the slopes made our holiday much more relaxing." 
-    },
-    { 
-        date: "Marzo 2024", 
-        stars: 5, 
-        it: "Fantastisk lägenhet med ett perfekt läge precis vid pisten. Värdarna var mycket trevliga och tillmötesgående. Rent, fräscht och mycket varmt inomhus trots kylan ute.", 
-        en: "Fantastic apartment with a perfect location right by the slope. The hosts were very nice and accommodating. Clean, fresh, and very warm indoors despite the cold outside." 
-    },
-    { 
-        date: "Dicembre 2024", 
-        stars: 5, 
-        it: "Non capita spesso di trovare una casa così ben riscaldata in montagna, si stava benissimo. La gestione è stata cordiale e precisa in ogni dettaglio. La comodità di non dover usare l'auto è impagabile.", 
-        en: "It's not often you find such a well-heated house in the mountains, it was very comfortable. The management was cordial and precise in every detail. The convenience of not having to use the car is priceless." 
-    },
-    { 
-        date: "Gennaio 2025", 
-        stars: 5, 
-        it: "Appartamento moderno dotato di ogni comfort. Pulizia da 10 e lode e un'accoglienza davvero calorosa da parte dei proprietari. Lo ski-in/ski-out è il migliore mai provato a Cervinia.", 
-        en: "Modern apartment equipped with every comfort. Top-notch cleanliness and a very warm welcome from the owners. The ski-in/ski-out is the best I've ever experienced in Cervinia." 
-    },
-    { 
-        date: "Febbraio 2025", 
-        stars: 5, 
-        it: "Abbiamo apprezzato moltissimo la cordialità dei proprietari che ci hanno seguito con attenzione. La casa è luminosa, caldissima e situata in una posizione strategica per chi scia. Tutto perfetto!", 
-        en: "We greatly appreciated the cordiality of the owners who followed us closely. The house is bright, very warm, and strategically located for skiers. Everything was perfect!" 
-    }
+    { date: "Gennaio 2024", it: "Posizione da sogno, esci di casa con gli sci ai piedi. Casa caldissima e moderna, ideale dopo una giornata sulla neve. Host gentilissimi.", en: "Dream location, ski-out directly from the door. Very warm and modern house." },
+    { date: "Febbraio 2024", it: "Ristrutturazione incredibile. Il garage privato a Cervinia è un vero lusso. Pulizia impeccabile e accoglienza cordiale.", en: "Incredible renovation. Private garage is a luxury." },
+    { date: "Marzo 2024", it: "Vista Cervino pazzesca. Tutto perfetto per la nostra famiglia. La casa è dotata di ogni comfort e il riscaldamento è eccellente.", en: "Amazing Matterhorn view. Everything was perfect." },
+    { date: "Dicembre 2024", it: "Il miglior ski-in ski-out mai provato. Host disponibili e premurosi. La casa profumava di pulito al nostro arrivo.", en: "The best ski-in ski-out experience ever." },
+    { date: "Gennaio 2025", it: "Appartamento moderno e funzionale. Gli host ci hanno accolto come amici. Posizione imbattibile sulla Pista 16.", en: "Modern and functional. Unbeatable location." },
+    { date: "Febbraio 2025", it: "Vacanza indimenticabile. Casa silenziosa, calda e vicinissima a tutto. Host cordiali e precisi nelle indicazioni.", en: "Unforgettable holiday. Quiet and warm house." }
 ];
 
 function renderReviews() {
@@ -48,17 +17,8 @@ function renderReviews() {
     if(!container) return;
     container.innerHTML = "";
     reviewsData.forEach(r => {
-        let stars = ""; for(let i=0; i<r.stars; i++) stars += '<i class="fas fa-snowflake snowflake-gold"></i>';
-        container.innerHTML += `
-            <div class="rev-card">
-                <div style="display:flex; justify-content:space-between; margin-bottom:12px; align-items:center;">
-                    <span>${stars}</span>
-                    <span style="font-size:11px; opacity:0.5; font-weight:600;">${r.date}</span>
-                </div>
-                <div style="font-size:14px; line-height:1.6; font-style:italic; color:rgba(255,255,255,0.9);">
-                    "${currentLang==='it' ? r.it : r.en}"
-                </div>
-            </div>`;
+        let stars = '<i class="fas fa-snowflake snowflake-gold"></i>'.repeat(5);
+        container.innerHTML += `<div class="rev-card"><div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>${stars}</span><span style="font-size:11px; opacity:0.5;">${r.date}</span></div><div style="font-size:14px; font-style:italic;">"${currentLang==='it'?r.it:r.en}"</div></div>`;
     });
 }
 
@@ -70,9 +30,9 @@ function renderCalendar() {
     for(let m=0; m<2; m++) {
         const date = new Date(now.getFullYear(), now.getMonth() + offset + m, 1);
         const name = date.toLocaleString(currentLang==='it'?'it-IT':'en-US', {month:'long', year:'numeric'});
-        let html = `<div class="cal-month-box"><div style="text-align:center; color:var(--accent); font-weight:800; margin-bottom:10px;">${name.toUpperCase()}</div><div class="cal-grid">`;
+        let html = `<div><div style="text-align:center; color:var(--accent); font-weight:800; margin-bottom:10px;">${name.toUpperCase()}</div><div class="cal-grid">`;
         const heads = currentLang==='it'?["L","M","M","G","V","S","D"]:["M","T","W","T","F","S","S"];
-        heads.forEach(h => html += `<div style="text-align:center; font-size:11px; opacity:0.5; padding-bottom:5px;">${h}</div>`);
+        heads.forEach(h => html += `<div style="text-align:center; font-size:10px; opacity:0.5;">${h}</div>`);
         let startShift = (new Date(date.getFullYear(), date.getMonth(), 1).getDay() + 6) % 7; 
         for(let i=0; i<startShift; i++) html += `<div></div>`;
         const total = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate();
@@ -106,7 +66,7 @@ async function syncBookedDates() {
 }
 
 function parseItalianDate(s) { const p = s.replace(/"/g, '').split('/'); return new Date(p[2], p[1] - 1, p[0]); }
-function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+
 function setLanguage(l) {
     currentLang = l; localStorage.setItem('cervinia_lang', l);
     document.querySelectorAll('.lang-txt').forEach(el => el.innerText = el.getAttribute(`data-${l}`));
@@ -115,62 +75,27 @@ function setLanguage(l) {
     renderReviews(); renderCalendar(); updatePrice();
 }
 
-function openLightbox(i) { currentIndex = i; updateLightbox(); document.getElementById("lightbox").style.display = "flex"; }
-function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
-function navigateLightbox(d) { currentIndex = (currentIndex + d + photos.length) % photos.length; updateLightbox(); }
-function updateLightbox() { document.getElementById("lbImg").src = photos[currentIndex]; }
+function setGuests(t, v) {
+    if (v === 1 && (ad + ch) >= 6) return alert("Max 6 ospiti totali");
+    if (t === 'ad') ad = Math.max(1, Math.min(6, ad + v));
+    else ch = Math.max(0, Math.min(5, ch + v));
+    document.getElementById("valAd").innerText = ad;
+    document.getElementById("valCh").innerText = ch;
+    updatePrice();
+}
+
 function handleDate(d, isB) { if(isB) return; if(!checkIn || (checkIn && checkOut)) { checkIn = d; checkOut = null; } else if (d < checkIn) { checkIn = d; } else { checkOut = d; } renderCalendar(); updatePrice(); }
+
 function updatePrice() {
     const pNew = document.getElementById("totalPrice"); if(!pNew || !checkIn || !checkOut) return;
     const nights = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000*60*60*24));
     let daily = (new Date(checkIn).getMonth() >= 10 || new Date(checkIn).getMonth() <= 3) ? APP_CONFIG.prices.winter : APP_CONFIG.prices.standard;
     let total = nights * daily * (APP_CONFIG.markup[ad] || 1) * (1 + (ch * APP_CONFIG.childExtra));
     pNew.innerText = total.toFixed(0) + "€";
-    if(document.getElementById("depositTxt")) document.getElementById("depositTxt").innerText = (total * 0.3).toFixed(0) + "€";
-}
-// ... (resto del codice uguale) ...
-
-function setGuests(t, v) {
-    // Controllo occupazione massima (6 persone totali)
-    if (v === 1 && (ad + ch) >= 6) {
-        alert(currentLang === 'it' ? "Massimo 6 persone totali" : "Maximum 6 people total");
-        return;
-    }
-
-    if (t === 'ad') {
-        ad = Math.max(1, Math.min(6, ad + v));
-    } else {
-        ch = Math.max(0, Math.min(5, ch + v)); // 5 se c'è almeno 1 adulto
-    }
-
-    document.getElementById("valAd").innerText = ad;
-    document.getElementById("valCh").innerText = ch;
-    updatePrice();
+    document.getElementById("oldPrice").innerText = (total * APP_CONFIG.marketingMultiplier).toFixed(0) + "€";
 }
 
-// ... (resto del codice uguale) ...
-// ... (Resto del codice invariato) ...
-function updatePrice() {
-    const pNew = document.getElementById("totalPrice");
-    const pOld = document.getElementById("oldPrice");
-    const badge = document.getElementById("promoBadge");
-    
-    if(!pNew || !checkIn || !checkOut) return;
-    
-    const nights = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000*60*60*24));
-    let daily = (new Date(checkIn).getMonth() >= 10 || new Date(checkIn).getMonth() <= 3) ? APP_CONFIG.prices.winter : APP_CONFIG.prices.standard;
-    
-    // Calcolo Totale Reale
-    let total = nights * daily * (APP_CONFIG.markup[ad] || 1) * (1 + (ch * APP_CONFIG.childExtra));
-    
-    // Mostra Prezzo Sbarrato (Marketing)
-    if(pOld && APP_CONFIG.marketingMultiplier) {
-        pOld.innerText = (total * APP_CONFIG.marketingMultiplier).toFixed(0) + "€";
-        pNew.innerText = total.toFixed(0) + "€";
-        if(badge) badge.style.display = "inline-block";
-    }
-    
-    if(document.getElementById("depositTxt")) {
-        document.getElementById("depositTxt").innerText = (total * 0.3).toFixed(0) + "€";
-    }
-}
+function openLightbox(i) { currentIndex = i; document.getElementById("lbImg").src = photos[i]; document.getElementById("lightbox").style.display = "flex"; }
+function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
+function shiftMonth(d) { offset += d; renderCalendar(); }
+document.addEventListener('DOMContentLoaded', () => { setLanguage(currentLang); syncBookedDates(); });
