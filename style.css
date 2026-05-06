@@ -10,7 +10,7 @@ body {
 .main-wrapper { background-color: rgba(0, 0, 0, 0.85); min-height: 100vh; padding-bottom: 80px; position: relative; }
 .container { max-width: 1200px; margin: auto; padding: 20px; }
 
-/* --- ELEMENTI FISSI (Index & Recap) --- */
+/* --- ELEMENTI FISSI --- */
 .top-lang-selector { 
     position: fixed; top: 20px; right: 30px; z-index: 2000; display: flex; gap: 15px; 
     background: rgba(0,0,0,0.4); padding: 8px 20px; border-radius: 30px; backdrop-filter: blur(5px);
@@ -33,32 +33,34 @@ body {
     padding: 15px 30px; border-radius: 50px; font-weight: 800; text-decoration: none; z-index: 2000; 
 }
 
-/* --- HEADER & LOGO --- */
-.site-header { padding: 90px 20px 50px; text-align: center; position: relative; }
-.header-logo-bg { 
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-    width: 350px; opacity: 0.4; mix-blend-mode: screen; pointer-events: none;
+/* --- TASTO HOME RECAP (FIX CLICCABILE) --- */
+.btn-back-side {
+    position: fixed; left: 0; top: 50%; transform: translateY(-50%); 
+    background: rgba(255,255,255,0.15); padding: 25px 12px; border-radius: 0 20px 20px 0; 
+    text-decoration: none !important; color: white !important; display: flex; 
+    flex-direction: column; align-items: center; z-index: 9999; /* Superiore a tutto */
+    border: 1px solid rgba(255,255,255,0.2); border-left: none; transition: 0.3s;
+    cursor: pointer !important;
 }
+.btn-back-side:hover { background: var(--accent); color: black !important; }
 
-/* --- LAYOUT INDEX (2 COLONNE) --- */
+/* --- GRID & CARDS --- */
 .booking-grid { display: grid; grid-template-columns: 1fr 380px; gap: 30px; margin-top: 20px; align-items: start; }
 .top-gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; height: 450px; }
 .main-img img, .side-imgs img, .thumb-row img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; cursor: pointer; }
 .side-imgs { display: grid; grid-template-rows: 1fr 1fr; gap: 12px; }
 .thumb-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; height: 100px; }
 
-/* --- LAYOUT RECAP --- */
-.btn-back-side {
-    position: fixed; left: 0; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1);
-    padding: 20px 10px; border-radius: 0 15px 15px 0; text-decoration: none; color: white; display: flex; flex-direction: column; align-items: center;
-}
 .recap-main-grid { display: grid; grid-template-columns: 1fr 250px; gap: 20px; margin-top: 20px; }
 .skier-ctrl { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center; margin-bottom: 10px; }
 
-/* --- COMUNE --- */
 .material-card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); padding: 30px; }
 .snowflake-gold { color: #FFD700; font-size: 16px; }
-.input-f-recap { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; color: white; margin-bottom: 10px; }
+
+.input-f-recap { 
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); 
+    padding: 15px; border-radius: 12px; color: white; margin-bottom: 10px; font-family: inherit;
+}
 
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
 .cal-day { padding: 12px 0; text-align: center; border-radius: 6px; cursor: pointer; background: #2ecc71; font-weight: 800; font-size: 12px; }
