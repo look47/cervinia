@@ -1,56 +1,40 @@
 :root { --accent: #00e5ff; --bg-card: rgba(255, 255, 255, 0.05); }
 * { box-sizing: border-box; }
-body { font-family: 'Outfit', sans-serif; margin: 0; background: url("sfondo_rododendro.webp") no-repeat center center fixed; background-size: cover; color: white; }
+body { font-family: 'Outfit', sans-serif; margin: 0; background: url("sfondo_rododendro.webp") no-repeat center center fixed; background-size: cover; color: white; overflow-x: hidden; }
 .main-wrapper { background-color: rgba(0, 0, 0, 0.88); min-height: 100vh; padding-bottom: 40px; }
 .container { max-width: 1200px; margin: auto; padding: 20px; }
 
-/* Header & Flags */
-.site-header { padding: 60px 20px; text-align: center; position: relative; }
-.lang-selector { margin-top: 20px; }
-.lang-flag-btn { background: none; border: none; font-size: 24px; cursor: pointer; opacity: 0.4; transition: 0.3s; margin: 0 10px; }
-.lang-flag-btn.active { opacity: 1; transform: scale(1.2); }
+/* Sidebar Menu */
+.sidebar-trigger { position: fixed; top: 20px; left: 20px; background: rgba(0,0,0,0.6); border: 1px solid var(--accent); color: white; padding: 12px; border-radius: 8px; cursor: pointer; z-index: 2000; }
+.sidebar { position: fixed; left: 0; top: 0; width: 280px; height: 100vh; background: #0a0a0a; z-index: 3000; border-right: 1px solid var(--accent); transform: translateX(-100%); transition: 0.3s; padding: 60px 20px; }
+.sidebar.active { transform: translateX(0); }
+.close-sidebar { position: absolute; top: 20px; right: 20px; font-size: 30px; cursor: pointer; background:none; border:none; color:white; }
+.nav-links { list-style: none; padding: 0; margin-top: 40px; }
+.nav-links li { margin-bottom: 25px; }
+.nav-links a { color: white; text-decoration: none; font-size: 18px; display: flex; align-items: center; gap: 15px; }
+
+/* Social Buttons */
+.social-header { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+.social-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; }
+.social-btn:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.1); }
 
 /* Voto Globale */
 .global-rating-box { display: flex; align-items: center; gap: 10px; margin: 15px 0; padding: 12px; background: rgba(0, 229, 255, 0.1); border-radius: 8px; width: fit-content; border: 1px solid rgba(0, 229, 255, 0.2); }
 .rating-num { font-size: 26px; font-weight: 800; color: var(--accent); }
 .snowflake-gold { color: #FFD700; margin-right: 2px; font-size: 14px; }
-.rating-count { font-size: 13px; opacity: 0.7; }
-
-/* Gallery */
-.booking-grid { display: grid; grid-template-columns: 1fr 380px; gap: 20px; margin-bottom: 40px; }
-.top-gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; height: 400px; margin-bottom: 10px; }
-.main-img img, .side-imgs img, .thumb-row img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; cursor: pointer; }
-.side-imgs { display: grid; grid-template-rows: 1fr 1fr; gap: 10px; }
-.thumb-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; height: 100px; }
-
-/* Material Design Cards */
-.material-card { background: var(--bg-card); backdrop-filter: blur(15px); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); padding: 25px; }
 
 /* Recensioni */
 .reviews-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
-.rev-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-.rev-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-.rev-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.rev-date { font-size: 11px; opacity: 0.5; }
-.rev-text { font-size: 14px; font-style: italic; line-height: 1.4; }
+.rev-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
 
-/* Calendario Recap */
-.cal-section { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 15px; margin: 30px 0; }
-.calendar-dual { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-.cal-day { padding: 12px 0; text-align: center; border-radius: 6px; cursor: pointer; background: #2ecc71; font-weight: 800; font-size: 13px; color: white; }
-.cal-day.booked { background: #ff4d4d; opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
-.cal-day.selected { background: var(--accent) !important; color: black; box-shadow: 0 0 15px var(--accent); }
-.cal-day.range { background: rgba(0, 229, 255, 0.4); }
+/* Lightbox Nav */
+#lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 5000; align-items: center; justify-content: center; }
+#lbImg { max-width: 85%; max-height: 80%; border-radius: 8px; }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; font-size: 40px; cursor: pointer; padding: 20px; z-index: 5100; }
+.lb-prev { left: 10px; }
+.lb-next { right: 10px; }
+.close-lb { position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; cursor: pointer; }
 
 /* Form e Inputs */
 .input-f { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 12px; border-radius: 8px; color: white; margin-top: 5px; }
 .btn-wa { display: block; background: #25D366; color: white; padding: 20px; text-align: center; border-radius: 12px; font-weight: 800; text-decoration: none; border: none; width: 100%; cursor: pointer; margin-top: 20px; }
-.p-new { font-size: 48px; color: var(--accent); font-weight: 800; text-align: center; margin: 10px 0; }
-.p-old { text-decoration: line-through; opacity: 0.5; text-align: center; }
-
-/* Lightbox */
-#lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 5000; align-items: center; justify-content: center; }
-#lbImg { max-width: 90%; max-height: 80%; border-radius: 8px; }
-
-@media (max-width: 900px) { .booking-grid { grid-template-columns: 1fr; } .top-gallery { height: 250px; } }
