@@ -10,13 +10,11 @@
 </head>
 <body>
 
-<!-- 1. LINGUE FISSE IN ALTO A DX -->
 <div class="top-lang-selector">
-    <span onclick="setLanguage('it')">🇮🇹</span>
-    <span onclick="setLanguage('en')">🇬🇧</span>
+    <span id="lang-it" onclick="setLanguage('it')">🇮🇹</span>
+    <span id="lang-en" onclick="setLanguage('en')">🇬🇧</span>
 </div>
 
-<!-- 2. SOCIAL IMPILATI A DX -->
 <div class="social-stack">
     <a href="https://instagram.com/tuoprofilo" class="social-link ig" target="_blank"><i class="fab fa-instagram"></i></a>
     <a href="https://wa.me/393479612836" class="social-link wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -24,7 +22,6 @@
     <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" class="social-link maps" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
 </div>
 
-<!-- 3. TASTO PRENOTA FISSO IN BASSO A DX -->
 <a href="recap.html" class="btn-fixed-book">
     <i class="fas fa-calendar-alt"></i> 
     <span class="lang-txt" data-it="PRENOTA ORA" data-en="BOOK NOW">PRENOTA ORA</span>
@@ -38,7 +35,6 @@
 
     <div class="container">
         <div class="booking-grid">
-            <!-- SINISTRA: GALLERY -->
             <div class="visual-section">
                 <div class="top-gallery">
                     <div class="main-img" onclick="openLightbox(0)"><img src="foto1.webp"></div>
@@ -58,7 +54,6 @@
                 </div>
             </div>
 
-            <!-- DESTRA: DESCRIZIONE APPARTAMENTO -->
             <aside class="booking-aside">
                 <div class="material-card">
                     <div style="margin-bottom:15px;">
