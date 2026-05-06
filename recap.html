@@ -9,53 +9,62 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-content" style="margin-left:0;">
+    <div class="main-wrapper">
         <div class="container" style="max-width:850px;">
             <div class="material-card" style="margin-top:20px;">
                 <h1 style="text-align:center; color:#00e5ff;">PRENOTAZIONE</h1>
                 
-                <div class="form-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:25px;">
-                    <input type="text" id="fName" placeholder="Nome" class="material-card" style="padding:12px; color:white;">
-                    <input type="text" id="fSurname" placeholder="Cognome" class="material-card" style="padding:12px; color:white;">
-                    <input type="email" id="fEmail" placeholder="Email" class="material-card" style="padding:12px; color:white;">
-                    <input type="tel" id="fPhone" placeholder="Telefono" class="material-card" style="padding:12px; color:white;">
+                <!-- DATI UTENTE -->
+                <div class="form-grid">
+                    <input type="text" id="fName" placeholder="Nome" class="input-f">
+                    <input type="text" id="fSurname" placeholder="Cognome" class="input-f">
+                    <input type="email" id="fEmail" placeholder="Email" class="input-f">
+                    <input type="tel" id="fPhone" placeholder="Telefono" class="input-f">
                 </div>
 
-                <div class="guest-picker" style="display:flex; justify-content:space-around; margin-bottom:25px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:20px;">
-                    <div style="text-align:center;">
+                <!-- OSPITI -->
+                <div class="guest-selector">
+                    <div class="g-type">
                         <span id="lblAd">Adulti</span>
-                        <div style="display:flex; align-items:center; gap:15px; margin-top:8px;">
-                            <button onclick="setGuests('ad', -1)" class="material-card" style="width:35px; height:35px; color:white;">-</button>
-                            <span id="valAd" style="font-size:20px; font-weight:800;">2</span>
-                            <button onclick="setGuests('ad', 1)" class="material-card" style="width:35px; height:35px; color:white;">+</button>
+                        <div class="g-ctrl">
+                            <button onclick="setGuests('ad', -1)">-</button>
+                            <span id="valAd">2</span>
+                            <button onclick="setGuests('ad', 1)">+</button>
                         </div>
                     </div>
-                    <div style="text-align:center;">
+                    <div class="g-type">
                         <span id="lblCh">Bambini</span>
-                        <div style="display:flex; align-items:center; gap:15px; margin-top:8px;">
-                            <button onclick="setGuests('ch', -1)" class="material-card" style="width:35px; height:35px; color:white;">-</button>
-                            <span id="valCh" style="font-size:20px; font-weight:800;">0</span>
-                            <button onclick="setGuests('ch', 1)" class="material-card" style="width:35px; height:35px; color:white;">+</button>
+                        <div class="g-ctrl">
+                            <button onclick="setGuests('ch', -1)">-</button>
+                            <span id="valCh">0</span>
+                            <button onclick="setGuests('ch', 1)">+</button>
                         </div>
                     </div>
                 </div>
 
-                <div style="text-align:center; margin-bottom:15px;">
-                    <button onclick="shiftMonth(-1)" class="material-card" style="color:white; padding:5px 15px;">❮</button>
-                    <button onclick="shiftMonth(1)" class="material-card" style="color:white; padding:5px 15px;">❯</button>
+                <!-- CALENDARIO -->
+                <div class="cal-nav-recap">
+                    <button onclick="shiftMonth(-1)">❮ Mese Prec.</button>
+                    <button onclick="shiftMonth(1)">Mese Succ. ❯</button>
                 </div>
                 <div id="calendar-render" class="calendar-dual"></div>
 
-                <div style="text-align:center; margin-top:35px; border-top:1px solid rgba(255,255,255,0.1); padding-top:25px;">
+                <!-- RIEPILOGO PREZZO -->
+                <div class="price-summary">
                     <p style="color:#2ecc71; font-weight:800;">✓ Pulizie incluse</p>
-                    <div id="oldPrice" style="text-decoration:line-through; opacity:0.5; font-size:18px;"></div>
-                    <div id="totalPrice" style="font-size:52px; color:#00e5ff; font-weight:800;">Scegli le date</div>
-                    <a href="#" id="waBtn" class="act-btn wa" style="width:100%; border-radius:12px; margin-top:20px; font-weight:800; font-size:18px;">CONFERMA SU WHATSAPP</a>
-                    <a href="index.html" style="display:block; margin-top:15px; color:#ccc; text-decoration:none;">Torna alla Home</a>
+                    <div id="oldPrice" class="p-old"></div>
+                    <div id="totalPrice" class="p-new">Seleziona le date</div>
+                    <p id="txtSave" style="color:#2ecc71; font-weight:600; display:none;">Risparmio prenotazione diretta!</p>
+                    
+                    <a href="#" id="waBtn" class="btn-wa">CONFERMA E INVIA SU WHATSAPP</a>
+                    <a href="index.html" style="display:block; margin-top:20px; color:#ccc; text-decoration:none;">Torna alla Home</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Carichiamo prima la configurazione, poi lo script -->
+    <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
