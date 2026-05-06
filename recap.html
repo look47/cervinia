@@ -10,60 +10,66 @@
 </head>
 <body>
     <div class="main-wrapper">
-        <div class="container" style="max-width:850px;">
-            <div class="material-card" style="margin-top:20px;">
-                <h1 style="text-align:center; color:#00e5ff;">PRENOTAZIONE</h1>
+        <div class="container" style="max-width:900px;">
+            
+            <!-- TASTO TORNA INDIETRO FACILE -->
+            <div style="margin-bottom: 15px;">
+                <a href="index.html" class="btn-back-home">
+                    <i class="fas fa-arrow-left"></i> Torna alla Gallery
+                </a>
+            </div>
+
+            <div class="material-card">
+                <h1 style="text-align:center; color:#00e5ff; margin-bottom:30px; letter-spacing:1px;">PRENOTAZIONE</h1>
                 
-                <!-- DATI UTENTE -->
-                <div class="form-grid">
-                    <input type="text" id="fName" placeholder="Nome" class="input-f">
-                    <input type="text" id="fSurname" placeholder="Cognome" class="input-f">
-                    <input type="email" id="fEmail" placeholder="Email" class="input-f">
-                    <input type="tel" id="fPhone" placeholder="Telefono" class="input-f">
+                <div class="form-grid-recap">
+                    <div class="input-group"><label>Nome</label><input type="text" id="fName" class="input-f" oninput="updatePrice()"></div>
+                    <div class="input-group"><label>Cognome</label><input type="text" id="fSurname" class="input-f" oninput="updatePrice()"></div>
+                    <div class="input-group"><label>Email</label><input type="email" id="fEmail" class="input-f"></div>
+                    <div class="input-group"><label>Telefono</label><input type="tel" id="fPhone" class="input-f"></div>
                 </div>
 
-                <!-- OSPITI -->
-                <div class="guest-selector">
+                <div class="guest-selector-recap">
                     <div class="g-type">
-                        <span id="lblAd">Adulti</span>
+                        <span>Adulti (max 6)</span>
                         <div class="g-ctrl">
                             <button onclick="setGuests('ad', -1)">-</button>
-                            <span id="valAd">2</span>
+                            <b id="valAd">2</b>
                             <button onclick="setGuests('ad', 1)">+</button>
                         </div>
                     </div>
                     <div class="g-type">
-                        <span id="lblCh">Bambini</span>
+                        <span>Bambini</span>
                         <div class="g-ctrl">
                             <button onclick="setGuests('ch', -1)">-</button>
-                            <span id="valCh">0</span>
+                            <b id="valCh">0</b>
                             <button onclick="setGuests('ch', 1)">+</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- CALENDARIO -->
-                <div class="cal-nav-recap">
-                    <button onclick="shiftMonth(-1)">❮ Mese Prec.</button>
-                    <button onclick="shiftMonth(1)">Mese Succ. ❯</button>
+                <div class="cal-section">
+                    <div class="cal-nav-recap">
+                        <button onclick="shiftMonth(-1)">❮ Mese Prec.</button>
+                        <button onclick="shiftMonth(1)">Mese Succ. ❯</button>
+                    </div>
+                    <div id="calendar-render" class="calendar-dual"></div>
                 </div>
-                <div id="calendar-render" class="calendar-dual"></div>
 
-                <!-- RIEPILOGO PREZZO -->
                 <div class="price-summary">
-                    <p style="color:#2ecc71; font-weight:800;">✓ Pulizie incluse</p>
+                    <p style="color:#2ecc71; font-weight:800; margin-bottom:5px;"><i class="fas fa-check-circle"></i> Pulizie incluse</p>
                     <div id="oldPrice" class="p-old"></div>
                     <div id="totalPrice" class="p-new">Seleziona le date</div>
-                    <p id="txtSave" style="color:#2ecc71; font-weight:600; display:none;">Risparmio prenotazione diretta!</p>
+                    <p id="txtSave" style="color:#2ecc71; font-weight:600; display:none; margin-bottom:20px;">Risparmio prenotazione diretta!</p>
                     
-                    <a href="#" id="waBtn" class="btn-wa">CONFERMA E INVIA SU WHATSAPP</a>
-                    <a href="index.html" style="display:block; margin-top:20px; color:#ccc; text-decoration:none;">Torna alla Home</a>
+                    <a href="#" id="waBtn" class="btn-wa">
+                        <i class="fab fa-whatsapp"></i> CONFERMA E INVIA
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Carichiamo prima la configurazione, poi lo script -->
     <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
