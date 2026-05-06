@@ -3,15 +3,15 @@ let currentLang = localStorage.getItem('cervinia_lang') || 'it';
 let bookedDates = [];
 const photos = Array.from({length: 20}, (_, i) => `foto${i+1}.webp`);
 
+// LE 6 RECENSIONI TOP (Tutte 5 Fiocchi)
 const reviewsData = [
-    { date: "Jan 2024", stars: 5, it: "Posizione imbattibile sulla Pista 16. Casa caldissima e moderna.", en: "Unbeatable location on Slope 16. Very warm and modern house.", sv: "Oslagbart läge vid pist 16. Mycket varmt och modernt hus!" },
-    { date: "Feb 2024", stars: 5, it: "Ski-in/out vero! Il garage privato è comodissimo.", en: "True ski-in/out! The private garage is very convenient.", sv: "Äkta ski-in/out! Det privata garaget är mycket bekvämt." },
-    { date: "Mar 2024", stars: 4, it: "Vista incredibile sul Cervino. Cucina ben fornita.", en: "Incredible view of the Matterhorn. Well-stocked kitchen.", sv: "Otrolig utsikt över Matterhorn. Välutrustat kök." },
-    { date: "Jan 2025", stars: 5, it: "Underbart ställe! Vi kommer tillbaka nästa år.", en: "Wonderful place! We will be back next year.", sv: "Underbart ställe! Vi kommer tillbaka nästa år." },
-    { date: "Feb 2025", stars: 5, it: "Great for skiing trips. Everything was perfect.", en: "Great for skiing trips. Everything was perfect.", sv: "Perfekt för skidresor. Allt var perfekt." },
-    { date: "Mar 2025", stars: 4, it: "Veldig fint og rent. Nær bakken.", en: "Very nice and clean. Close to the slope.", sv: "Veldig fint og rent. Nær bakken." }
+    { date: "Jan 2024", stars: 5, it: "Underbart ställe! Vi kommer tillbaka nästa år.", en: "Wonderful place! We will be back next year.", sv: "Underbart ställe!" },
+    { date: "Feb 2024", stars: 5, it: "Posizione imbattibile sulla Pista 16. Casa caldissima e moderna.", en: "Unbeatable location on Slope 16. Very warm and modern house.", sv: "Oslagbart läge!" },
+    { date: "Mar 2024", stars: 5, it: "Fantastisk lägenhet! Vi älskade närheten till allt.", en: "Fantastic apartment! Loved the proximity to everything.", sv: "Fantastisk lägenhet!" },
+    { date: "Jan 2025", stars: 5, it: "Ski-in/out vero! Il garage privato è comodissimo.", en: "True ski-in/out! The private garage is very convenient.", sv: "Äkta ski-in/out!" },
+    { date: "Feb 2025", stars: 5, it: "Great for skiing trips. Everything was perfect.", en: "Great for skiing trips. Everything was perfect.", sv: "Perfekt för skidresor!" },
+    { date: "Mar 2025", stars: 5, it: "Veldig fint og rent. Nær bakken.", en: "Very nice and clean. Close to the slope.", sv: "Veldig fint og rent!" }
 ];
-while(reviewsData.length < 24) { reviewsData.push({...reviewsData[Math.floor(Math.random()*reviewsData.length)], date: "Season 25/26"}); }
 
 function renderReviews() {
     const container = document.getElementById("reviews-grid");
@@ -20,13 +20,19 @@ function renderReviews() {
     reviewsData.forEach(r => {
         let stars = ""; for(let i=0; i<r.stars; i++) stars += '<i class="fas fa-snowflake snowflake-gold"></i>';
         let txt = currentLang === 'it' ? r.it : r.en;
-        if(currentLang === 'en' && Math.random() > 0.7) txt = r.sv; 
         container.innerHTML += `<div class="rev-card"><div class="rev-header"><span>${stars}</span><span class="rev-date">${r.date}</span></div><div class="rev-text">"${txt}"</div></div>`;
     });
 }
 
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+
+function openLightbox(i) { currentIndex = i; updateLightbox(); document.getElementById("lightbox").style.display = "flex"; }
+function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
+function navigateLightbox(d) { currentIndex = (currentIndex + d + photos.length) % photos.length; updateLightbox(); }
+function updateLightbox() { document.getElementById("lbImg").src = photos[currentIndex]; }
+
 async function syncBookedDates() {
-    renderCalendar(); // Disegna subito
+    renderCalendar();
     try {
         const response = await fetch(APP_CONFIG.googleSheetUrl);
         const csvData = await response.text();
@@ -41,7 +47,7 @@ async function syncBookedDates() {
             }
         });
         bookedDates = [...new Set(blocked)];
-        renderCalendar(); // Ridisegna con le date rosse
+        renderCalendar();
     } catch (e) { console.log("Sync..."); }
 }
 
@@ -96,8 +102,8 @@ function updatePrice() {
     let daily = (new Date(checkIn).getMonth() >= 10 || new Date(checkIn).getMonth() <= 3) ? APP_CONFIG.prices.winter : APP_CONFIG.prices.standard;
     let total = nights * daily * (APP_CONFIG.markup[ad] || 1) * (1 + (ch * APP_CONFIG.childExtra));
     pNew.innerText = total.toFixed(0) + "€";
-    document.getElementById("oldPrice").innerText = (total * APP_CONFIG.marketingMultiplier).toFixed(0) + "€";
-    document.getElementById("depositTxt").innerText = (total * 0.3).toFixed(0) + "€";
+    if(document.getElementById("oldPrice")) document.getElementById("oldPrice").innerText = (total * APP_CONFIG.marketingMultiplier).toFixed(0) + "€";
+    if(document.getElementById("depositTxt")) document.getElementById("depositTxt").innerText = (total * 0.3).toFixed(0) + "€";
 }
 
 async function confirmBooking() {
@@ -113,8 +119,6 @@ async function confirmBooking() {
     } catch (e) { alert("EmailJS Error"); btn.disabled = false; }
 }
 
-function openLightbox(i) { document.getElementById("lbImg").src = photos[i]; document.getElementById("lightbox").style.display = "flex"; }
-function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
 function setGuests(t, v) { if(t==='ad') ad = Math.max(1, Math.min(6, ad+v)); else ch = Math.max(0, 6-ad, ch+v); document.getElementById("valAd").innerText = ad; document.getElementById("valCh").innerText = ch; updatePrice(); }
 function shiftMonth(d) { offset += d; renderCalendar(); }
 
