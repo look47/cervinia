@@ -179,3 +179,101 @@ body {
     .social-stack { right: 20px; }
     .btn-fixed-book { right: 20px; }
 }
+
+/* ... (Mantieni tutto il resto del file di prima) ... */
+
+/* Tasto Back Laterale (a Sinistra) */
+.btn-back-side {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: none;
+    color: white;
+    padding: 20px 15px;
+    border-radius: 0 15px 15px 0;
+    text-decoration: none;
+    z-index: 2000;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.btn-back-side:hover { background: var(--accent); color: black; padding-left: 25px; }
+.btn-back-side i { font-size: 20px; }
+.btn-back-side span { writing-mode: vertical-lr; text-transform: uppercase; font-size: 11px; font-weight: 800; letter-spacing: 2px; }
+
+/* Sciatori Stilizzati */
+.skier-count-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+.skier-ctrl {
+    background: rgba(255,255,255,0.05);
+    padding: 15px 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.skier-icon { color: var(--accent); font-size: 24px; }
+.skier-icon.child { font-size: 16px; } /* Più piccolo per i bambini */
+
+/* Input Box con Stile Material */
+.input-group-recap {
+    position: relative;
+    margin-bottom: 20px;
+}
+.input-f-recap {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 18px;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    transition: 0.3s;
+}
+.input-f-recap:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.07);
+}
+
+/* Marketing Price */
+.price-marketing-box {
+    text-align: center;
+    margin: 20px 0;
+}
+.p-old-recap {
+    font-size: 20px;
+    text-decoration: line-through;
+    opacity: 0.4;
+    margin-bottom: -5px;
+}
+.p-new-recap {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+}
+.promo-badge {
+    display: inline-block;
+    background: #ff4d4d;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 800;
+    margin-top: 10px;
+}
