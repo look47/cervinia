@@ -10,11 +10,26 @@
 </head>
 <body>
 
+<button class="sidebar-trigger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+
+<nav class="sidebar" id="sidebar">
+    <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+    <h2 style="color:var(--accent)">CERVINIA<br>SKI HOME</h2>
+    <ul class="nav-links">
+        <li><a href="#info" onclick="toggleSidebar()"><i class="fas fa-home"></i> <span class="lang-txt" data-it="Appartamento" data-en="Apartment">Appartamento</span></a></li>
+        <li><a href="#foto" onclick="toggleSidebar()"><i class="fas fa-images"></i> <span class="lang-txt" data-it="Gallery" data-en="Gallery">Gallery</span></a></li>
+        <li><a href="#recensioni" onclick="toggleSidebar()"><i class="fas fa-star"></i> <span class="lang-txt" data-it="Recensioni" data-en="Reviews">Recensioni</span></a></li>
+        <li><a href="recap.html"><i class="fas fa-calendar-alt"></i> <span class="lang-txt" data-it="Prenota" data-en="Book Now">Prenota</span></a></li>
+    </ul>
+</nav>
+
 <div class="main-wrapper">
     <header class="site-header">
-        <div class="header-content">
-            <h1>CERVINIA SKI HOME</h1>
-            <p class="lang-txt" data-it="Il tuo rifugio moderno sulla Pista 16" data-en="Your modern retreat on Slope 16">Il tuo rifugio moderno sulla Pista 16</p>
+        <h1>CERVINIA SKI HOME</h1>
+        <div class="social-header">
+            <a href="https://instagram.com/tuoprofilo" class="social-btn"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/393479612836" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:tuaemail@gmail.com" class="social-btn"><i class="far fa-envelope"></i></a>
         </div>
         <div class="lang-selector">
             <button id="btn-it" class="lang-flag-btn" onclick="setLanguage('it')">🇮🇹</button>
@@ -36,18 +51,16 @@
                     <img src="foto4.webp" onclick="openLightbox(3)">
                     <img src="foto5.webp" onclick="openLightbox(4)">
                     <img src="foto6.webp" onclick="openLightbox(5)">
-                    <img src="foto7.webp" onclick="openLightbox(6)">
                     <div class="material-card" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="openLightbox(0)">
                         <span class="lang-txt" data-it="+20 FOTO" data-en="+20 PHOTOS">+20 FOTO</span>
                     </div>
                 </div>
             </div>
 
-            <aside class="desc-box material-card">
+            <aside class="desc-box material-card" id="info">
                 <h2 class="lang-txt" data-it="L'Appartamento" data-en="The Apartment">L'Appartamento</h2>
-                
                 <div class="global-rating-box">
-                    <span class="rating-num">4.9</span>
+                    <span class="rating-num">5.0</span>
                     <div class="rating-stars">
                         <i class="fas fa-snowflake snowflake-gold"></i>
                         <i class="fas fa-snowflake snowflake-gold"></i>
@@ -55,11 +68,9 @@
                         <i class="fas fa-snowflake snowflake-gold"></i>
                         <i class="fas fa-snowflake snowflake-gold"></i>
                     </div>
-                    <span class="rating-count">(24 <span class="lang-txt" data-it="Recensioni" data-en="Reviews">Recensioni</span>)</span>
+                    <span class="rating-count">(6 <span class="lang-txt" data-it="Recensioni" data-en="Reviews">Recensioni</span>)</span>
                 </div>
-
-                <p class="lang-txt" data-it="Ski-in Ski-out direttamente sulla Pista 16. Recentemente rinnovato, offre 6 posti letto in uno stile moderno e alpino. Garage privato incluso." data-en="Ski-in Ski-out directly on Slope 16. Recently renovated, sleeps 6 in modern alpine style. Private garage included.">Ski-in Ski-out direttamente sulla Pista 16...</p>
-                <div class="check-times"><b>In:</b> 16:00 | <b>Out:</b> 10:30</div>
+                <p class="lang-txt" data-it="Ski-in Ski-out direttamente sulla Pista 16. Recentemente rinnovato, offre 6 posti letto in uno stile moderno e alpino." data-en="Ski-in Ski-out directly on Slope 16. Recently renovated, sleeps 6 in modern alpine style.">Ski-in Ski-out direttamente sulla Pista 16...</p>
             </aside>
         </div>
 
@@ -70,11 +81,12 @@
     </div>
 </div>
 
-<a href="recap.html" style="position:fixed; bottom:20px; right:20px; background:var(--accent); color:black; padding:15px 30px; border-radius:50px; font-weight:800; text-decoration:none; box-shadow:0 10px 30px rgba(0,229,255,0.4); z-index:1000;">
-    <i class="fas fa-calendar-alt"></i> <span class="lang-txt" data-it="PRENOTA ORA" data-en="BOOK NOW">PRENOTA ORA</span>
-</a>
-
-<div id="lightbox" onclick="closeLightbox()"><img id="lbImg"></div>
+<div id="lightbox">
+    <span class="close-lb" onclick="closeLightbox()">&times;</span>
+    <button class="lb-nav lb-prev" onclick="navigateLightbox(-1)">❮</button>
+    <img id="lbImg">
+    <button class="lb-nav lb-next" onclick="navigateLightbox(1)">❯</button>
+</div>
 
 <script src="config.js"></script>
 <script src="script.js"></script>
