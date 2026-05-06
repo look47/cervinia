@@ -10,76 +10,57 @@
 </head>
 <body>
 
-    <!-- Tasto HOME Verticale -->
-    <a href="index.html" class="btn-back-side">
-        <i class="fas fa-house-chimney-window" style="font-size: 24px;"></i>
-        <div class="home-text"><span>H</span><span>O</span><span>M</span><span>E</span></div>
-    </a>
+<a href="index.html" class="btn-back-side">
+    <i class="fas fa-house-chimney"></i>
+    <div style="font-weight:800; font-size:12px; margin-top:5px;">H<br>O<br>M<br>E</div>
+</a>
 
-    <div class="main-wrapper">
-        <div class="container" style="max-width:1000px;">
+<div class="main-wrapper">
+    <div class="container" style="max-width:1000px;">
+        <div class="material-card" style="margin-top: 30px;">
+            <h1 style="text-align:center; color:var(--accent); margin-bottom:30px;">RESERVATION</h1>
             
-            <div class="material-card" style="margin-top: 30px;">
-                <h1 style="text-align:center; color:var(--accent); margin-bottom:40px; font-weight:800;">RODODENDRO RESERVATION</h1>
-                
-                <div class="recap-main-grid">
-                    <!-- SINISTRA: CALENDARIO -->
-                    <div class="cal-section" style="margin:0;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                            <button onclick="shiftMonth(-1)" style="background:none; border:none; color:white; cursor:pointer;"><i class="fas fa-chevron-left"></i></button>
-                            <button onclick="shiftMonth(1)" style="background:none; border:none; color:white; cursor:pointer;"><i class="fas fa-chevron-right"></i></button>
-                        </div>
-                        <div id="calendar-render" class="calendar-dual"></div>
+            <div class="recap-main-grid">
+                <div class="cal-section">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                        <button onclick="shiftMonth(-1)" style="background:none; border:none; color:white; cursor:pointer;">❮</button>
+                        <button onclick="shiftMonth(1)" style="background:none; border:none; color:white; cursor:pointer;">❯</button>
                     </div>
-
-                    <!-- DESTRA: OSPITI (SCIATORI) -->
-                    <aside class="skier-aside">
-                        <div class="skier-ctrl">
-                            <i class="fas fa-skier skier-icon"></i>
-                            <div style="font-size:12px; opacity:0.6; margin-bottom:10px;">ADULTI</div>
-                            <div style="display:flex; justify-content:center; align-items:center; gap:20px;">
-                                <button onclick="setGuests('ad', -1)" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;">-</button>
-                                <b id="valAd" style="font-size:24px;">2</b>
-                                <button onclick="setGuests('ad', 1)" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;">+</button>
-                            </div>
-                        </div>
-                        <div class="skier-ctrl">
-                            <i class="fas fa-skier skier-icon child"></i>
-                            <div style="font-size:12px; opacity:0.6; margin-bottom:10px;">BAMBINI</div>
-                            <div style="display:flex; justify-content:center; align-items:center; gap:20px;">
-                                <button onclick="setGuests('ch', -1)" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;">-</button>
-                                <b id="valCh" style="font-size:24px;">0</b>
-                                <button onclick="setGuests('ch', 1)" style="background:none; border:none; color:white; font-size:24px; cursor:pointer;">+</button>
-                            </div>
-                        </div>
-                        <div style="font-size:11px; text-align:center; opacity:0.5;">* Max 6 ospiti totali</div>
-                    </aside>
+                    <div id="calendar-render" class="cal-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;"></div>
                 </div>
 
-                <!-- DATI OSPITE -->
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin-top:40px;">
-                    <input type="text" id="fName" class="input-f-recap" placeholder="Nome">
-                    <input type="text" id="fSurname" class="input-f-recap" placeholder="Cognome">
-                    <input type="email" id="fEmail" class="input-f-recap" placeholder="Email">
-                    <input type="tel" id="fPhone" class="input-f-recap" placeholder="Telefono">
-                </div>
+                <aside>
+                    <div class="skier-ctrl">
+                        <i class="fas fa-skier" style="color:var(--accent); font-size:24px;"></i>
+                        <div style="font-size:10px; margin:5px 0;">ADULTI</div>
+                        <button onclick="setGuests('ad', -1)">-</button> <b id="valAd">2</b> <button onclick="setGuests('ad', 1)">+</button>
+                    </div>
+                    <div class="skier-ctrl">
+                        <i class="fas fa-skier" style="color:var(--accent); font-size:18px;"></i>
+                        <div style="font-size:10px; margin:5px 0;">BAMBINI</div>
+                        <button onclick="setGuests('ch', -1)">-</button> <b id="valCh">0</b> <button onclick="setGuests('ch', 1)">+</button>
+                    </div>
+                </aside>
+            </div>
 
-                <!-- PREZZO E INVIO -->
-                <div style="text-align:center; margin-top:40px; padding-top:30px; border-top:1px solid rgba(255,255,255,0.1);">
-                    <div id="oldPrice" class="p-old-recap"></div>
-                    <div id="totalPrice" class="p-new-recap">...</div>
-                    <div style="font-size:14px; margin-top:10px; opacity:0.8;">Acconto richiesto: <b id="depositTxt" style="color:var(--accent)">0€</b></div>
-                    
-                    <button id="mainConfirmBtn" onclick="confirmBooking()" class="btn-confirm-premium lang-txt" data-it="CONFERMA E PRENOTA" data-en="CONFIRM AND BOOK">
-                        CONFERMA E PRENOTA
-                    </button>
-                </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:30px;">
+                <input type="text" id="fName" class="input-f-recap" placeholder="Nome">
+                <input type="text" id="fSurname" class="input-f-recap" placeholder="Cognome">
+                <input type="email" id="fEmail" class="input-f-recap" placeholder="Email">
+                <input type="tel" id="fPhone" class="input-f-recap" placeholder="Telefono">
+            </div>
+
+            <div style="text-align:center; margin-top:30px;">
+                <div id="oldPrice" style="text-decoration:line-through; opacity:0.4;"></div>
+                <div id="totalPrice" style="font-size:40px; color:var(--accent); font-weight:800;">...</div>
+                <button id="mainConfirmBtn" onclick="confirmBooking()" style="width:100%; background:var(--accent); color:black; border:none; padding:20px; border-radius:15px; font-weight:800; cursor:pointer; margin-top:20px;">CONFERMA E PRENOTA</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="config.js"></script>
-    <script src="script.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="config.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
