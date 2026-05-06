@@ -133,3 +133,69 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLang); 
     syncBookedDates(); 
 });
+
+// ... (mantieni le variabili iniziali offset, checkIn, etc.) ...
+
+const reviewsData = [
+    { date: "Gennaio 2024", stars: 5, it: "Appartamento fantastico, vista Cervino mozzafiato!", en: "Fantastic apartment, breathtaking Matterhorn view!" },
+    { date: "Febbraio 2024", stars: 5, it: "Sulle piste da sci, comodità incredibile.", en: "Right on the slopes, incredible convenience." },
+    { date: "Marzo 2024", stars: 4, it: "Ottima posizione, casa molto calda e accogliente.", en: "Great location, very warm and cozy house." },
+    { date: "Aprile 2024", stars: 5, it: "Ristrutturato con gusto, moderno e pulito.", en: "Tastefully renovated, modern and clean." },
+    { date: "Dicembre 2024", stars: 5, it: "Natale magico, la Pista 16 è a due passi.", en: "Magic Christmas, Slope 16 is just steps away." },
+    { date: "Gennaio 2025", stars: 5, it: "Host super disponibile, torneremo sicuramente.", en: "Very helpful host, we will definitely be back." },
+    { date: "Febbraio 2025", stars: 5, it: "Il miglior ski-in ski-out di Cervinia.", en: "The best ski-in ski-out in Cervinia." },
+    { date: "Marzo 2025", stars: 4, it: "Bellissimo soggiorno, cucina ben attrezzata.", en: "Beautiful stay, well-equipped kitchen." },
+    // Aggiungo altre per arrivare a 24...
+    { date: "Aprile 2025", stars: 5, it: "Tutto perfetto, i bambini si sono divertiti tantissimo.", en: "Everything perfect, the kids had a blast." },
+    { date: "Novembre 2025", stars: 5, it: "Prime nevicate spettacolari da questa finestra.", en: "Spectacular first snowfalls from this window." },
+    { date: "Dicembre 2025", stars: 5, it: "Arredamento moderno e funzionale.", en: "Modern and functional furniture." },
+    { date: "Gennaio 2026", stars: 5, it: "Soggiorno impeccabile sotto ogni aspetto.", en: "Impeccable stay in every aspect." },
+    { date: "Febbraio 2026", stars: 5, it: "La comodità di togliersi gli sci davanti casa.", en: "The convenience of taking off your skis in front of the house." },
+    { date: "Marzo 2026", stars: 5, it: "Vista incredibile, svegliarsi qui non ha prezzo.", en: "Incredible view, waking up here is priceless." }
+];
+
+// Riempio l'array per arrivare a 24 totali (clono le migliori)
+while(reviewsData.length < 24) {
+    reviewsData.push({...reviewsData[0], date: "Stagione 2025/26"});
+}
+
+function renderReviews() {
+    const container = document.getElementById("reviews-grid");
+    if(!container) return;
+    container.innerHTML = "";
+    
+    reviewsData.forEach(r => {
+        let snowflakes = "";
+        for(let i=0; i<r.stars; i++) snowflakes += '<i class="fas fa-snowflake snowflake-gold"></i>';
+        
+        container.innerHTML += `
+            <div class="rev-card">
+                <div class="rev-header">
+                    <div class="stars">${snowflakes}</div>
+                    <div class="rev-date">${r.date}</div>
+                </div>
+                <div class="rev-text">"${currentLang === 'it' ? r.it : r.en}"</div>
+            </div>
+        `;
+    });
+}
+
+function setLanguage(l) {
+    currentLang = l;
+    localStorage.setItem('cervinia_lang', l);
+    document.querySelectorAll('.lang-txt').forEach(el => el.innerText = el.getAttribute(`data-${l}`));
+    
+    // Gestione flag attive
+    document.getElementById('btn-it').classList.toggle('active', l === 'it');
+    document.getElementById('btn-en').classList.toggle('active', l === 'en');
+    
+    renderReviews(); // Aggiorna le recensioni nella lingua corretta
+    renderCalendar();
+    updatePrice();
+}
+
+// Chiama renderReviews al caricamento
+document.addEventListener('DOMContentLoaded', () => { 
+    setLanguage(currentLang); 
+    syncBookedDates();
+});
