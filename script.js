@@ -48,7 +48,7 @@ function renderCalendar() {
 async function syncBookedDates() {
     renderCalendar();
     try {
-        const res = await fetch(APP_CONFIG.googleSheetUrl);
+        const res = await fetch(APP_CONFIG.googleSheetUrl); //
         const csv = await res.text();
         const rows = csv.split(/\r?\n/);
         let blocked = [];
@@ -62,14 +62,12 @@ async function syncBookedDates() {
         });
         bookedDates = [...new Set(blocked)];
         renderCalendar();
-    } catch (e) { console.log("Sync..."); }
+    } catch (e) { console.log("Sync Error"); }
 }
 
 function parseItalianDate(s) { const p = s.replace(/"/g, '').split('/'); return new Date(p[2], p[1] - 1, p[0]); }
-function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
 function setLanguage(l) { currentLang = l; localStorage.setItem('cervinia_lang', l); document.querySelectorAll('.lang-txt').forEach(el => el.innerText = el.getAttribute(`data-${l}`)); renderReviews(); renderCalendar(); updatePrice(); }
 
-// LIGHTBOX NAV
 function openLightbox(i) { currentIndex = i; updateLightbox(); document.getElementById("lightbox").style.display = "flex"; }
 function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
 function navigateLightbox(d) { currentIndex = (currentIndex + d + photos.length) % photos.length; updateLightbox(); }
