@@ -128,9 +128,27 @@ function updatePrice() {
     pNew.innerText = total.toFixed(0) + "€";
     if(document.getElementById("depositTxt")) document.getElementById("depositTxt").innerText = (total * 0.3).toFixed(0) + "€";
 }
-function setGuests(t, v) { if(t==='ad') ad = Math.max(1, Math.min(6, ad+v)); else ch = Math.max(0, 6-ad, ch+v); document.getElementById("valAd").innerText = ad; document.getElementById("valCh").innerText = ch; updatePrice(); }
-function shiftMonth(d) { offset += d; renderCalendar(); }
-document.addEventListener('DOMContentLoaded', () => { setLanguage(currentLang); syncBookedDates(); });
+// ... (resto del codice uguale) ...
+
+function setGuests(t, v) {
+    // Controllo occupazione massima (6 persone totali)
+    if (v === 1 && (ad + ch) >= 6) {
+        alert(currentLang === 'it' ? "Massimo 6 persone totali" : "Maximum 6 people total");
+        return;
+    }
+
+    if (t === 'ad') {
+        ad = Math.max(1, Math.min(6, ad + v));
+    } else {
+        ch = Math.max(0, Math.min(5, ch + v)); // 5 se c'è almeno 1 adulto
+    }
+
+    document.getElementById("valAd").innerText = ad;
+    document.getElementById("valCh").innerText = ch;
+    updatePrice();
+}
+
+// ... (resto del codice uguale) ...
 // ... (Resto del codice invariato) ...
 function updatePrice() {
     const pNew = document.getElementById("totalPrice");
