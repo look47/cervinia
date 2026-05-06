@@ -16,15 +16,14 @@
 </div>
 
 <div class="social-stack">
-    <a href="https://instagram.com/tuoprofilo" class="social-link ig" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://wa.me/393479612836" class="social-link wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a href="mailto:tuaemail@gmail.com" class="social-link mail"><i class="far fa-envelope"></i></a>
-    <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" class="social-link maps" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+    <a href="#" class="social-link ig"><i class="fab fa-instagram"></i></a>
+    <a href="https://wa.me/393479612836" class="social-link wa"><i class="fab fa-whatsapp"></i></a>
+    <a href="#" class="social-link mail"><i class="far fa-envelope"></i></a>
+    <a href="#" class="social-link maps"><i class="fas fa-map-marker-alt"></i></a>
 </div>
 
 <a href="recap.html" class="btn-fixed-book">
-    <i class="fas fa-calendar-alt"></i> 
-    <span class="lang-txt" data-it="PRENOTA ORA" data-en="BOOK NOW">PRENOTA ORA</span>
+    <i class="fas fa-calendar-alt"></i> <span class="lang-txt" data-it="PRENOTA ORA" data-en="BOOK NOW">PRENOTA ORA</span>
 </a>
 
 <div class="main-wrapper">
@@ -48,39 +47,31 @@
                     <img src="foto5.webp" onclick="openLightbox(4)">
                     <img src="foto6.webp" onclick="openLightbox(5)">
                     <img src="foto7.webp" onclick="openLightbox(6)">
-                    <div class="material-card" style="display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0;" onclick="openLightbox(0)">
-                        <span style="font-weight:800; font-size:14px; color:var(--accent)">+20 FOTO</span>
+                    <div class="material-card" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="openLightbox(0)">
+                        <span style="font-weight:800; font-size:12px; color:var(--accent)">+20 FOTO</span>
                     </div>
                 </div>
             </div>
 
-            <aside class="booking-aside">
-                <div class="material-card">
-                    <div style="margin-bottom:15px;">
-                        <i class="fas fa-snowflake snowflake-gold"></i>
-                        <i class="fas fa-snowflake snowflake-gold"></i>
-                        <i class="fas fa-snowflake snowflake-gold"></i>
-                        <i class="fas fa-snowflake snowflake-gold"></i>
-                        <i class="fas fa-snowflake snowflake-gold"></i>
-                    </div>
-                    <h2 style="margin:0 0 15px 0; font-size:24px;">Rododendro Ski-In Ski-Out</h2>
-                    <p class="lang-txt" data-it="Direttamente sulla Pista 16. Recentemente ristrutturato con finiture moderne, garage privato e 6 posti letto." data-en="Directly on Slope 16. Recently renovated with modern finishes, private garage, and 6 beds.">Direttamente sulla Pista 16...</p>
+            <aside class="material-card">
+                <div style="margin-bottom:10px;">
+                    <i class="fas fa-snowflake snowflake-gold"></i><i class="fas fa-snowflake snowflake-gold"></i><i class="fas fa-snowflake snowflake-gold"></i><i class="fas fa-snowflake snowflake-gold"></i><i class="fas fa-snowflake snowflake-gold"></i>
                 </div>
+                <h2>Rododendro Ski-In Ski-Out</h2>
+                <p class="lang-txt" data-it="Direttamente sulla Pista 16. Recentemente ristrutturato con finiture moderne, garage privato e 6 posti letto." data-en="Directly on Slope 16. Recently renovated with modern finishes, private garage, and 6 beds.">Direttamente sulla Pista 16...</p>
+                <a href="recap.html" style="display:block; background:var(--accent); color:black; text-align:center; padding:15px; border-radius:10px; font-weight:800; text-decoration:none; margin-top:20px;">VERIFICA DISPONIBILITÀ</a>
             </aside>
         </div>
 
-        <section id="recensioni" style="margin-top: 80px;">
-            <h3 class="lang-txt" data-it="Cosa dicono i nostri ospiti" data-en="Guest Reviews" style="font-size:28px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:15px; margin-bottom:30px;">Cosa dicono i nostri ospiti</h3>
+        <section id="recensioni" style="margin-top: 50px;">
+            <h3 class="lang-txt" data-it="Cosa dicono i nostri ospiti" data-en="Guest Reviews">Recensioni</h3>
             <div id="reviews-grid" class="reviews-container"></div>
         </section>
     </div>
 </div>
 
-<div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:5000; align-items:center; justify-content:center;">
-    <span onclick="closeLightbox()" style="position:absolute; top:30px; right:40px; font-size:50px; color:white; cursor:pointer;">&times;</span>
-    <button onclick="navigateLightbox(-1)" style="position:absolute; left:20px; background:none; border:none; color:white; font-size:50px; cursor:pointer;">❮</button>
-    <img id="lbImg" style="max-width:85%; max-height:85%;">
-    <button onclick="navigateLightbox(1)" style="position:absolute; right:20px; background:none; border:none; color:white; font-size:50px; cursor:pointer;">❯</button>
+<div id="lightbox" style="display:none;" onclick="closeLightbox()">
+    <img id="lbImg">
 </div>
 
 <script src="config.js"></script>
