@@ -10,33 +10,19 @@
 </head>
 <body>
 
-<!-- MENU TRIGGER -->
-<button class="sidebar-trigger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-
-<!-- SIDEBAR -->
-<nav class="sidebar" id="sidebar">
-    <div class="sidebar-inner">
-        <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
-        <h2 class="sidebar-logo">CERVINIA<br><span>SKI HOME</span></h2>
-        <ul class="nav-links">
-            <li><a href="#info" onclick="toggleSidebar()"><i class="fas fa-home"></i> <span>Appartamento</span></a></li>
-            <li><a href="#foto" onclick="toggleSidebar()"><i class="fas fa-images"></i> <span>Gallery</span></a></li>
-            <li><a href="#recensioni" onclick="toggleSidebar()"><i class="fas fa-star"></i> <span>Recensioni</span></a></li>
-        </ul>
-    </div>
-</nav>
-
 <div class="main-wrapper">
     <header class="site-header">
         <div class="header-content">
-            <img src="sfondo_nero.webp" class="header-logo-bg">
             <h1>CERVINIA SKI HOME</h1>
-            <p>Il tuo rifugio moderno sulle piste del Cervino</p>
+            <p class="lang-txt" data-it="Il tuo rifugio moderno sulla Pista 16" data-en="Your modern retreat on Slope 16">Il tuo rifugio moderno sulla Pista 16</p>
+        </div>
+        <div class="lang-selector">
+            <button id="btn-it" class="lang-flag-btn" onclick="setLanguage('it')">🇮🇹</button>
+            <button id="btn-en" class="lang-flag-btn" onclick="setLanguage('en')">🇬🇧</button>
         </div>
     </header>
 
     <div class="container">
-        <!-- GRIGLIA FOTO + DESCRIZIONE -->
         <div class="booking-grid">
             <div class="visual-section" id="foto">
                 <div class="top-gallery">
@@ -51,89 +37,45 @@
                     <img src="foto5.webp" onclick="openLightbox(4)">
                     <img src="foto6.webp" onclick="openLightbox(5)">
                     <img src="foto7.webp" onclick="openLightbox(6)">
-                    <div class="more-photos" onclick="openLightbox(0)">
-                        <img src="foto8.webp"><span>Altre 20 foto</span>
+                    <div class="material-card" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="openLightbox(0)">
+                        <span class="lang-txt" data-it="+20 FOTO" data-en="+20 PHOTOS">+20 FOTO</span>
                     </div>
                 </div>
             </div>
 
-            <aside class="desc-box material-card" id="info">
-                <h2>L'Appartamento</h2>
-                <div class="desc-text">
-                    <p>Ski-in Ski-out direttamente sulla Pista 16. Recentemente rinnovato, offre 6 posti letto in uno stile moderno e alpino.</p>
-                    <p>WiFi fibra, Smart TV, cucina completa. Tutto incluso per la tua vacanza.</p>
+            <aside class="desc-box material-card">
+                <h2 class="lang-txt" data-it="L'Appartamento" data-en="The Apartment">L'Appartamento</h2>
+                
+                <div class="global-rating-box">
+                    <span class="rating-num">4.9</span>
+                    <div class="rating-stars">
+                        <i class="fas fa-snowflake snowflake-gold"></i>
+                        <i class="fas fa-snowflake snowflake-gold"></i>
+                        <i class="fas fa-snowflake snowflake-gold"></i>
+                        <i class="fas fa-snowflake snowflake-gold"></i>
+                        <i class="fas fa-snowflake snowflake-gold"></i>
+                    </div>
+                    <span class="rating-count">(24 <span class="lang-txt" data-it="Recensioni" data-en="Reviews">Recensioni</span>)</span>
                 </div>
+
+                <p class="lang-txt" data-it="Ski-in Ski-out direttamente sulla Pista 16. Recentemente rinnovato, offre 6 posti letto in uno stile moderno e alpino. Garage privato incluso." data-en="Ski-in Ski-out directly on Slope 16. Recently renovated, sleeps 6 in modern alpine style. Private garage included.">Ski-in Ski-out direttamente sulla Pista 16...</p>
                 <div class="check-times"><b>In:</b> 16:00 | <b>Out:</b> 10:30</div>
             </aside>
         </div>
 
-        <!-- RECENSIONI + MAPPA SOTTO -->
-        <div class="bottom-grid">
-            <div class="reviews-area" id="recensioni">
-                <h3 class="section-title">Recensioni</h3>
-                <div class="reviews-flex">
-                    <div class="rev-item material-card">
-                        <div class="score">8,5</div>
-                        <p>«Posizione imbattibile, sci ai piedi. Casa pulitissima.»</p>
-                        <small>— Marco, Italia</small>
-                    </div>
-                    <div class="rev-item material-card">
-                        <div class="score">9,0</div>
-                        <p>«Vista mozzafiato sul Cervino. Host gentilissimo.»</p>
-                        <small>— Elena, Italia</small>
-                    </div>
-                </div>
-            </div>
-            <div class="map-area">
-                <h3 class="section-title">Posizione</h3>
-                <div class="map-card material-card">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2777.6!2d7.6!3d45.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDU1JzMxLjgiTiA3wrAzNycxNi40IkU!5e0!3m2!1sit!2sit!4v1700000000000"></iframe>
-                    <a href="https://maps.app.goo.gl/LYKC4AV3RhmxbBBi8" target="_blank" class="map-btn">Vedi su mappa</a>
-                </div>
-            </div>
-        </div>
+        <section id="recensioni" style="margin-top: 50px;">
+            <h3 class="section-title lang-txt" data-it="Cosa dicono i nostri ospiti" data-en="Guest Reviews">Cosa dicono i nostri ospiti</h3>
+            <div id="reviews-grid" class="reviews-container"></div>
+        </section>
     </div>
 </div>
 
-<div class="floating-actions">
-    <div class="social-stack">
-        <a href="https://wa.me/393479612836" target="_blank" class="s-ic wa"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://instagram.com/cervinia_ski_house" target="_blank" class="s-ic ig"><i class="fab fa-instagram"></i></a>
-        <a href="mailto:airpulizie@gmail.com" class="s-ic mail"><i class="far fa-envelope"></i></a>
-    </div>
-    <a href="recap.html" class="btn-book-float"><i class="fas fa-calendar-alt"></i> PRENOTA</a>
-</div>
+<a href="recap.html" style="position:fixed; bottom:20px; right:20px; background:var(--accent); color:black; padding:15px 30px; border-radius:50px; font-weight:800; text-decoration:none; box-shadow:0 10px 30px rgba(0,229,255,0.4); z-index:1000;">
+    <i class="fas fa-calendar-alt"></i> <span class="lang-txt" data-it="PRENOTA ORA" data-en="BOOK NOW">PRENOTA ORA</span>
+</a>
 
-<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
-<div id="lightbox">
-    <span class="close-lb" onclick="closeLightbox()">&times;</span>
-    <button class="lb-nav lb-prev" onclick="navigateLightbox(-1)">❮</button>
-    <div class="lb-content"><img id="lbImg"><div id="lbCounter" class="lb-counter"></div></div>
-    <button class="lb-nav lb-next" onclick="navigateLightbox(1)">❯</button>
-</div>
+<div id="lightbox" onclick="closeLightbox()"><img id="lbImg"></div>
 
-    <!-- ... (Header e Gallery rimangono uguali) ... -->
-
-<div class="lang-selector" style="position: absolute; top: 20px; right: 20px;">
-    <button id="btn-it" class="lang-flag-btn" onclick="setLanguage('it')">🇮🇹</button>
-    <button id="btn-en" class="lang-flag-btn" onclick="setLanguage('en')">🇬🇧</button>
-</div>
-
-<!-- ... (Sotto la Gallery e la Mappa) ... -->
-
-<section class="container" id="recensioni" style="margin-top: 60px;">
-    <h2 class="section-title">
-        <span class="lang-txt" data-it="Cosa dicono i nostri ospiti" data-en="What our guests say">Cosa dicono i nostri ospiti</span>
-        <div style="font-size: 16px; opacity: 0.7; margin-top: 10px;">
-            <i class="fas fa-snowflake snowflake-gold"></i> 4.9/5 (24 <span class="lang-txt" data-it="Recensioni" data-en="Reviews">Recensioni</span>)
-        </div>
-    </h2>
-    <div id="reviews-grid" class="reviews-container">
-        <!-- Le recensioni vengono caricate qui dal JS -->
-    </div>
-</section>
-
-<!-- ... (Tasto prenota float e footer) ... -->
 <script src="config.js"></script>
 <script src="script.js"></script>
 </body>
