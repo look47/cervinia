@@ -84,27 +84,42 @@ body {
 }
 .btn-back-side:hover { background: var(--accent); color: black; }
 
-/* --- LOGO NELL'HEADER (Sempre usando sfondo_nero.webp) --- */
-.header-logo-inline { 
-    width: 80px; 
-    height: auto; 
-    
-    /* 1. Elimina il nero del file .webp */
-    mix-blend-mode: screen; 
-    
+/* --- HEADER: TITOLO E LOGO AFFIANCATI E CENTRATI --- */
+.site-header { 
+    padding: 70px 20px 40px; 
+    display: flex; 
+    flex-direction: row;     /* Mette titolo e logo sulla stessa riga */
+    align-items: center;     /* Li allinea verticalmente al centro */
+    justify-content: center; /* Li centra perfettamente nella pagina */
+    gap: 20px;               /* Spazio tra il testo e il logo */
+    width: 100%;             /* Forza l'header a occupare tutto lo spazio */
+    position: relative;
+    text-align: center;
+}
 
-    
-    /* 3. Crea l'effetto trasparenza (0.35 = 35% di visibilità) */
-    opacity: 0.35; 
-    
+.site-header h1 { 
+    margin: 0;               /* Rimuove margini che potrebbero spostare il titolo */
+    font-weight: 800; 
+    letter-spacing: 2px; 
+    text-shadow: 0 0 15px rgba(0,0,0,0.5);
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.header-logo-inline { 
+    width: 70px;             /* Leggermente più piccolo per non sbilanciare il testo */
+    height: auto; 
+    mix-blend-mode: screen;  /* Rimuove il nero di sfondo_nero.webp */
+    filter: brightness(0) invert(1); /* Trasforma il logo in bianco */
+    opacity: 0.35;           /* Effetto trasparenza/ghost */
     pointer-events: none;
     transition: 0.3s ease-in-out;
 }
 
-/* Effetto al passaggio del mouse sul titolo per un tocco "Premium" */
+/* Effetto luce al passaggio del mouse */
 .site-header:hover .header-logo-inline {
-    opacity: 0.7; /* Si illumina quando l'utente si avvicina */
-    transform: scale(1.05); /* Si ingrandisce leggermente */
+    opacity: 0.7;
+    transform: scale(1.1);
 }
 
 /* --- CARDS & FILIGRANA (OVERLAY) --- */
