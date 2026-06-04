@@ -57,7 +57,14 @@ async function syncBookedDates() {
             if (cols[0]?.includes('/')) {
                 const start = parseItalianDate(cols[0]), end = parseItalianDate(cols[1]);
                 let cur = new Date(start);
-                while (cur < end) { blocked.push(cur.toISOString().split('T')[0]); cur.setDate(cur.getDate() + 1); }
+                while (cur <= end) { 
+                    // Usa formato locale YYYY-MM-DD per evitare conversioni UTC
+                    const year = cur.getFullYear();
+                    const month = String(cur.getMonth() + 1).padStart(2, '0');
+                    const day = String(cur.getDate()).padStart(2, '0');
+                    blocked.push(`${year}-${month}-${day}`);
+                    cur.setDate(cur.getDate() + 1); 
+                }
             }
         });
         bookedDates = [...new Set(blocked)];
@@ -65,7 +72,11 @@ async function syncBookedDates() {
     } catch (e) { console.log("Sync..."); }
 }
 
-function parseItalianDate(s) { const p = s.replace(/"/g, '').split('/'); return new Date(p[2], p[1] - 1, p[0]); }
+function parseItalianDate(s) { 
+    const p = s.replace(/"/g, '').split('/'); 
+    // Forza ora a mezzogiorno locale per evitare problemi di fusi orario
+    return new Date(p[2], p[1] - 1, p[0], 12, 0, 0); 
+}
 
 function setLanguage(l) {
     currentLang = l; localStorage.setItem('cervinia_lang', l);
