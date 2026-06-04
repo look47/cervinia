@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Rododendro Ski-In Ski-Out</title>
+    <title>Rododendro Ski-In Ski-Out | Cervinia Appartamento Vacanze</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Appartamento ski-in ski-out a Cervinia, direttamente sulla Pista 16. Recentemente ristrutturato con finiture moderne, garage privato e 6 posti letto. Prenota ora la tua vacanza sulle piste del Cervino.">
+    <meta name="keywords" content="Cervinia, appartamento vacanze, ski-in ski-out, Pista 16, Cervino, affitto breve, garage privato">
+    <meta property="og:title" content="Rododendro Ski-In Ski-Out | Cervinia">
+    <meta property="og:description" content="Appartamento ski-in ski-out a Cervinia, direttamente sulla Pista 16. Garage privato e 6 posti letto.">
+    <meta property="og:image" content="https://cervinia-ski-house.vercel.app/foto1.webp">
+    <meta property="og:url" content="https://cervinia-ski-house.vercel.app">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://cervinia-ski-house.vercel.app">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="top-lang-selector">
-    <span id="lang-it" onclick="setLanguage('it')">🇮🇹</span>
-    <span id="lang-en" onclick="setLanguage('en')">🇬🇧</span>
-</div>
+<nav class="main-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">RODODENDRO</a>
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="#recensioni" class="nav-link">Recensioni</a>
+            <a href="recap.html" class="nav-link nav-cta">Prenota</a>
+        </div>
+        <div class="nav-lang">
+            <span id="lang-it" onclick="setLanguage('it')">🇮🇹</span>
+            <span id="lang-en" onclick="setLanguage('en')">🇬🇧</span>
+        </div>
+    </div>
+</nav>
 
-<!-- SOCIAL STACK AGGIORNATA E PUNTUALE -->
 <div class="social-stack">
-    <!-- Instagram -->
     <a href="https://www.instagram.com/cervinia_ski_house/" class="social-link ig" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-instagram"></i>
     </a>
-    
-    <!-- WhatsApp (Configurato col tuo numero) -->
     <a href="https://wa.me/393479612836" class="social-link wa" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i>
     </a>
-    
-    <!-- Mail -->
     <a href="mailto:airpulizie@gmail.com" class="social-link mail">
         <i class="far fa-envelope"></i>
     </a>
-    
-    <!-- Google Maps: Destinazione Rododendro Ski-In Ski-Out -->
     <a href="https://www.google.com/maps/search/?api=1&query=Rododendro+Ski+In+Ski+Out+Cervinia" class="social-link maps" target="_blank" rel="noopener noreferrer">
         <i class="fas fa-map-marker-alt"></i>
     </a>
 </div>
-
-<a href="recap.html" class="btn-fixed-book">
-    <i class="fas fa-calendar-alt"></i> <span class="lang-txt" data-it="PRENOTA ORA" data-en="BOOK NOW">PRENOTA ORA</span>
-</a>
 
 <div class="main-wrapper">
  
@@ -70,9 +77,6 @@
                     <img src="foto5.webp" onclick="openLightbox(4)">
                     <img src="foto6.webp" onclick="openLightbox(5)">
                     <img src="foto7.webp" onclick="openLightbox(6)">
-                    <div class="material-card" style="display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="openLightbox(0)">
-                        <span style="font-weight:800; font-size:12px; color:var(--accent)">+20 FOTO</span>
-                    </div>
                 </div>
             </div>
 
@@ -93,8 +97,11 @@
     </div>
 </div>
 
-<div id="lightbox" style="display:none;" onclick="closeLightbox()">
-    <img id="lbImg">
+<div id="lightbox" style="display:none;">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <button class="lb-prev" onclick="prevPhoto()">❮</button>
+    <img id="lbImg" onclick="closeLightbox()">
+    <button class="lb-next" onclick="nextPhoto()">❯</button>
 </div>
 
 <script src="config.js"></script>

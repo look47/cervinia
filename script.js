@@ -1,7 +1,7 @@
 let offset = 0, checkIn = null, checkOut = null, ad = 2, ch = 0, currentIndex = 0;
 let currentLang = localStorage.getItem('cervinia_lang') || 'it';
 let bookedDates = [];
-const photos = Array.from({length: 20}, (_, i) => `foto${i+1}.webp`);
+const photos = ['foto1.webp', 'foto2.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp'];
 
 const reviewsData = [
     { date: "Gennaio 2024", it: "Posizione da sogno, esci di casa con gli sci ai piedi. Casa caldissima e moderna, ideale dopo una giornata sulla neve. Host gentilissimi.", en: "Dream location, ski-out directly from the door. Very warm and modern house." },
@@ -106,7 +106,76 @@ function updatePrice() {
     document.getElementById("oldPrice").innerText = (total * APP_CONFIG.marketingMultiplier).toFixed(0) + "€";
 }
 
-function openLightbox(i) { currentIndex = i; document.getElementById("lbImg").src = photos[i]; document.getElementById("lightbox").style.display = "flex"; }
-function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
+function openLightbox(i) { 
+    if (i >= photos.length) return; 
+    currentIndex = i; 
+    document.getElementById("lbImg").src = photos[i]; 
+    document.getElementById("lightbox").style.display = "flex"; 
+    document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() { 
+    document.getElementById("lightbox").style.display = "none"; 
+    document.body.style.overflow = "";
+}
+
+function nextPhoto() {
+    currentIndex = (currentIndex + 1) % photos.length;
+    document.getElementById("lbImg").src = photos[currentIndex];
+}
+
+function prevPhoto() {
+    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+    document.getElementById("lbImg").src = photos[currentIndex];
+}
+
+document.addEventListener('keydown', (e) => {
+    const lightbox = document.getElementById("lightbox");
+    if (lightbox.style.display === "flex") {
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowRight") nextPhoto();
+        if (e.key === "ArrowLeft") prevPhoto();
+    }
+});
 function shiftMonth(d) { offset += d; renderCalendar(); }
+
+function confirmBooking() {
+    const fName = document.getElementById("fName").value.trim();
+    const fSurname = document.getElementById("fSurname").value.trim();
+    const fEmail = document.getElementById("fEmail").value.trim();
+    const fPhone = document.getElementById("fPhone").value.trim();
+    
+    if (!checkIn || !checkOut) {
+        alert(currentLang === 'it' ? "Seleziona le date del soggiorno" : "Please select your stay dates");
+        return;
+    }
+    
+    if (!fName || !fSurname || !fEmail || !fPhone) {
+        alert(currentLang === 'it' ? "Compila tutti i campi obbligatori" : "Please fill all required fields");
+        return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(fEmail)) {
+        alert(currentLang === 'it' ? "Inserisci un'email valida" : "Please enter a valid email");
+        return;
+    }
+    
+    const phoneRegex = /^[+]?[\d\s\-()]{8,20}$/;
+    if (!phoneRegex.test(fPhone)) {
+        alert(currentLang === 'it' ? "Inserisci un numero di telefono valido" : "Please enter a valid phone number");
+        return;
+    }
+    
+    const btn = document.getElementById("mainConfirmBtn");
+    btn.disabled = true;
+    btn.textContent = currentLang === 'it' ? "ELABORAZIONE..." : "PROCESSING...";
+    
+    setTimeout(() => {
+        alert(currentLang === 'it' ? "Grazie! La tua richiesta è stata registrata. Ti contatteremo presto per confermare." : "Thank you! Your request has been registered. We will contact you soon to confirm.");
+        btn.disabled = false;
+        btn.textContent = currentLang === 'it' ? "CONFERMA E PRENOTA" : "CONFIRM AND BOOK";
+    }, 1500);
+}
+
 document.addEventListener('DOMContentLoaded', () => { setLanguage(currentLang); syncBookedDates(); });

@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Prenota - Rododendro Ski-In Ski-Out</title>
+    <title>Prenota - Rododendro Ski-In Ski-Out | Cervinia</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Prenota il tuo soggiorno a Cervinia. Appartamento ski-in ski-out sulla Pista 16 con garage privato e 6 posti letto.">
+    <meta name="keywords" content="Cervinia, prenotazione, ski-in ski-out, Pista 16, appartamento vacanze">
+    <meta property="og:title" content="Prenota - Rododendro Ski-In Ski-Out">
+    <meta property="og:description" content="Prenota il tuo soggiorno a Cervinia. Appartamento ski-in ski-out sulla Pista 16.">
+    <meta property="og:image" content="https://cervinia-ski-house.vercel.app/foto1.webp">
+    <meta property="og:url" content="https://cervinia-ski-house.vercel.app/recap.html">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://cervinia-ski-house.vercel.app/recap.html">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- TASTO HOME LATERALE FISSO -->
-<a href="index.html" class="btn-back-side">
-    <i class="fas fa-house-chimney-window" style="font-size: 22px;"></i>
-    <div style="font-weight:800; font-size:13px; margin-top:8px; line-height:1.2; text-align:center;">H<br>O<br>M<br>E</div>
-</a>
-
-<div class="top-lang-selector">
-    <span id="lang-it" onclick="setLanguage('it')">🇮🇹</span>
-    <span id="lang-en" onclick="setLanguage('en')">🇬🇧</span>
-</div>
+<nav class="main-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">RODODENDRO</a>
+        <div class="nav-menu">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="recap.html" class="nav-link active nav-cta">Prenota</a>
+        </div>
+        <div class="nav-lang">
+            <span id="lang-it" onclick="setLanguage('it')">🇮🇹</span>
+            <span id="lang-en" onclick="setLanguage('en')">🇬🇧</span>
+        </div>
+    </div>
+</nav>
 
 <div class="main-wrapper">
     <div class="container" style="max-width:1000px;">
@@ -33,12 +44,28 @@
             <div class="recap-main-grid">
                 <!-- SINISTRA: CALENDARIO -->
                 <div class="cal-section">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                        <button onclick="shiftMonth(-1)" style="background:none; border:none; color:white; cursor:pointer;">❮</button>
-                        <button onclick="shiftMonth(1)" style="background:none; border:none; color:white; cursor:pointer;">❯</button>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                        <button onclick="shiftMonth(-1)" style="background:none; border:none; color:var(--accent); cursor:pointer; font-size:20px; padding:5px;">❮</button>
+                        <button onclick="shiftMonth(1)" style="background:none; border:none; color:var(--accent); cursor:pointer; font-size:20px; padding:5px;">❯</button>
                     </div>
                     <!-- Il calendario viene iniettato qui dallo script -->
                     <div id="calendar-render" style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;"></div>
+                    
+                    <!-- LEGENDA -->
+                    <div style="margin-top:20px; display:flex; gap:15px; flex-wrap:wrap; font-size:11px; opacity:0.8;">
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <div style="width:12px; height:12px; background:#27ae60; border-radius:3px;"></div>
+                            <span class="lang-txt" data-it="Disponibile" data-en="Available">Disponibile</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <div style="width:12px; height:12px; background:#c0392b; border-radius:3px; opacity:0.4;"></div>
+                            <span class="lang-txt" data-it="Occupato" data-en="Booked">Occupato</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <div style="width:12px; height:12px; background:var(--accent); border-radius:3px;"></div>
+                            <span class="lang-txt" data-it="Selezionato" data-en="Selected">Selezionato</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- DESTRA: OSPITI -->
@@ -67,10 +94,10 @@
 
             <!-- DATI OSPITE -->
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:30px; position:relative; z-index:1;">
-                <input type="text" id="fName" class="input-f-recap" placeholder="Nome">
-                <input type="text" id="fSurname" class="input-f-recap" placeholder="Cognome">
-                <input type="email" id="fEmail" class="input-f-recap" placeholder="Email">
-                <input type="tel" id="fPhone" class="input-f-recap" placeholder="Telefono">
+                <input type="text" id="fName" class="input-f-recap" placeholder="Nome" required>
+                <input type="text" id="fSurname" class="input-f-recap" placeholder="Cognome" required>
+                <input type="email" id="fEmail" class="input-f-recap" placeholder="Email" required>
+                <input type="tel" id="fPhone" class="input-f-recap" placeholder="Telefono" required>
             </div>
 
             <!-- PREZZO E TASTO INVIO -->
@@ -85,7 +112,6 @@
 </div>
 
 <!-- SCRIPTS -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script src="config.js"></script>
 <script src="script.js"></script>
 </body>
